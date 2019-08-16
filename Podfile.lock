@@ -1,0 +1,20 @@
+PODS:
+  - MarkdownKit (1.5)
+  - SwiftLint (0.35.0)
+
+DEPENDENCIES:
+  - MarkdownKit
+  - SwiftLint
+
+SPEC REPOS:
+  trunk:
+    - MarkdownKit
+    - SwiftLint
+
+SPEC CHECKSUMS:
+  MarkdownKit: 379028e9cd3ebf05ccac87205cd9aead446159d4
+  SwiftLint: 5553187048b900c91aa03552807681bb6b027846
+
+PODFILE CHECKSUM: aff75a823909fc2570ff3fd2f32a196f989fe818
+
+COCOAPODS: 1.8.0

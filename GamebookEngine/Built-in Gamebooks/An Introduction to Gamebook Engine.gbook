@@ -1,0 +1,350 @@
+{
+  "name" : "An Introduction to Gamebook Engine",
+  "uuid" : "3B4C5CD0-89FC-49AA-8A2C-DE86CE20D118",
+  "pages" : [
+    {
+      "content" : "# Welcome to Gamebook Engine!\n\nGamebook Engine is an app that allows you to play, create, and share multiple-choice games, a type of interactive fiction where the player’s decisions get to shape the path (and often the outcome) of the story.\n\nThis guide itself is a Gamebook built using Gamebook Engine. The basic idea should be obvious to anyone who read a certain popular brand of children’s books growing up: you’ve got some text to read, then you’ve got some choices to make; rinse and repeat.\n\nThe Gamebooks that this app creates can be a little more dynamic than the printed page, allowing you to track actions taken by the player which can be used to influence the decisions they can make later on.",
+      "type" : "first",
+      "decisions" : [
+        {
+          "content" : "How do I play games?",
+          "destination_uuid" : "3CED919D-847F-4221-BC96-C89213D89EC7",
+          "rules" : [
+
+          ],
+          "uuid" : "BD95C129-0F84-4BE0-833A-C67874E969A0",
+          "match_style" : "match_all"
+        },
+        {
+          "match_style" : "match_all",
+          "destination_uuid" : "267DDF7D-2CDF-4C55-8859-9179E947CD75",
+          "rules" : [
+
+          ],
+          "uuid" : "25491FD6-4760-4136-BF46-4F15797E2DD4",
+          "content" : "How do I make games?"
+        },
+        {
+          "destination_uuid" : "C40FE90D-A402-4631-A56D-3C538B7BF962",
+          "match_style" : "match_all",
+          "content" : "How do I share games?",
+          "uuid" : "572146FE-7E9F-4574-AC19-A33FCC31CB9D",
+          "rules" : [
+
+          ]
+        },
+        {
+          "content" : "Who made this thing?",
+          "uuid" : "5E200D37-D2D8-4094-96EF-17FB523DEC50",
+          "match_style" : "match_all",
+          "destination_uuid" : "0E5B129D-C302-416C-A366-928D4D7B1432",
+          "rules" : [
+
+          ]
+        },
+        {
+          "match_style" : "match_all",
+          "rules" : [
+            {
+              "attribute_uuid" : "D450883B-5240-4083-90FD-883E8CF02B61",
+              "value" : 1,
+              "uuid" : "1437DAB5-29AF-4871-AAA8-93EFCFAF8ADF",
+              "type" : "equal"
+            },
+            {
+              "uuid" : "E8CCA4E2-7A79-4684-BAB3-EF53FF791484",
+              "type" : "equal",
+              "value" : 1,
+              "attribute_uuid" : "C4CF5FD5-8269-4423-951C-C0F9A19F90BD"
+            },
+            {
+              "type" : "equal",
+              "value" : 1,
+              "uuid" : "FE32742D-302E-4119-ABAE-55D275BE249B",
+              "attribute_uuid" : "3A07AB52-B3FE-44DF-9922-CE820682ED83"
+            },
+            {
+              "uuid" : "E4D44DF5-D66A-4ECF-A8AB-EC2B9C5665FB",
+              "type" : "equal",
+              "attribute_uuid" : "92F7830E-4041-4D95-A0BF-64B250A15C34",
+              "value" : 1
+            },
+            {
+              "attribute_uuid" : "49A98A94-206A-408F-B94F-975AD538422C",
+              "uuid" : "EA07AC60-4177-41BF-AFDB-F760B5790DC1",
+              "type" : "equal",
+              "value" : 1
+            },
+            {
+              "uuid" : "31DF72CD-0F5A-47CA-B3D9-B2A01ABE1B57",
+              "value" : 1,
+              "attribute_uuid" : "0AB63469-9CED-4885-9C57-4AA421562B84",
+              "type" : "equal"
+            },
+            {
+              "type" : "equal",
+              "uuid" : "17E8CB3F-FBC9-4E4B-94ED-E81650CE179D",
+              "value" : 1,
+              "attribute_uuid" : "5DD02B0F-3646-4BD9-A39A-2C644398A8D8"
+            },
+            {
+              "type" : "equal",
+              "attribute_uuid" : "6CE5B74F-4E0B-45AB-BA08-D53C74D04D04",
+              "uuid" : "64BCE4CB-841C-415D-8BCB-E10B7CE5438F",
+              "value" : 1
+            }
+          ],
+          "content" : "Congrats! You read every page in this guide. Tap here for a special surprise!",
+          "uuid" : "ECD9A502-DBE9-49D4-8C1F-9F1038D68883",
+          "destination_uuid" : "FDBAA147-6629-43BD-8ECE-4AB156A49992"
+        }
+      ],
+      "uuid" : "8C26507E-1D9A-48DE-94EB-8FB96C9FC4B2"
+    },
+    {
+      "uuid" : "3CED919D-847F-4221-BC96-C89213D89EC7",
+      "content" : "# How to Play\n\nIf you exit from this introduction game you’ll be on the main **Your Gamebooks** screen, and tapping any item in the list will begin playing it (or pick up where you left off). You probably already know this, because you couldn’t be here reading about it otherwise.\n\nYou can import games from **.gbook** files, by using the + button in the top left of the view. Any **.gbook** files you add to your iCloud Drive will be available in the file browser. You can also open files for export right from the Files app on your phone, or download them from the web.\n\nUse the buttons at the bottom of the game screen to **Exit Game**—which will take you back to the **Your Gamebooks** screen; and to **Restart Game**—which will reset your progress and take you back to the first page of the current game.",
+      "type" : "",
+      "consequences" : [
+        {
+          "type" : "set",
+          "amount" : 1,
+          "uuid" : "7D38B72C-FB72-48ED-BA79-959869F5BEA0",
+          "attribute_uuid" : "C4CF5FD5-8269-4423-951C-C0F9A19F90BD"
+        }
+      ],
+      "decisions" : [
+        {
+          "match_style" : "match_all",
+          "content" : "Go back to the Welcome screen",
+          "rules" : [
+
+          ],
+          "destination_uuid" : "8C26507E-1D9A-48DE-94EB-8FB96C9FC4B2",
+          "uuid" : "C85B5FBB-38ED-4BFB-A20C-7A3FC3C3361E"
+        }
+      ]
+    },
+    {
+      "uuid" : "267DDF7D-2CDF-4C55-8859-9179E947CD75",
+      "type" : "",
+      "content" : "# How to Make Games\n\nTo create a new game, tap on the Add (+) symbol in the upper right of the **Your Gamebooks** screen, and select “Create New”. You’ll be asked to name your game then, but note that you can always change the name later.\n\nOn the side of each game in the list there’s three icons meaning, in order: Edit, Export, and Delete. Hit Edit, and you’ll end up in the Overview mode showing you a diagram of the pages of your game laid out, which at this point only has one page.\n\nGamebooks are made out of a few components: **Pages**, **Decisions**, **Attributes**, and **Consequences**. Let’s learn about those now.",
+      "consequences" : [
+        {
+          "amount" : 1,
+          "attribute_uuid" : "92F7830E-4041-4D95-A0BF-64B250A15C34",
+          "uuid" : "2796C447-A907-4015-880C-1AA5BC8FF704",
+          "type" : "set"
+        }
+      ],
+      "decisions" : [
+        {
+          "match_style" : "match_all",
+          "destination_uuid" : "79B65151-5F4A-45A4-A57A-45213C58CAEC",
+          "content" : "Learn about Pages",
+          "rules" : [
+
+          ],
+          "uuid" : "696A85FB-83EE-45FE-B80E-233336BDCFE7"
+        },
+        {
+          "uuid" : "15045379-19B0-4C3E-BF48-C864F93109B4",
+          "content" : "Go back to the Welcome screen",
+          "rules" : [
+
+          ],
+          "match_style" : "match_all",
+          "destination_uuid" : "8C26507E-1D9A-48DE-94EB-8FB96C9FC4B2"
+        }
+      ]
+    },
+    {
+      "content" : "# About Gamebook Engine\n\nGamebook Engine was built by [Brad Root](https:\/\/amiantos.net), because one day he felt like it. It seemed like a fun idea!\n\nGamebook Engine is free open source software, which means you can check out the source code and use it to build your own projects. You can find out more about the project [on GitHub](https:\/\/github.com\/amiantos\/brgamebookengine).",
+      "uuid" : "0E5B129D-C302-416C-A366-928D4D7B1432",
+      "type" : "",
+      "consequences" : [
+        {
+          "attribute_uuid" : "3A07AB52-B3FE-44DF-9922-CE820682ED83",
+          "uuid" : "5FE10B6A-470F-4BDB-909C-D6CE5B694DD3",
+          "type" : "set",
+          "amount" : 1
+        }
+      ],
+      "decisions" : [
+        {
+          "destination_uuid" : "8C26507E-1D9A-48DE-94EB-8FB96C9FC4B2",
+          "uuid" : "83A06BA7-524C-4EEB-B845-920BA8CCCC22",
+          "content" : "Go back to the Welcome screen",
+          "rules" : [
+
+          ],
+          "match_style" : "match_all"
+        }
+      ]
+    },
+    {
+      "content" : "# How to Share\n\nOn the **Your Gamebooks** screen, the middle icon next to every book is for sharing that gamebook. This’ll convert your game to a **.gbook** file that you can then save to your Files app or share with a friend via any number of methods.",
+      "type" : "",
+      "consequences" : [
+        {
+          "attribute_uuid" : "D450883B-5240-4083-90FD-883E8CF02B61",
+          "uuid" : "7A226C6C-76D4-4B84-9827-0FF3C03EB7E5",
+          "amount" : 1,
+          "type" : "set"
+        }
+      ],
+      "decisions" : [
+        {
+          "destination_uuid" : "8C26507E-1D9A-48DE-94EB-8FB96C9FC4B2",
+          "rules" : [
+
+          ],
+          "match_style" : "match_all",
+          "content" : "Go back to the Welcome screen",
+          "uuid" : "D2556E66-AE15-43BC-AC4D-8C0D663B8DF4"
+        }
+      ],
+      "uuid" : "C40FE90D-A402-4631-A56D-3C538B7BF962"
+    },
+    {
+      "content" : "# Attributes\n\nAttributes are numerical bits of information you can track for the player over the course of the game, that you manipulate using Consequences, and check when building Decisions.\n\nTechnical Details: Attributes are decimal values, created with an initial value of 0.0, and can be modified by either setting (overriding), adding, subtracting, or multiplying them via the Consequence feature.\n\nFor example, you could create an attribute to track the relationship a player has with another character, naming the attribute “Relationship: Jack”. On the first Page of the game, you use a Consequence to Set that attribute to 50.\n\nAs the game progresses, if the player makes Jack upset, you could subtract the attribute by 25 points. Later, you could have an important decision appear _only_ if the players relationship with Jack is greater than 25 points. If the player previously made Jack upset, and didn’t remedy it, they will not get to pick that decision as an option.\n\nAttributes allow you to create dynamic games that can change in subtle or extreme ways depending on the decisions the player chooses.",
+      "type" : "",
+      "consequences" : [
+        {
+          "amount" : 1,
+          "attribute_uuid" : "0AB63469-9CED-4885-9C57-4AA421562B84",
+          "uuid" : "E9D50417-7C6C-49BF-8C6C-3D983C81454A",
+          "type" : "set"
+        }
+      ],
+      "uuid" : "3A54F4AF-F11A-4031-A5B2-C60A04E82BFB",
+      "decisions" : [
+        {
+          "uuid" : "2D60102F-1372-4BE7-882D-D139D911644B",
+          "content" : "Learn about Consequences",
+          "rules" : [
+
+          ],
+          "match_style" : "match_all",
+          "destination_uuid" : "D3688B32-F15B-4C51-A4C4-F7C44D232FB3"
+        }
+      ]
+    },
+    {
+      "consequences" : [
+        {
+          "uuid" : "27C8E89D-ABAB-4841-944E-9DC78681D2C9",
+          "type" : "set",
+          "attribute_uuid" : "49A98A94-206A-408F-B94F-975AD538422C",
+          "amount" : 1
+        }
+      ],
+      "type" : "",
+      "uuid" : "79B65151-5F4A-45A4-A57A-45213C58CAEC",
+      "content" : "# Pages\n\nPages are the core building block of a Gamebook. Each Page has three different components: the content, formatted with Markdown; Decisions, which take the player to other Pages; and Consequences, which are modifications to Attributes that come as a result of landing on the Page.\n\n### About Markdown\n\nMarkdown is a lightweight markup language with plain text formatting syntax. Only a reduced set of Markdown attributes are supported in Gamebook Engine. Here are some examples:\n\n\\*italic\\* or \\_italics\\_\n\\*\\*bold\\*\\* or \\_\\_bold\\_\\_\n\n\\# Header 1\n\\#\\# Header 2\n\\#\\#\\# Header 3\n\n\\> Quote\n\n\\* List\n\n\\`code\\`\n\n\\[Links\\]\\(http:\/\/github.com\/ivanbruel\/MarkdownKit\/\\)",
+      "decisions" : [
+        {
+          "content" : "Learn about Decisions",
+          "rules" : [
+
+          ],
+          "destination_uuid" : "04AA4089-BB43-4D5F-8648-4BB2F79798D6",
+          "uuid" : "11AFDCCF-3DA9-4344-B9DA-4A0365C51268",
+          "match_style" : "match_all"
+        }
+      ]
+    },
+    {
+      "type" : "",
+      "uuid" : "04AA4089-BB43-4D5F-8648-4BB2F79798D6",
+      "content" : "# Decisions\n\nDecisions are how your players navigate to other Pages. Their composition is pretty simple: the text you display to the player, the destination Page that the Decision leads to, and any rules required to show it.\n\nRules are entirely optional and you can build an entire game without using them. They’re just an extra tool that can be used to make your game more dynamic.\n\nFor example, imagine if your game involves a dungeon of some kind, and one of the rooms has a door in it that requires a key to open. You’d create an attribute to track whether or not they have a key, named “has key”. Then you’d create a rule on the “Unlock the door” Decision that goes something like “has key is not equal to 0”. When they find the key, you can set “has key” to 1, and when they return to that room they’d see the new Decision that allows them to unlock the door.",
+      "consequences" : [
+        {
+          "attribute_uuid" : "5DD02B0F-3646-4BD9-A39A-2C644398A8D8",
+          "amount" : 1,
+          "uuid" : "E10E27A0-148C-43DF-A59B-E33FB84DA0F0",
+          "type" : "set"
+        }
+      ],
+      "decisions" : [
+        {
+          "content" : "Learn about Attributes",
+          "match_style" : "match_all",
+          "destination_uuid" : "3A54F4AF-F11A-4031-A5B2-C60A04E82BFB",
+          "rules" : [
+
+          ],
+          "uuid" : "6AA96ECB-5EA3-401A-A158-823DAB19DF97"
+        }
+      ]
+    },
+    {
+      "decisions" : [
+        {
+          "match_style" : "match_all",
+          "uuid" : "C5FABC1D-A685-4983-8887-E42A4DD83F7D",
+          "destination_uuid" : "8C26507E-1D9A-48DE-94EB-8FB96C9FC4B2",
+          "rules" : [
+
+          ],
+          "content" : "Go back to the Welcome screen"
+        }
+      ],
+      "content" : "# Consequences\n\nConsequences are the only way to change a player’s attribute values. They’re assigned at the Page level and take affect as soon as the player lands on the page.\n\nConsequences can manipulate attribute values four different ways: you can set them to a specific value, overwriting any precious value; you can add or subtract any number from them; and you can multiply them by any number. \n\nFor example, returning to the “has key” idea, when the player lands on the page where they receive the key (“A radiant angel appears in the room before you, and hands you a glittering key!”), you’d have a Consequence that will “set ‘has key’ to 1”. When they return to the other room where they need the key, that attribute will cause an “unlock door” decision to pop up (based on that decision’s rules).",
+      "type" : "",
+      "consequences" : [
+        {
+          "amount" : 1,
+          "attribute_uuid" : "6CE5B74F-4E0B-45AB-BA08-D53C74D04D04",
+          "uuid" : "3D23A102-F5C9-4615-A037-9D88495ABE03",
+          "type" : "set"
+        }
+      ],
+      "uuid" : "D3688B32-F15B-4C51-A4C4-F7C44D232FB3"
+    },
+    {
+      "uuid" : "FDBAA147-6629-43BD-8ECE-4AB156A49992",
+      "content" : "# Congratulations...?\n\nJust kidding, I don’t have a special surprise for you. I’m sorry. 😔\n\nBut on the plus side, you’re much better informed about how Gamebook Engine works!\n\nTap “Restart Game” to go back to the Welcome screen. Or tap “Exit Game” to pick another Gamebook or start creating your own from the **Your Gamebooks** screen.",
+      "type" : "ending"
+    }
+  ],
+  "attributes" : [
+    {
+      "uuid" : "5DD02B0F-3646-4BD9-A39A-2C644398A8D8",
+      "name" : "view decisions"
+    },
+    {
+      "uuid" : "6CE5B74F-4E0B-45AB-BA08-D53C74D04D04",
+      "name" : "view consequences"
+    },
+    {
+      "name" : "view how to make",
+      "uuid" : "92F7830E-4041-4D95-A0BF-64B250A15C34"
+    },
+    {
+      "name" : "view how to play",
+      "uuid" : "C4CF5FD5-8269-4423-951C-C0F9A19F90BD"
+    },
+    {
+      "uuid" : "3A07AB52-B3FE-44DF-9922-CE820682ED83",
+      "name" : "view who made this"
+    },
+    {
+      "uuid" : "49A98A94-206A-408F-B94F-975AD538422C",
+      "name" : "view pages"
+    },
+    {
+      "uuid" : "0AB63469-9CED-4885-9C57-4AA421562B84",
+      "name" : "view attributes"
+    },
+    {
+      "uuid" : "D450883B-5240-4083-90FD-883E8CF02B61",
+      "name" : "view how to share"
+    }
+  ],
+  "author" : "Brad Root",
+  "about" : "Thanks for downloading Gamebook Engine! Check out this quick guide to learn what Gamebook Engine is and how to use it.",
+  "license" : "",
+  "website" : "https:\/\/amiantos.net\/gamebookengine",
+  "font" : "normal"
+}

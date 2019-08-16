@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14492.1" systemVersion="18G95" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Attribute" representedClassName="Attribute" syncable="YES">
+        <attribute name="name" attributeType="String" syncable="YES"/>
+        <attribute name="uuid" attributeType="UUID" usesScalarValueType="NO" syncable="YES"/>
+        <relationship name="consequences" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Consequence" inverseName="attribute" inverseEntity="Consequence" syncable="YES"/>
+        <relationship name="game" maxCount="1" deletionRule="Nullify" destinationEntity="Game" inverseName="attributes" inverseEntity="Game" syncable="YES"/>
+        <relationship name="rules" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Rule" inverseName="attribute" inverseEntity="Rule" syncable="YES"/>
+    </entity>
+    <entity name="Consequence" representedClassName="Consequence" syncable="YES">
+        <attribute name="amount" attributeType="Float" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="type" attributeType="Integer 32" defaultValueString="2" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="uuid" attributeType="UUID" usesScalarValueType="NO" syncable="YES"/>
+        <relationship name="attribute" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Attribute" inverseName="consequences" inverseEntity="Attribute" syncable="YES"/>
+        <relationship name="page" maxCount="1" deletionRule="Nullify" destinationEntity="Page" inverseName="consequences" inverseEntity="Page" syncable="YES"/>
+    </entity>
+    <entity name="Decision" representedClassName="Decision" syncable="YES">
+        <attribute name="content" attributeType="String" customClassName="NSAttributedString" syncable="YES"/>
+        <attribute name="matchStyle" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="uuid" attributeType="UUID" usesScalarValueType="NO" syncable="YES"/>
+        <relationship name="destination" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Page" inverseName="origins" inverseEntity="Page" syncable="YES"/>
+        <relationship name="page" maxCount="1" deletionRule="Nullify" destinationEntity="Page" inverseName="decisions" inverseEntity="Page" syncable="YES"/>
+        <relationship name="rules" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Rule" inverseName="decision" inverseEntity="Rule" syncable="YES"/>
+    </entity>
+    <entity name="Game" representedClassName="Game" syncable="YES">
+        <attribute name="about" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="author" attributeType="String" defaultValueString="Anonymous" syncable="YES"/>
+        <attribute name="font" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="license" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" attributeType="String" syncable="YES"/>
+        <attribute name="uuid" attributeType="UUID" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="website" optional="YES" attributeType="URI" syncable="YES"/>
+        <relationship name="attributes" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Attribute" inverseName="game" inverseEntity="Attribute" syncable="YES"/>
+        <relationship name="pages" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="Page" inverseName="game" inverseEntity="Page" syncable="YES"/>
+    </entity>
+    <entity name="Page" representedClassName="Page" syncable="YES">
+        <attribute name="content" attributeType="String" customClassName="NSAttributedString" syncable="YES"/>
+        <attribute name="type" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="uuid" attributeType="UUID" usesScalarValueType="NO" syncable="YES"/>
+        <relationship name="consequences" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Consequence" inverseName="page" inverseEntity="Consequence" syncable="YES"/>
+        <relationship name="decisions" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="Decision" inverseName="page" inverseEntity="Decision" syncable="YES"/>
+        <relationship name="game" maxCount="1" deletionRule="Nullify" destinationEntity="Game" inverseName="pages" inverseEntity="Game" syncable="YES"/>
+        <relationship name="origins" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Decision" inverseName="destination" inverseEntity="Decision" syncable="YES"/>
+    </entity>
+    <entity name="Rule" representedClassName="Rule" syncable="YES">
+        <attribute name="type" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="uuid" attributeType="UUID" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="value" attributeType="Float" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="attribute" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Attribute" inverseName="rules" inverseEntity="Attribute" syncable="YES"/>
+        <relationship name="decision" maxCount="1" deletionRule="Nullify" destinationEntity="Decision" inverseName="rules" inverseEntity="Decision" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Attribute" positionX="118.90625" positionY="17.83203125" width="128" height="120"/>
+        <element name="Consequence" positionX="-97.89453125" positionY="17.29296875" width="128" height="120"/>
+        <element name="Decision" positionX="159.20703125" positionY="-178.453125" width="128" height="135"/>
+        <element name="Game" positionX="-118.96484375" positionY="-379.7421875" width="128" height="180"/>
+        <element name="Page" positionX="-99.73046875" positionY="-203.80078125" width="128" height="150"/>
+        <element name="Rule" positionX="18" positionY="-225" width="128" height="120"/>
+    </elements>
+</model>
