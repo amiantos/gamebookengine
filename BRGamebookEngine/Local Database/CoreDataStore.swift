@@ -190,7 +190,7 @@ class CoreDataStore {
 
     // MARK: - Consequences
 
-    func createConsequence(for page: Page, attribute: Attribute?, type: ConsequenceType?, amount: Int32, completion: @escaping (Consequence?) -> Void) {
+    func createConsequence(for page: Page, attribute _: Attribute?, type: ConsequenceType?, amount: Int32, completion: @escaping (Consequence?) -> Void) {
         mainManagedObjectContext.perform {
             do {
                 let managedConsequence = Consequence(context: self.mainManagedObjectContext)

@@ -9,7 +9,6 @@
 import UIKit
 
 class PageEditorConsequenceTableViewCell: UITableViewCell {
-
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

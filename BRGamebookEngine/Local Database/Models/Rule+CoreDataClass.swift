@@ -7,10 +7,8 @@
 //
 //
 
-import Foundation
 import CoreData
+import Foundation
 
 @objc(Rule)
-public class Rule: NSManagedObject {
-
-}
+public class Rule: NSManagedObject {}

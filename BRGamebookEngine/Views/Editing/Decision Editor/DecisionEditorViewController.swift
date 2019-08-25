@@ -20,10 +20,10 @@ class DecisionEditorViewController: UIViewController {
     }
 
     @IBOutlet var destinationPreviewLabel: UILabel!
-    @IBOutlet weak var segmentedControl: UISegmentedControl!
-    @IBAction func segmentedControlChanged(_ sender: UISegmentedControl) {
-    }
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet var segmentedControl: UISegmentedControl!
+    @IBAction func segmentedControlChanged(_: UISegmentedControl) {}
+
+    @IBOutlet var tableView: UITableView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,7 +34,7 @@ class DecisionEditorViewController: UIViewController {
         toolbar.barStyle = .default
         toolbar.items = [
             UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
-            UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(doneAction))
+            UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(doneAction)),
         ]
         textView.inputAccessoryView = toolbar
 

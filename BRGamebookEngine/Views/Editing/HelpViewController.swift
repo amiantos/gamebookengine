@@ -6,8 +6,8 @@
 //  Copyright © 2019 Brad Root. All rights reserved.
 //
 
-import UIKit
 import Down
+import UIKit
 
 let helpMarkdown = """
 This editor helps you create simple interactive books, where readers can make decisions that influence the story.
@@ -16,8 +16,7 @@ There are several core building blocks that should be understood: **Attributes**
 """
 
 class HelpViewController: UIViewController {
-
-    @IBOutlet weak var textView: UITextView!
+    @IBOutlet var textView: UITextView!
 
     override func viewDidLoad() {
         super.viewDidLoad()

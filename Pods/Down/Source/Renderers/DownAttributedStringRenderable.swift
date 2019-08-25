@@ -28,11 +28,11 @@ extension DownAttributedStringRenderable {
     /// - Returns: An `NSAttributedString`
     /// - Throws: `DownErrors` depending on the scenario
     public func toAttributedString(_ options: DownOptions = .default, stylesheet: String? = nil) throws -> NSAttributedString {
-        let html = try self.toHTML(options)
+        let html = try toHTML(options)
         let defaultStylesheet = "* {font-family: Helvetica } code, pre { font-family: Menlo }"
         return try NSAttributedString(htmlString: "<style>" + (stylesheet ?? defaultStylesheet) + "</style>" + html)
     }
-    
+
     /// Generates an `NSAttributedString` from the `markdownString` property
     ///
     /// **Note:** The attributed string is constructed directly by traversing the abstract syntax tree. It is
@@ -45,12 +45,12 @@ extension DownAttributedStringRenderable {
     /// - Returns: `DownErrors` depending on the scenario
     /// - Throws: `DownErrors` depending on the scenario
     public func toAttributedString(_ options: DownOptions = .default, styler: Styler) throws -> NSAttributedString {
-        let tree = try self.toAST(options)
-        
+        let tree = try toAST(options)
+
         guard tree.type == CMARK_NODE_DOCUMENT else {
             throw DownErrors.astRenderingError
         }
-        
+
         let document = Document(cmarkNode: tree)
         let visitor = AttributedStringVisitor(styler: styler, options: options)
         return document.accept(visitor)

@@ -7,18 +7,26 @@
 //
 //
 
-import Foundation
 import CoreData
+import Foundation
 
-@objc public enum ConsequenceType: Int32 {
+@objc public enum ConsequenceType: Int32, CustomStringConvertible {
     case set = 0
     case add = 1
     case subtract = 2
     case multiply = 3
+
+    public var description: String {
+        switch self {
+        case .set: return "Set"
+        case .add: return "Add"
+        case .subtract: return "Subtract"
+        case .multiply: return "Multiply"
+        }
+    }
 }
 
 extension Consequence {
-
     @nonobjc public class func fetchRequest() -> NSFetchRequest<Consequence> {
         return NSFetchRequest<Consequence>(entityName: "Consequence")
     }
@@ -28,5 +36,4 @@ extension Consequence {
     @NSManaged public var uuid: UUID?
     @NSManaged public var attribute: Attribute?
     @NSManaged public var page: Page?
-
 }

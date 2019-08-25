@@ -9,8 +9,8 @@
 import Foundation
 
 public struct Down: DownASTRenderable, DownHTMLRenderable, DownXMLRenderable,
-                    DownLaTeXRenderable, DownGroffRenderable, DownCommonMarkRenderable,
-                    DownAttributedStringRenderable {
+    DownLaTeXRenderable, DownGroffRenderable, DownCommonMarkRenderable,
+    DownAttributedStringRenderable {
     /// A string containing CommonMark Markdown
     public var markdownString: String
 

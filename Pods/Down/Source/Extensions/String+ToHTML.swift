@@ -10,7 +10,6 @@ import Foundation
 import libcmark
 
 extension String {
-
     /// Generates an HTML string from the contents of the string (self), which should contain CommonMark Markdown
     ///
     /// - Parameter options: `DownOptions` to modify parsing or rendering, defaulting to `.default`
@@ -22,5 +21,4 @@ extension String {
         cmark_node_free(ast)
         return html
     }
-
 }

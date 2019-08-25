@@ -49,7 +49,7 @@ class PageEditorViewController: UIViewController {
         toolbar.barStyle = .default
         toolbar.items = [
             UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
-            UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(doneAction))
+            UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(doneAction)),
         ]
         textView.inputAccessoryView = toolbar
 
@@ -222,8 +222,22 @@ extension PageEditorViewController: UITableViewDelegate, UITableViewDataSource {
             cell.textLabel?.text = currentDecisions?[indexPath.row].content.string
             return cell
         }
+        guard let consequence = currentConsequences?.item(at: indexPath.row) else { fatalError() }
         let cell = tableView.dequeueReusableCell(withIdentifier: "consequenceCell", for: indexPath)
-        cell.textLabel?.text = String(describing: currentConsequences?[indexPath.row].amount)
+        cell.selectionStyle = .none
+
+        let attribute = consequence.attribute?.name ?? "NULL"
+        let value = consequence.amount
+        switch consequence.type {
+        case .set:
+            cell.textLabel?.text = "\(attribute): Set to \(value)"
+        case .add:
+            cell.textLabel?.text = "\(attribute): Add \(value)"
+        case .subtract:
+            cell.textLabel?.text = "\(attribute): Subtract \(value)"
+        case .multiply:
+            cell.textLabel?.text = "\(attribute): Multiply by \(value)"
+        }
         return cell
     }
 
@@ -278,7 +292,7 @@ extension PageEditorViewController: UITableViewDelegate, UITableViewDataSource {
             return [editAction, deleteAction]
         } else {
             // Consequence
-            let editAction = UITableViewRowAction(style: .normal, title: "Edit") { (_, indexPath) in
+            let editAction = UITableViewRowAction(style: .normal, title: "Edit") { _, indexPath in
                 guard let consequence = self.currentConsequences?.item(at: indexPath.row) else { return }
                 let consequenceEditor = ConsequenceEditorViewController()
                 consequenceEditor.currentConsequence = consequence
@@ -286,9 +300,9 @@ extension PageEditorViewController: UITableViewDelegate, UITableViewDataSource {
             }
             editAction.backgroundColor = .black
 
-            let deleteAction = UITableViewRowAction(style: .destructive, title: "Delete") { (_, indexPath) in
+            let deleteAction = UITableViewRowAction(style: .destructive, title: "Delete") { _, indexPath in
                 guard let consequence = self.currentConsequences?.item(at: indexPath.row) else { return }
-                coreDataStore.deleteConsequence(consequence, completion: { (consequence) in
+                coreDataStore.deleteConsequence(consequence, completion: { consequence in
                     if consequence == nil {
                         DispatchQueue.main.async {
                             self.currentConsequences?.remove(at: indexPath.row)

@@ -7,8 +7,8 @@
 //
 //
 
-import Foundation
 import CoreData
+import Foundation
 
 @objc public enum RuleType: Int32 {
     case isEqualTo = 0
@@ -18,7 +18,6 @@ import CoreData
 }
 
 extension Rule {
-
     @nonobjc public class func fetchRequest() -> NSFetchRequest<Rule> {
         return NSFetchRequest<Rule>(entityName: "Rule")
     }
@@ -28,5 +27,4 @@ extension Rule {
     @NSManaged public var value: RuleType
     @NSManaged public var decision: Decision
     @NSManaged public var attribute: Attribute?
-
 }

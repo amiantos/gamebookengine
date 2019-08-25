@@ -12,9 +12,7 @@
     import UIKit
 #endif
 
-
 extension NSAttributedString {
-
     /// Instantiates an attributed string with the given HTML string
     ///
     /// - Parameter htmlString: An HTML string
@@ -26,9 +24,8 @@ extension NSAttributedString {
 
         let options: [NSAttributedString.DocumentReadingOptionKey: Any] = [
             .documentType: NSAttributedString.DocumentType.html,
-            .characterEncoding: NSNumber(value: String.Encoding.utf8.rawValue)
+            .characterEncoding: NSNumber(value: String.Encoding.utf8.rawValue),
         ]
         try self.init(data: data, options: options, documentAttributes: nil)
     }
-
 }

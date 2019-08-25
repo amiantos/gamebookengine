@@ -7,10 +7,8 @@
 //
 //
 
-import Foundation
 import CoreData
+import Foundation
 
 @objc(Page)
-public class Page: NSManagedObject {
-
-}
+public class Page: NSManagedObject {}

@@ -8,9 +8,14 @@
 
 import UIKit
 
+protocol AttributesTableViewDelegate: AnyObject {
+    func selectedAttribute(_ attribute: Attribute)
+}
+
 class AttributesTableViewController: UITableViewController {
     var currentGame: Game?
     var attributes: [Attribute] = []
+    var delegate: AttributesTableViewDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,5 +82,11 @@ class AttributesTableViewController: UITableViewController {
         cell.textLabel?.text = attributes[indexPath.row].name
 
         return cell
+    }
+
+    override func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let attribute = attributes.item(at: indexPath.row) else { return }
+        delegate?.selectedAttribute(attribute)
+        navigationController?.popViewController(animated: true)
     }
 }

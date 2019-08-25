@@ -9,7 +9,6 @@ import Foundation
 import libcmark
 
 public class CustomInline: BaseNode {
-    
     /// The custom content, if present.
     public private(set) lazy var literal: String? = cmarkNode.literal
 }
