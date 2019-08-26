@@ -16,7 +16,6 @@ class HelpViewController: UIViewController {
         super.viewDidLoad()
 
         title = "Editor Help"
-
         guard let readMeURL = Bundle.main.url(forResource: "Help", withExtension: "md"),
             let readMeContents = try? String(contentsOf: readMeURL)
             else { return }
@@ -24,7 +23,7 @@ class HelpViewController: UIViewController {
         let helpText = Down(markdownString: readMeContents)
         do {
             // swiftlint:disable line_length
-            textView.attributedText = try? helpText.toAttributedString(.default, stylesheet: "* {font-family: sans-serif;} p {font-size: 13pt;} code, pre { font-family: Menlo; font-size: 12pt; font-weight: bold; }")
+            textView.attributedText = try? helpText.toAttributedString(.default, stylesheet: "* {font-family: sans-serif;} p {font-size: 13pt;text-indent:0.7em;} code, pre { font-family: Menlo; font-size: 12pt; font-weight: bold; }")
         }
     }
 }
