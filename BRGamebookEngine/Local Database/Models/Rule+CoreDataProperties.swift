@@ -10,11 +10,20 @@
 import CoreData
 import Foundation
 
-@objc public enum RuleType: Int32 {
+@objc public enum RuleType: Int32, CustomStringConvertible {
     case isEqualTo = 0
     case isNotEqualTo = 1
     case isGreaterThan = 2
     case isLessThan = 3
+
+    public var description: String {
+        switch self {
+        case .isEqualTo: return "is equal to"
+        case .isNotEqualTo: return "is not equal to"
+        case .isGreaterThan: return "is greater than"
+        case .isLessThan: return "is less than"
+        }
+    }
 }
 
 extension Rule {

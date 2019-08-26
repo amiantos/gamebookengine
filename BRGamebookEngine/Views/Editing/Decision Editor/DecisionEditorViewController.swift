@@ -55,6 +55,11 @@ class DecisionEditorViewController: UIViewController {
         loadContent()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        loadContent()
+    }
+
     @objc func doneAction() {
         textView.resignFirstResponder()
         saveContent()
@@ -96,9 +101,35 @@ extension DecisionEditorViewController: UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ruleCell", for: indexPath)
 
-        cell.textLabel?.text = currentRules.item(at: indexPath.row)?.uuid.uuidString
+        guard let rule = currentRules.item(at: indexPath.row) else { fatalError() }
+        cell.textLabel?.text = "\(rule.attribute?.name ?? "NULL") \(rule.type.description) \(rule.value)"
 
         return cell
+    }
+
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let editAction = UITableViewRowAction(style: .normal, title: "Edit") { _, indexPath in
+            guard let rule = self.currentRules.item(at: indexPath.row) else { return }
+            let ruleEditor = RuleEditorViewController()
+            ruleEditor.currentRule = rule
+            self.navigationController?.pushViewController(ruleEditor, animated: true)
+        }
+        editAction.backgroundColor = .black
+
+//        let deleteAction = UITableViewRowAction(style: .destructive, title: "Delete") { _, indexPath in
+//            guard let consequence = self.currentConsequences?.item(at: indexPath.row) else { return }
+//            coreDataStore.deleteConsequence(consequence, completion: { consequence in
+//                if consequence == nil {
+//                    DispatchQueue.main.async {
+//                        self.currentConsequences?.remove(at: indexPath.row)
+//                        self.tableView.deleteRows(at: [indexPath], with: .automatic)
+//                    }
+//                }
+//            })
+//        }
+        return [editAction]
+
+
     }
 
 }
