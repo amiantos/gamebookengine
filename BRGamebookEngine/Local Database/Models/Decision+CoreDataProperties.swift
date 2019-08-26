@@ -25,4 +25,5 @@ extension Decision {
     @NSManaged public var destination: Page?
     @NSManaged public var page: Page
     @NSManaged public var matchStyle: MatchType
+    @NSManaged public var rules: NSSet?
 }

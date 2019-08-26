@@ -20,7 +20,7 @@
         <attribute name="uuid" attributeType="UUID" usesScalarValueType="NO" syncable="YES"/>
         <relationship name="destination" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Page" inverseName="origins" inverseEntity="Page" syncable="YES"/>
         <relationship name="page" maxCount="1" deletionRule="Nullify" destinationEntity="Page" inverseName="decisions" inverseEntity="Page" syncable="YES"/>
-        <relationship name="rules" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Rule" inverseName="decision" inverseEntity="Rule" syncable="YES"/>
+        <relationship name="rules" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Rule" inverseName="decision" inverseEntity="Rule" syncable="YES"/>
     </entity>
     <entity name="Game" representedClassName="Game" syncable="YES">
         <attribute name="name" attributeType="String" syncable="YES"/>

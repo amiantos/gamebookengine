@@ -25,6 +25,8 @@
 		444358C5230C7BBE00A2E004 /* PlayPageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 444358C3230C7BBE00A2E004 /* PlayPageViewController.xib */; };
 		A777B3E7A60CB2B425568C0A /* Pods_BRGamebookEngineTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 758C8B8480935878A356A1E3 /* Pods_BRGamebookEngineTests.framework */; };
 		B407897F2313587200D09F87 /* Help.md in Resources */ = {isa = PBXBuildFile; fileRef = B407897E2313587100D09F87 /* Help.md */; };
+		B407898223136E2F00D09F87 /* DecisionEditorRuleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B407898023136E2F00D09F87 /* DecisionEditorRuleTableViewCell.swift */; };
+		B407898323136E2F00D09F87 /* DecisionEditorRuleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B407898123136E2F00D09F87 /* DecisionEditorRuleTableViewCell.xib */; };
 		B448874F23063A0D000E2FDD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B448874E23063A0D000E2FDD /* AppDelegate.swift */; };
 		B448875423063A0D000E2FDD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B448875223063A0D000E2FDD /* Main.storyboard */; };
 		B448875623063A0E000E2FDD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B448875523063A0E000E2FDD /* Assets.xcassets */; };
@@ -103,6 +105,8 @@
 		8A79E7ED69660CA046C6833E /* Pods-BRGamebookEngineUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BRGamebookEngineUITests.release.xcconfig"; path = "Target Support Files/Pods-BRGamebookEngineUITests/Pods-BRGamebookEngineUITests.release.xcconfig"; sourceTree = "<group>"; };
 		8C06B6DAE229252DF93183A6 /* Pods-BRGamebookEngineTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BRGamebookEngineTests.debug.xcconfig"; path = "Target Support Files/Pods-BRGamebookEngineTests/Pods-BRGamebookEngineTests.debug.xcconfig"; sourceTree = "<group>"; };
 		B407897E2313587100D09F87 /* Help.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = Help.md; sourceTree = "<group>"; };
+		B407898023136E2F00D09F87 /* DecisionEditorRuleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecisionEditorRuleTableViewCell.swift; sourceTree = "<group>"; };
+		B407898123136E2F00D09F87 /* DecisionEditorRuleTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DecisionEditorRuleTableViewCell.xib; sourceTree = "<group>"; };
 		B448874B23063A0D000E2FDD /* BRGamebookEngine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BRGamebookEngine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B448874E23063A0D000E2FDD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B448875323063A0D000E2FDD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -339,6 +343,8 @@
 			children = (
 				B4F7C13623118E2300EE055C /* DecisionEditorViewController.swift */,
 				B4F7C13723118E2300EE055C /* DecisionEditorViewController.xib */,
+				B407898023136E2F00D09F87 /* DecisionEditorRuleTableViewCell.swift */,
+				B407898123136E2F00D09F87 /* DecisionEditorRuleTableViewCell.xib */,
 			);
 			path = "Decision Editor";
 			sourceTree = "<group>";
@@ -482,6 +488,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B407898323136E2F00D09F87 /* DecisionEditorRuleTableViewCell.xib in Resources */,
 				B4F7C13E23118E3E00EE055C /* ConsequenceEditorViewController.xib in Resources */,
 				B448875923063A0E000E2FDD /* LaunchScreen.storyboard in Resources */,
 				444358C0230C794400A2E004 /* PageEditorViewController.xib in Resources */,
@@ -634,6 +641,7 @@
 				B4F7C1442311ACDC00EE055C /* Page+CoreDataClass.swift in Sources */,
 				4439E663230B534D00C6A23C /* Consequence+CoreDataProperties.swift in Sources */,
 				B4A8BBBE230A171500851056 /* BRGamebookEngine.xcdatamodeld in Sources */,
+				B407898223136E2F00D09F87 /* DecisionEditorRuleTableViewCell.swift in Sources */,
 				B49173B4230A1C9F0032E15B /* CoreDataStore.swift in Sources */,
 				B4E9EFA5230A36A300C9CA76 /* GamesTableViewController.swift in Sources */,
 				B47F7BD82310F77B00BB072A /* AttributesTableViewController.swift in Sources */,

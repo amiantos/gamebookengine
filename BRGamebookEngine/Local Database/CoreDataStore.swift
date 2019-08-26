@@ -188,6 +188,25 @@ class CoreDataStore {
         completion(nil)
     }
 
+    // MARK: - Rules
+
+    func createRule(for decision: Decision, attribute: Attribute?, type: RuleType?, value: Int32?, completion: @escaping (Rule?) -> Void) {
+        mainManagedObjectContext.perform {
+            do {
+                let managedRule = Rule(context: self.mainManagedObjectContext)
+                managedRule.uuid = UUID()
+                managedRule.decision = decision
+                managedRule.value = value ?? 0
+                managedRule.type = type ?? .isEqualTo
+                try self.mainManagedObjectContext.save()
+                self.saveContext()
+                completion(managedRule)
+            } catch {
+                completion(nil)
+            }
+        }
+    }
+
     // MARK: - Consequences
 
     func createConsequence(for page: Page, attribute _: Attribute?, type: ConsequenceType?, amount: Int32, completion: @escaping (Consequence?) -> Void) {

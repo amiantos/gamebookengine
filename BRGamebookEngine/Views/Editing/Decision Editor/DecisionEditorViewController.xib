@@ -97,6 +97,12 @@
                     <rect key="frame" x="20" y="503.5" width="374" height="378.5"/>
                     <color key="backgroundColor" red="0.94901960780000005" green="0.90979817139999997" blue="0.83058500369999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 </tableView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gdf-Ld-fDF">
+                    <rect key="frame" x="372" y="432.5" width="22" height="22"/>
+                    <connections>
+                        <action selector="addRuleButtonAction:" destination="-1" eventType="touchUpInside" id="wMZ-zS-ik1"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="0.94901960780000005" green="0.90979817139999997" blue="0.83058500369999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -108,6 +114,7 @@
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="FTb-LY-59o" secondAttribute="trailing" constant="20" id="ALC-VD-Cef"/>
                 <constraint firstItem="FTb-LY-59o" firstAttribute="top" secondItem="L9T-mK-RRF" secondAttribute="bottom" constant="8" id="ASs-Gl-etE"/>
                 <constraint firstItem="pG0-ox-y1f" firstAttribute="top" secondItem="MtL-Hm-NUQ" secondAttribute="bottom" constant="8" id="BTx-JB-Mgs"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="gdf-Ld-fDF" secondAttribute="trailing" constant="20" id="D1s-7Q-Zho"/>
                 <constraint firstItem="5tq-pi-IGa" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="Grg-P3-5Gi"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="x7G-N3-4O8" secondAttribute="trailing" constant="20" id="HkQ-Vj-cya"/>
                 <constraint firstItem="x7G-N3-4O8" firstAttribute="top" secondItem="pG0-ox-y1f" secondAttribute="bottom" constant="40" id="LWX-DO-t0C"/>
@@ -128,6 +135,7 @@
                 <constraint firstItem="psE-rh-oGJ" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" constant="20" id="l2E-ot-4Jk"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="WZy-h9-Ygd" secondAttribute="trailing" constant="20" id="loN-6v-9w5"/>
                 <constraint firstItem="5tq-pi-IGa" firstAttribute="centerY" secondItem="MHU-wb-QJW" secondAttribute="centerY" id="m93-oM-Z7R"/>
+                <constraint firstItem="gdf-Ld-fDF" firstAttribute="centerY" secondItem="x7G-N3-4O8" secondAttribute="centerY" id="nbZ-bw-oPm"/>
             </constraints>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>

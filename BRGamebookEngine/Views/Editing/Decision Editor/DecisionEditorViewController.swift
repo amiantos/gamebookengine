@@ -10,6 +10,7 @@ import UIKit
 
 class DecisionEditorViewController: UIViewController {
     var currentDecision: Decision?
+    var currentRules: [Rule] = []
 
     @IBOutlet var textView: UITextView!
     @IBAction func changeDestination(_: UIButton) {
@@ -25,6 +26,9 @@ class DecisionEditorViewController: UIViewController {
         guard let decision = currentDecision, let matchType = MatchType(rawValue: Int32(sender.selectedSegmentIndex)) else { return }
         decision.matchStyle = matchType
         saveContent()
+    }
+    @IBAction func addRuleButtonAction(_ sender: UIButton) {
+        addRule()
     }
 
     @IBOutlet var tableView: UITableView!
@@ -44,6 +48,10 @@ class DecisionEditorViewController: UIViewController {
 
         textView.allowsEditingTextAttributes = true
 
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(UINib(nibName: "DecisionEditorRuleTableViewCell", bundle: nil), forCellReuseIdentifier: "ruleCell")
+
         loadContent()
     }
 
@@ -52,11 +60,24 @@ class DecisionEditorViewController: UIViewController {
         saveContent()
     }
 
+    fileprivate func addRule() {
+        coreDataStore.createRule(for: currentDecision!, attribute: nil, type: nil, value: nil) { (rule) in
+            if rule != nil {
+                DispatchQueue.main.async {
+                    self.loadContent()
+                }
+            }
+        }
+
+    }
+
     fileprivate func loadContent() {
         if let decision = currentDecision {
             textView.attributedText = decision.content
             destinationPreviewLabel.text = decision.destination?.content?.string ?? "No destination set!"
             segmentedControl.selectedSegmentIndex = Int(decision.matchStyle.rawValue)
+            currentRules = currentDecision?.rules?.allObjects as? [Rule] ?? []
+            tableView.reloadData()
         }
     }
 
@@ -65,6 +86,21 @@ class DecisionEditorViewController: UIViewController {
         decision.content = textView.attributedText
         coreDataStore.saveContext()
     }
+}
+
+extension DecisionEditorViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return currentRules.count
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ruleCell", for: indexPath)
+
+        cell.textLabel?.text = currentRules.item(at: indexPath.row)?.uuid.uuidString
+
+        return cell
+    }
+
 }
 
 extension DecisionEditorViewController: PagesTableViewDelegate {

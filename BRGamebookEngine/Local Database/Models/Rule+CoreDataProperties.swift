@@ -22,9 +22,9 @@ extension Rule {
         return NSFetchRequest<Rule>(entityName: "Rule")
     }
 
-    @NSManaged public var type: Int32
+    @NSManaged public var type: RuleType
     @NSManaged public var uuid: UUID
-    @NSManaged public var value: RuleType
+    @NSManaged public var value: Int32
     @NSManaged public var decision: Decision
     @NSManaged public var attribute: Attribute?
 }
