@@ -9,12 +9,6 @@
 import Down
 import UIKit
 
-let helpMarkdown = """
-This editor helps you create simple interactive books, where readers can make decisions that influence the story.
-
-There are several core building blocks that should be understood: **Attributes**, **Pages**, **Decisions**, and **Consequences**.
-"""
-
 class HelpViewController: UIViewController {
     @IBOutlet var textView: UITextView!
 
@@ -23,9 +17,14 @@ class HelpViewController: UIViewController {
 
         title = "Editor Help"
 
-        let helpText = Down(markdownString: helpMarkdown)
+        guard let readMeURL = Bundle.main.url(forResource: "Help", withExtension: "md"),
+            let readMeContents = try? String(contentsOf: readMeURL)
+            else { return }
+
+        let helpText = Down(markdownString: readMeContents)
         do {
-            textView.attributedText = try? helpText.toAttributedString(.default, stylesheet: "* {font-family: sans-serif; font-size: 14pt; } code, pre { font-family: Menlo }")
+            // swiftlint:disable line_length
+            textView.attributedText = try? helpText.toAttributedString(.default, stylesheet: "* {font-family: sans-serif;} p {font-size: 13pt;} code, pre { font-family: Menlo; font-size: 12pt; font-weight: bold; }")
         }
     }
 }

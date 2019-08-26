@@ -24,6 +24,7 @@
 		444358C4230C7BBE00A2E004 /* PlayPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 444358C2230C7BBE00A2E004 /* PlayPageViewController.swift */; };
 		444358C5230C7BBE00A2E004 /* PlayPageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 444358C3230C7BBE00A2E004 /* PlayPageViewController.xib */; };
 		A777B3E7A60CB2B425568C0A /* Pods_BRGamebookEngineTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 758C8B8480935878A356A1E3 /* Pods_BRGamebookEngineTests.framework */; };
+		B407897F2313587200D09F87 /* Help.md in Resources */ = {isa = PBXBuildFile; fileRef = B407897E2313587100D09F87 /* Help.md */; };
 		B448874F23063A0D000E2FDD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B448874E23063A0D000E2FDD /* AppDelegate.swift */; };
 		B448875423063A0D000E2FDD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B448875223063A0D000E2FDD /* Main.storyboard */; };
 		B448875623063A0E000E2FDD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B448875523063A0E000E2FDD /* Assets.xcassets */; };
@@ -101,6 +102,7 @@
 		7B25426557DD2423316934BB /* Pods_BRGamebookEngineUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BRGamebookEngineUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A79E7ED69660CA046C6833E /* Pods-BRGamebookEngineUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BRGamebookEngineUITests.release.xcconfig"; path = "Target Support Files/Pods-BRGamebookEngineUITests/Pods-BRGamebookEngineUITests.release.xcconfig"; sourceTree = "<group>"; };
 		8C06B6DAE229252DF93183A6 /* Pods-BRGamebookEngineTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BRGamebookEngineTests.debug.xcconfig"; path = "Target Support Files/Pods-BRGamebookEngineTests/Pods-BRGamebookEngineTests.debug.xcconfig"; sourceTree = "<group>"; };
+		B407897E2313587100D09F87 /* Help.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = Help.md; sourceTree = "<group>"; };
 		B448874B23063A0D000E2FDD /* BRGamebookEngine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BRGamebookEngine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B448874E23063A0D000E2FDD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B448875323063A0D000E2FDD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -188,6 +190,7 @@
 				444358B4230C56FD00A2E004 /* Page List */,
 				B4F7C14A2311B3E700EE055C /* HelpViewController.swift */,
 				B4F7C14B2311B3E800EE055C /* HelpViewController.xib */,
+				B407897E2313587100D09F87 /* Help.md */,
 			);
 			path = Editing;
 			sourceTree = "<group>";
@@ -494,6 +497,7 @@
 				B448875423063A0D000E2FDD /* Main.storyboard in Resources */,
 				B47F7BD92310F77B00BB072A /* AttributesTableViewController.xib in Resources */,
 				444358BA230C665E00A2E004 /* PagesTableViewController.xib in Resources */,
+				B407897F2313587200D09F87 /* Help.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
