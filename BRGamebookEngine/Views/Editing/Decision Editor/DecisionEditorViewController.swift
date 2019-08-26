@@ -21,7 +21,11 @@ class DecisionEditorViewController: UIViewController {
 
     @IBOutlet var destinationPreviewLabel: UILabel!
     @IBOutlet var segmentedControl: UISegmentedControl!
-    @IBAction func segmentedControlChanged(_: UISegmentedControl) {}
+    @IBAction func segmentedControlChanged(_ sender: UISegmentedControl) {
+        guard let decision = currentDecision, let matchType = MatchType(rawValue: Int32(sender.selectedSegmentIndex)) else { return }
+        decision.matchStyle = matchType
+        saveContent()
+    }
 
     @IBOutlet var tableView: UITableView!
 
@@ -52,6 +56,7 @@ class DecisionEditorViewController: UIViewController {
         if let decision = currentDecision {
             textView.attributedText = decision.content
             destinationPreviewLabel.text = decision.destination?.content?.string ?? "No destination set!"
+            segmentedControl.selectedSegmentIndex = Int(decision.matchStyle.rawValue)
         }
     }
 

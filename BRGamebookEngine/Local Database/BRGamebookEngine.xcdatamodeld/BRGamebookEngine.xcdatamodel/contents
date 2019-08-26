@@ -16,6 +16,7 @@
     </entity>
     <entity name="Decision" representedClassName="Decision" syncable="YES">
         <attribute name="content" attributeType="Transformable" customClassName="NSAttributedString" syncable="YES"/>
+        <attribute name="matchStyle" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="uuid" attributeType="UUID" usesScalarValueType="NO" syncable="YES"/>
         <relationship name="destination" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Page" inverseName="origins" inverseEntity="Page" syncable="YES"/>
         <relationship name="page" maxCount="1" deletionRule="Nullify" destinationEntity="Page" inverseName="decisions" inverseEntity="Page" syncable="YES"/>
@@ -46,7 +47,7 @@
     <elements>
         <element name="Attribute" positionX="118.90625" positionY="17.83203125" width="128" height="120"/>
         <element name="Consequence" positionX="-97.89453125" positionY="17.29296875" width="128" height="120"/>
-        <element name="Decision" positionX="159.20703125" positionY="-178.453125" width="128" height="120"/>
+        <element name="Decision" positionX="159.20703125" positionY="-178.453125" width="128" height="135"/>
         <element name="Game" positionX="-118.96484375" positionY="-379.7421875" width="128" height="105"/>
         <element name="Page" positionX="-99.73046875" positionY="-203.80078125" width="128" height="150"/>
         <element name="Rule" positionX="18" positionY="-225" width="128" height="120"/>

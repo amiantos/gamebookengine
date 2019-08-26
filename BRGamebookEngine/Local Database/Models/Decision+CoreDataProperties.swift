@@ -10,6 +10,11 @@
 import CoreData
 import Foundation
 
+@objc public enum MatchType: Int32 {
+    case matchAll = 0
+    case matchAny = 1
+}
+
 extension Decision {
     @nonobjc public class func fetchRequest() -> NSFetchRequest<Decision> {
         return NSFetchRequest<Decision>(entityName: "Decision")
@@ -19,4 +24,5 @@ extension Decision {
     @NSManaged public var uuid: UUID
     @NSManaged public var destination: Page?
     @NSManaged public var page: Page
+    @NSManaged public var matchStyle: MatchType
 }
