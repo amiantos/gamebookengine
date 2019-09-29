@@ -1,11 +1,12 @@
 ![Gamebook Engine](/images/github-title.png?raw=true)
 
-Gamebook Engine is an open source iOS app for creating and playing "gamebooks", a type of interactive fiction where the player gets to make decisions that influence the story.
+Gamebook Engine is an iOS app for creating and playing gamebooks, a type of interactive fiction where the player gets to make decisions that influence the story.
 
 ## Features
 
-* [x] Create classic (or more advanced) gamebooks right on your iDevice
-* [x] Export and import games from non-proprietary JSON files
+* [x] Import and play gamebooks
+* [x] Create gamebooks right on your iPad or iPhone
+* [x] Export games to non-proprietary JSON files (`.gbook`)
 * [ ] Analyzer ensures you don't create any unreachable pages or dead-ends
 
 ## Screenshots
@@ -16,12 +17,12 @@ Gamebook Engine is an open source iOS app for creating and playing "gamebooks", 
 
 * **Attributes**
   * These are essentially just global variables shared throughout a game
-  * They hold a name, and an integer value which defaults to 0
+  * They hold a name, and an decimal value which defaults to 0.0
 * **Pages**
   * **Content**
     * The text of the page, formatted with a limited set of Markdown attributes
   * **Consequences**
-    * The consequences of landing on a given page
+    * Method for manipulating a player's stored attributes
     * A consequence can affect attributes in three ways:
       * Set (to a value)
       * Increment (by a value)
@@ -33,12 +34,12 @@ Gamebook Engine is an open source iOS app for creating and playing "gamebooks", 
     * **Rules**
       * Match Any or All rules (based on the value of Attributes) to determine if a decision appears on the page
 
-If you're curious about what an exported Gamebook looks like, view [An Introduction to Gamebook Engine.gbook](https://github.com/amiantos/gamebookengine/blob/master/BRGamebookEngine/Built-in%20Gamebooks/An%20Introduction%20to%20Gamebook%20Engine.gbook) for an example.
+If you're curious about what an exported Gamebook looks like, view [An Introduction to Gamebook Engine.gbook](https://github.com/amiantos/gamebookengine/blob/master/GamebookEngine/Built-in%20Gamebooks/An%20Introduction%20to%20Gamebook%20Engine.gbook) as a simple example.
 
 ## To Install
 
 1. `git clone https://github.com/amiantos/gamebookengine.git`
-2. Open `BRGamebookEngine.xcworkspace` in Xcode 11 or higher.
+2. Open `GamebookEngine.xcworkspace` in Xcode 11 or higher.
 3. Build :)
 
 ## Author
