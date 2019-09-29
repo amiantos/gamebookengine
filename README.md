@@ -1,4 +1,4 @@
-# Gamebook Engine
+![Numu Tracker Screenshots](/images/github-screenshots.jpg?raw=true)
 
 Gamebook Engine is an open source iOS app for creating and playing "gamebooks", a type of interactive fiction where the player gets to make decisions that influence the story.
 
