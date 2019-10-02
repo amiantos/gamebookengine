@@ -13,6 +13,12 @@ Gamebook Engine is an iOS app for creating and playing gamebooks, a type of inte
 
 ![Gamebook Engine Screenshots](/images/github-screenshots.jpg?raw=true)
 
+## Beta Test
+
+If you're interested in using pre-release versions of Gamebook Engine and providing feedback, you can join the beta!
+
+**[Sign up for the beta on TestFlight](https://testflight.apple.com/join/FjHHmoVy)**
+
 ## Gamebook Structure
 
 * **Attributes**
