@@ -11,4 +11,6 @@ import UIKit
 public typealias MarkdownFont = UIFont
 public typealias MarkdownColor = UIColor
 
-public extension MarkdownFont {}
+public extension MarkdownFont {
+  
+}
