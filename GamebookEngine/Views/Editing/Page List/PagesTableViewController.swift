@@ -80,6 +80,12 @@ class PagesTableViewController: UITableViewController, UISearchBarDelegate {
         navigationController?.popViewController(animated: true)
     }
 
+    // MARK: Scroll View
+
+    override func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        pagesSearchBar.endEditing(true)
+    }
+
     // MARK: Search Bar
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
