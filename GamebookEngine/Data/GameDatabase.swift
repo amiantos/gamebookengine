@@ -256,6 +256,25 @@ class GameDatabase {
         completion(nil)
     }
 
+    func searchPages(for game: Game, terms: String, completion: @escaping ([Page]) -> Void) {
+        fetchAllPages(for: game) { pages in
+            guard let pages = pages else {
+                completion([])
+                return
+            }
+
+            var filteredPages = [Page]()
+
+            for page in pages {
+                if page.content.lowercased().contains(terms.lowercased()) {
+                    filteredPages.append(page)
+                }
+            }
+
+            completion(filteredPages)
+        }
+    }
+
     // MARK: - Decisions
 
     func createDecision(

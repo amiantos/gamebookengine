@@ -17,8 +17,6 @@ class PagesTableViewController: UITableViewController, UISearchBarDelegate {
     @IBOutlet weak var pagesSearchBar: UISearchBar!
     var game: Game
     var pages: [Page] = []
-    var searching = false
-    var filteredPages: [Page] = []
     weak var delegate: PagesTableViewDelegate?
 
     // MARK: Initialization
@@ -42,7 +40,6 @@ class PagesTableViewController: UITableViewController, UISearchBarDelegate {
         tableView.register(UINib(nibName: "PageTableViewCell", bundle: nil), forCellReuseIdentifier: "pageCell")
 
         pagesSearchBar.delegate = self
-        pagesSearchBar.returnKeyType = .done
 
         loadPages()
     }
@@ -61,22 +58,12 @@ class PagesTableViewController: UITableViewController, UISearchBarDelegate {
     }
 
     override func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
-        if searching {
-            return filteredPages.count
-        }
-
         return pages.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "pageCell", for: indexPath) as? PageTableViewCell else { fatalError() }
-        let page: Page?
-
-        if searching {
-            page = filteredPages.item(at: indexPath.row)
-        } else {
-            page = pages.item(at: indexPath.row)
-        }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "pageCell", for: indexPath) as? PageTableViewCell,
+            let page = pages.item(at: indexPath.row) else { fatalError() }
 
         cell.page = page
 
@@ -88,37 +75,24 @@ class PagesTableViewController: UITableViewController, UISearchBarDelegate {
     }
 
     override func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if searching {
-            guard let filteredPage = filteredPages.item(at: indexPath.row) else { return }
-            delegate?.selectedPage(filteredPage)
-        } else {
-            guard let page = pages.item(at: indexPath.row) else { return }
-            delegate?.selectedPage(page)
-        }
-
+        guard let page = pages.item(at: indexPath.row) else { return }
+        delegate?.selectedPage(page)
         navigationController?.popViewController(animated: true)
     }
 
     // MARK: Search Bar
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        // Leaves function if the entered text contains whitespace
+        // Leaves the method if the entered text is empty
         if searchText.trimmingCharacters(in: .whitespaces).isEmpty {
-            searching = false
-            tableView.reloadData()
+            loadPages()
             return
         }
 
-        filteredPages = [Page]()
-
-        for page in pages {
-            if page.content.lowercased().contains(searchText.lowercased()) {
-                filteredPages.append(page)
-            }
+        GameDatabase.standard.searchPages(for: game, terms: searchText) { [weak self] pages in
+            self?.pages = pages
+            self?.tableView.reloadData()
         }
-
-        searching = true
-        tableView.reloadData()
     }
 
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
