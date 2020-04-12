@@ -17,6 +17,8 @@ class PagesTableViewController: UITableViewController, UISearchBarDelegate {
     @IBOutlet weak var pagesSearchBar: UISearchBar!
     var game: Game
     var pages: [Page] = []
+    var searchIndicator: UIActivityIndicatorView!
+    var searchTimer: Timer?
     weak var delegate: PagesTableViewDelegate?
 
     // MARK: Initialization
@@ -40,6 +42,16 @@ class PagesTableViewController: UITableViewController, UISearchBarDelegate {
         tableView.register(UINib(nibName: "PageTableViewCell", bundle: nil), forCellReuseIdentifier: "pageCell")
 
         pagesSearchBar.delegate = self
+
+        searchIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 80, height: 80))
+        searchIndicator.translatesAutoresizingMaskIntoConstraints = false
+        searchIndicator.hidesWhenStopped = true
+        view.addSubview(searchIndicator)
+
+        NSLayoutConstraint.activate([
+            searchIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            searchIndicator.topAnchor.constraint(equalTo: view.topAnchor, constant: 100)
+        ])
 
         loadPages()
     }
@@ -83,15 +95,29 @@ class PagesTableViewController: UITableViewController, UISearchBarDelegate {
     // MARK: Search Bar
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        searchTimer?.invalidate()
+
+        if searchIndicator.isAnimating {
+            searchIndicator.stopAnimating()
+        }
+
         // Leaves the method if the entered text is empty
         if searchText.trimmingCharacters(in: .whitespaces).isEmpty {
             loadPages()
             return
         }
 
-        GameDatabase.standard.searchPages(for: game, terms: searchText) { [weak self] pages in
-            self?.pages = pages
-            self?.tableView.reloadData()
+        pages = []
+        tableView.reloadData()
+        searchIndicator.startAnimating()
+
+        searchTimer = Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { [weak self] _ in
+            self?.searchIndicator.stopAnimating()
+
+            GameDatabase.standard.searchPages(for: self!.game, terms: searchText) { pages in
+                self?.pages = pages
+                self?.tableView.reloadData()
+            }
         }
     }
 
