@@ -19,6 +19,7 @@ class PagesTableViewController: UITableViewController, UISearchBarDelegate {
     var pages: [Page] = []
     var searchIndicator: UIActivityIndicatorView!
     var searchTimer: Timer?
+    var noResultsLabel: UILabel!
     weak var delegate: PagesTableViewDelegate?
 
     // MARK: Initialization
@@ -51,6 +52,19 @@ class PagesTableViewController: UITableViewController, UISearchBarDelegate {
         NSLayoutConstraint.activate([
             searchIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             searchIndicator.topAnchor.constraint(equalTo: view.topAnchor, constant: 100)
+        ])
+
+        noResultsLabel = UILabel()
+        noResultsLabel.translatesAutoresizingMaskIntoConstraints = false
+        noResultsLabel.text = "No Results"
+        noResultsLabel.font = .boldSystemFont(ofSize: 30)
+        noResultsLabel.textColor = .systemGray
+        noResultsLabel.isHidden = true
+        view.addSubview(noResultsLabel)
+
+        NSLayoutConstraint.activate([
+            noResultsLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            noResultsLabel.centerYAnchor.constraint(equalTo: view.topAnchor, constant: 200)
         ])
 
         loadPages()
@@ -96,6 +110,7 @@ class PagesTableViewController: UITableViewController, UISearchBarDelegate {
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         searchTimer?.invalidate()
+        noResultsLabel.isHidden = true
 
         if searchIndicator.isAnimating {
             searchIndicator.stopAnimating()
@@ -115,6 +130,10 @@ class PagesTableViewController: UITableViewController, UISearchBarDelegate {
             self?.searchIndicator.stopAnimating()
 
             GameDatabase.standard.searchPages(for: self!.game, terms: searchText) { pages in
+                if pages.isEmpty {
+                    self?.noResultsLabel.isHidden = false
+                }
+
                 self?.pages = pages
                 self?.tableView.reloadData()
             }
