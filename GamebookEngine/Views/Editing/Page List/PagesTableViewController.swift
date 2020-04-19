@@ -43,6 +43,7 @@ class PagesTableViewController: UITableViewController, UISearchBarDelegate {
         tableView.register(UINib(nibName: "PageTableViewCell", bundle: nil), forCellReuseIdentifier: "pageCell")
 
         pagesSearchBar.delegate = self
+        pagesSearchBar.returnKeyType = .done
 
         searchIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 80, height: 80))
         searchIndicator.translatesAutoresizingMaskIntoConstraints = false
