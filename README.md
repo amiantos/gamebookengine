@@ -48,9 +48,10 @@ If you're curious about what an exported Gamebook looks like, view [An Introduct
 2. Open `GamebookEngine.xcworkspace` in Xcode 11 or higher.
 3. Build :)
 
-## Author
+## Authors
 
 * Brad Root - [amiantos](https://github.com/amiantos)
+* Jerry Turcios - [jerryturcios08](https://github.com/jerryturcios08)
 
 ## Credits
 
