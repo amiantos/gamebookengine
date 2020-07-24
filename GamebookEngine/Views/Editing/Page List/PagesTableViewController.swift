@@ -104,7 +104,6 @@ class PagesTableViewController: UITableViewController, UISearchBarDelegate {
     override func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let page = pages.item(at: indexPath.row) else { return }
         delegate?.selectedPage(page)
-        navigationController?.popViewController(animated: true)
     }
 
     // MARK: Search Bar

@@ -146,6 +146,7 @@ extension DecisionEditorViewController: PagesTableViewDelegate {
         decision.destination = page
         GameDatabase.standard.saveContext()
         loadContent()
+        navigationController?.popViewController(animated: true)
     }
 
     func deletedPage(_: Page) {
