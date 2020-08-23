@@ -63,22 +63,21 @@ class GameListGameTableViewCell: UITableViewCell {
     }
 
     override func setHighlighted(_ highlighted: Bool, animated _: Bool) {
-        // TODO: Replace this animation with proper UIViewPropertyAnimator setup
-        switch highlighted {
-        case true:
-            let animation = CABasicAnimation(keyPath: "shadowOpacity")
-            animation.fromValue = layer.shadowOpacity
-            animation.toValue = 0.0
-            animation.duration = 1
-            gameContainerView.layer.add(animation, forKey: animation.keyPath)
-            gameContainerView.layer.shadowOpacity = 0.0
-        case false:
-            let animation = CABasicAnimation(keyPath: "shadowOpacity")
-            animation.fromValue = layer.shadowOpacity
-            animation.toValue = 0.1
-            animation.duration = 0.2
-            gameContainerView.layer.add(animation, forKey: animation.keyPath)
-            gameContainerView.layer.shadowOpacity = 0.1
+        let highlightAnimator = UIViewPropertyAnimator(duration: 0.05, curve: .linear) {
+            [weak self] in
+            self?.gameContainerView.layer.shadowOpacity = 0.1
+        }
+
+        let unhighlightAnimator = UIViewPropertyAnimator(duration: 0.05, curve: .linear) {
+            [weak self] in
+            self?.gameContainerView.layer.shadowOpacity = 0.0
+        }
+
+        // Animates the cell's shadow when the highlighted property changes
+        if highlighted {
+            unhighlightAnimator.startAnimation()
+        } else {
+            highlightAnimator.startAnimation()
         }
     }
 }
