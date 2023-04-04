@@ -13,6 +13,7 @@ class GameOverviewViewController: UIViewController, PagesTableViewDelegate {
     var game: Game?
     var scene: PagesScene?
     var skView: SKView?
+    var searchButton: UIButton!
     weak var delegate: PagesTableViewDelegate?
 
     override func viewDidLoad() {
@@ -37,6 +38,29 @@ class GameOverviewViewController: UIViewController, PagesTableViewDelegate {
         let metaButton = UIBarButtonItem(title: "Edit Metadata", style: .plain, target: self, action: #selector(metaAction))
         navigationItem.leftBarButtonItem = exitButton
         navigationItem.rightBarButtonItem = metaButton
+
+        searchButton = UIButton()
+        searchButton.translatesAutoresizingMaskIntoConstraints = false
+        searchButton.addTarget(self, action: #selector(searchButtonTapped), for: .touchUpInside)
+        searchButton.setImage(UIImage(named: "search"), for: .normal)
+        searchButton.imageView?.tintColor = UIColor(named: "button")
+        searchButton.backgroundColor = UIColor(named: "containerBackground")
+
+        searchButton.layer.cornerRadius = 5
+        searchButton.layer.masksToBounds = false
+        searchButton.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1).cgColor
+        searchButton.layer.shadowOpacity = 0.3
+        searchButton.layer.shadowRadius = 4
+        searchButton.layer.shadowOffset = CGSize(width: 0, height: 2)
+
+        view.addSubview(searchButton)
+
+        NSLayoutConstraint.activate([
+            searchButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            searchButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            searchButton.heightAnchor.constraint(equalToConstant: 40),
+            searchButton.widthAnchor.constraint(equalToConstant: 40)
+        ])
     }
 
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -69,6 +93,13 @@ class GameOverviewViewController: UIViewController, PagesTableViewDelegate {
         let view = MetadataEditorViewController()
         view.game = game
         navigationController?.pushViewController(view, animated: true)
+    }
+
+    @objc func searchButtonTapped() {
+        guard let game = game else { return }
+        let pagesView = PagesTableViewController(for: game)
+        pagesView.delegate = self
+        navigationController?.pushViewController(pagesView, animated: true)
     }
 
     func selectedPage(_ page: Page) {

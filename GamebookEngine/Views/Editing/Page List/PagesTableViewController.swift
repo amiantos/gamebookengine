@@ -13,9 +13,13 @@ protocol PagesTableViewDelegate: AnyObject {
     func deletedPage(_ page: Page)
 }
 
-class PagesTableViewController: UITableViewController {
+class PagesTableViewController: UITableViewController, UISearchBarDelegate {
+    @IBOutlet weak var pagesSearchBar: UISearchBar!
     var game: Game
     var pages: [Page] = []
+    var searchIndicator: UIActivityIndicatorView!
+    var searchTimer: Timer?
+    var noResultsLabel: UILabel!
     weak var delegate: PagesTableViewDelegate?
 
     // MARK: Initialization
@@ -37,6 +41,32 @@ class PagesTableViewController: UITableViewController {
         title = "Pages"
 
         tableView.register(UINib(nibName: "PageTableViewCell", bundle: nil), forCellReuseIdentifier: "pageCell")
+
+        pagesSearchBar.delegate = self
+        pagesSearchBar.returnKeyType = .done
+
+        searchIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 80, height: 80))
+        searchIndicator.translatesAutoresizingMaskIntoConstraints = false
+        searchIndicator.hidesWhenStopped = true
+        view.addSubview(searchIndicator)
+
+        NSLayoutConstraint.activate([
+            searchIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            searchIndicator.topAnchor.constraint(equalTo: view.topAnchor, constant: 100)
+        ])
+
+        noResultsLabel = UILabel()
+        noResultsLabel.translatesAutoresizingMaskIntoConstraints = false
+        noResultsLabel.text = "No Results"
+        noResultsLabel.font = .boldSystemFont(ofSize: 30)
+        noResultsLabel.textColor = .systemGray
+        noResultsLabel.isHidden = true
+        view.addSubview(noResultsLabel)
+
+        NSLayoutConstraint.activate([
+            noResultsLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            noResultsLabel.centerYAnchor.constraint(equalTo: view.topAnchor, constant: 200)
+        ])
 
         loadPages()
     }
@@ -74,6 +104,43 @@ class PagesTableViewController: UITableViewController {
     override func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let page = pages.item(at: indexPath.row) else { return }
         delegate?.selectedPage(page)
-        navigationController?.popViewController(animated: true)
+    }
+
+    // MARK: Search Bar
+
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        searchTimer?.invalidate()
+        noResultsLabel.isHidden = true
+
+        if searchIndicator.isAnimating {
+            searchIndicator.stopAnimating()
+        }
+
+        // Leaves the method if the entered text is empty
+        if searchText.trimmingCharacters(in: .whitespaces).isEmpty {
+            loadPages()
+            return
+        }
+
+        pages = []
+        tableView.reloadData()
+        searchIndicator.startAnimating()
+
+        searchTimer = Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { [weak self] _ in
+            self?.searchIndicator.stopAnimating()
+
+            GameDatabase.standard.searchPages(for: self!.game, terms: searchText) { pages in
+                if pages.isEmpty {
+                    self?.noResultsLabel.isHidden = false
+                }
+
+                self?.pages = pages
+                self?.tableView.reloadData()
+            }
+        }
+    }
+
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        pagesSearchBar.endEditing(true)
     }
 }

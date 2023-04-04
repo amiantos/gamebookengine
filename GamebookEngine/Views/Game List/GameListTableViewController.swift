@@ -217,16 +217,39 @@ extension GameListTableViewController: GameListGameTableViewCellDelegate, UIDocu
     }
 
     func exportGame(_ game: Game) {
-        let jsonString = GameSerializer.standard.toJSONString(game: game)
-        let textData = jsonString.data(using: .utf8)
-        let textURL = textData?.dataToFile(fileName: "\(game.name).gbook")
-        var filesToShare = [Any]()
-        filesToShare.append(textURL!)
+        let gamebookDocument = GamebookProvider(game: game)
         let indexPathForGame = IndexPath(row: games.firstIndex(of: game)!, section: 0)
         guard let cell = tableView.cellForRow(at: indexPathForGame) as? GameListGameTableViewCell else { fatalError() }
-        let activityViewController = UIActivityViewController(activityItems: filesToShare, applicationActivities: nil)
+
+        let activityViewController = UIActivityViewController(activityItems: [gamebookDocument], applicationActivities: nil)
         activityViewController.popoverPresentationController?.sourceView = cell.exportButton
         activityViewController.popoverPresentationController?.sourceRect = CGRect(x: 15, y: cell.exportButton.frame.height / 2, width: 0, height: 0)
         present(activityViewController, animated: true, completion: nil)
+    }
+}
+
+// MARK: - Item Provider
+
+class GamebookProvider: UIActivityItemProvider {
+    var temporaryURL: NSURL?
+    var game: Game
+
+    override var item: Any {
+        let jsonString = GameSerializer.standard.toJSONString(game: game)
+        let textData = jsonString.data(using: .utf8)
+        guard let textURL = textData?.dataToFile(fileName: "\(game.name).gbook") else {
+            fatalError("Error: Unable to load the gamebook")
+        }
+        Log.debug("Load \(game.name) at \(textURL)")
+        return textURL
+    }
+
+    init(game: Game) {
+        // Creates a URL to show a non-existent gamebook prior to loading the real gamebook
+        self.temporaryURL = NSURL(fileURLWithPath: NSTemporaryDirectory() + "\(game.name).gbook")
+        Log.debug("Create temporary URL for \(game.name)")
+
+        self.game = game
+        super.init(placeholderItem: temporaryURL as Any)
     }
 }

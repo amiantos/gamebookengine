@@ -273,6 +273,7 @@ extension PageEditorViewController: PagesTableViewDelegate {
         previousPage = currentPage
         currentPage = page
         loadContent()
+        navigationController?.popViewController(animated: true)
     }
 }
 
