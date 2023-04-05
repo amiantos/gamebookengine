@@ -69,6 +69,8 @@
 	</array>
 	<key>UISupportsDocumentBrowser</key>
 	<false/>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
 	<key>UTExportedTypeDeclarations</key>
 	<array>
 		<dict>
