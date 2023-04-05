@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		4407F51729DD21C400119893 /* MarkdownKit in Frameworks */ = {isa = PBXBuildFile; productRef = 4407F51629DD21C400119893 /* MarkdownKit */; };
+		4407F51929DD22C800119893 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 4407F51829DD22C800119893 /* LICENSE */; };
+		4407F51B29DD22CE00119893 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 4407F51A29DD22CE00119893 /* README.md */; };
 		440EF3F22323279D000A7C9F /* ContentSizedTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440EF3F12323279D000A7C9F /* ContentSizedTableView.swift */; };
 		4417DC292314867C00A6F96B /* RuleEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4417DC272314867C00A6F96B /* RuleEditorViewController.swift */; };
 		4417DC2A2314867C00A6F96B /* RuleEditorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4417DC282314867C00A6F96B /* RuleEditorViewController.xib */; };
@@ -128,6 +130,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4407F51829DD22C800119893 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		4407F51A29DD22CE00119893 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		440EF3F12323279D000A7C9F /* ContentSizedTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentSizedTableView.swift; sourceTree = "<group>"; };
 		4417DC272314867C00A6F96B /* RuleEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleEditorViewController.swift; sourceTree = "<group>"; };
 		4417DC282314867C00A6F96B /* RuleEditorViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RuleEditorViewController.xib; sourceTree = "<group>"; };
@@ -364,6 +368,8 @@
 		B448874223063A0D000E2FDD = {
 			isa = PBXGroup;
 			children = (
+				4407F51A29DD22CE00119893 /* README.md */,
+				4407F51829DD22C800119893 /* LICENSE */,
 				B448874D23063A0D000E2FDD /* GamebookEngine */,
 				B448876223063A0E000E2FDD /* GamebookEngineTests */,
 				B448876D23063A0E000E2FDD /* GamebookEngineUITests */,
@@ -696,11 +702,13 @@
 				44CB58C32326CFB6009E49D9 /* An Introduction to Gamebook Engine.gbook in Resources */,
 				B4789FEE2318880E008DBE9F /* GameListGameTableViewCell.xib in Resources */,
 				444358C5230C7BBE00A2E004 /* PlayViewController.xib in Resources */,
+				4407F51B29DD22CE00119893 /* README.md in Resources */,
 				44ADBA8923404BBB00855649 /* fileicon-ipad-320px.png in Resources */,
 				B4A13AD6230F6D24004929B8 /* PageEditorDecisionTableViewCell.xib in Resources */,
 				B448875623063A0E000E2FDD /* Assets.xcassets in Resources */,
 				B4A13AD2230F5B08004929B8 /* PlayDecisionTableViewCell.xib in Resources */,
 				44ADBA8723404BBB00855649 /* fileicon-ipad-64px.png in Resources */,
+				4407F51929DD22C800119893 /* LICENSE in Resources */,
 				B4F7C1492311AEB800EE055C /* PageEditorConsequenceTableViewCell.xib in Resources */,
 				B47F7BDE2310F79900BB072A /* AttributeTableViewCell.xib in Resources */,
 				44ADBA8623404BBB00855649 /* fileicon-iphone-44x58.png in Resources */,
