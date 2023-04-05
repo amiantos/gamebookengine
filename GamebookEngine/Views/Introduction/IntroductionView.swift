@@ -34,6 +34,7 @@ struct CardView: View {
             }
             Spacer()
             Text(self.data.text)
+                .lineLimit(4)
                 .font(.body)
                 .minimumScaleFactor(0.5)
                 .padding(24)
@@ -48,7 +49,7 @@ struct CardView: View {
 struct IntroductionView: View {
     @State var cards: [CardData] = [
         CardData(
-            title: "Salutations", text: "Thanks for downloading Gamebook Engine, the all-in-one app for creating "
+            title: "Salutations", text: "Welcome to Gamebook Engine, the all-in-one app for creating "
                 + "and playing interactive stories, entirely on your phone or "
                 + "tablet. No account needed, no cloud services, total privacy.", image: Image("magic-icon")
         ),
@@ -75,6 +76,7 @@ struct IntroductionView: View {
             data: cards,
             onSwipe: { text, direction in
                 print("Swiped \(text) to \(direction)")
+                self.cards.append(text)
             },
             content: { data, _, _ in
                 CardView(data: data)
