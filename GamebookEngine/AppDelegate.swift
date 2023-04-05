@@ -35,7 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Log.info("Open URL: \(url)")
         _ = url.startAccessingSecurityScopedResource()
         guard let jsonData = try? Data(contentsOf: url) else { return false }
-        _ = url.stopAccessingSecurityScopedResource()
+        url.stopAccessingSecurityScopedResource()
         GameSerializer.standard.gameFromJSONData(jsonData)
         return true
     }

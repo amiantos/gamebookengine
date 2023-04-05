@@ -25,7 +25,7 @@ class PreviewViewController: UIViewController, QLPreviewingController {
         guard let jsonData = try? Data(contentsOf: url) else { handler(nil)
             return
         }
-        _ = url.stopAccessingSecurityScopedResource()
+        url.stopAccessingSecurityScopedResource()
         let decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
 
