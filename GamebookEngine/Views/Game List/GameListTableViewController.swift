@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 class GameListTableViewController: UITableViewController {
     var games: [Game] = []
@@ -55,6 +56,7 @@ class GameListTableViewController: UITableViewController {
         super.viewDidAppear(animated)
 
         fetchGames()
+        showIntroductionScreen()
     }
 
     override func viewDidLayoutSubviews() {
@@ -159,6 +161,12 @@ extension GameListTableViewController: GameListGameTableViewCellDelegate, UIDocu
                 }
             }
         }
+    }
+    
+    @objc fileprivate func showIntroductionScreen() {
+        let swiftUIViewController = UIHostingController(rootView: IntroductionView())
+        swiftUIViewController.modalPresentationStyle = .pageSheet
+        present(swiftUIViewController, animated: true, completion: nil)
     }
 
     fileprivate func showFilePicker(_ sender: UIButton) {
