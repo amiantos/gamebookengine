@@ -11,6 +11,7 @@ import UIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
+    var temp: Int?
     var window: UIWindow?
     let navigationController = UINavigationController(rootViewController: GameListTableViewController())
 
