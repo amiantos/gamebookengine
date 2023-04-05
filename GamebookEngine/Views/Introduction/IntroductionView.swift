@@ -22,7 +22,7 @@ struct CardView: View {
     var body: some View {
         VStack {
             Text(self.data.title)
-                .font(.title)
+                .font(.largeTitle)
                 .padding()
             Spacer()
             GeometryReader { geo in
@@ -34,10 +34,12 @@ struct CardView: View {
             }
             Spacer()
             Text(self.data.text)
+                .font(.body)
                 .minimumScaleFactor(0.5)
-                .padding()
+                .padding(24)
         }
-        .background(Color.white)
+        .background(Color(UIColor(white: 0.95, alpha: 1)))
+        .foregroundColor(.black)
         .cornerRadius(10)
         .shadow(radius: 4)
     }
@@ -46,9 +48,9 @@ struct CardView: View {
 struct IntroductionView: View {
     @State var cards: [CardData] = [
         CardData(
-            title: "Gamebook Engine", text: "Welcome to Gamebook Engine, the all-in-one app for creating "
+            title: "Salutations", text: "Thanks for downloading Gamebook Engine, the all-in-one app for creating "
                 + "and playing interactive stories, entirely on your phone or "
-                + "tablet. No account needed, no cloud services, total privacy.", image: Image("welcome-icon")
+                + "tablet. No account needed, no cloud services, total privacy.", image: Image("magic-icon")
         ),
         CardData(
             title: "Create", text: "Edit gamebooks or create your own! Gamebook Engine has"
@@ -81,6 +83,7 @@ struct IntroductionView: View {
         .padding()
         .scaledToFit()
         .frame(alignment: .center)
+        .frame(maxWidth: 400)
     }
 }
 
