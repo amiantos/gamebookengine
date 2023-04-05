@@ -190,8 +190,8 @@ extension GameListTableViewController: GameListGameTableViewCellDelegate, UIDocu
             self.createDefaultGames()
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        actionSheet.addAction(importAction)
         actionSheet.addAction(createAction)
+        actionSheet.addAction(importAction)
         actionSheet.addAction(createDefaultGamesAction)
         actionSheet.addAction(cancelAction)
         actionSheet.popoverPresentationController?.sourceView = sender
