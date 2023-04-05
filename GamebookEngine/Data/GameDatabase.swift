@@ -261,10 +261,8 @@ class GameDatabase {
             guard let pages = pages else { return completion([]) }
             var filteredPages = [Page]()
 
-            for page in pages {
-                if page.content.lowercased().contains(terms.lowercased()) {
-                    filteredPages.append(page)
-                }
+            for page in pages where page.content.lowercased().contains(terms.lowercased()) {
+                filteredPages.append(page)
             }
 
             completion(filteredPages)
