@@ -23,10 +23,16 @@ struct UserDatabase {
 extension UserDefaults {
     func createIntroGameIfNeeded() {
         let status: Bool = bool(forKey: .createdIntro)
-        if !status, let introURL = Bundle.main.url(forResource: "An Introduction to Gamebook Engine", withExtension: "gbook"),
+        if !status {
+            createDefaultGames()
+            set(true, for: .createdIntro)
+        }
+    }
+    
+    func createDefaultGames() {
+        if let introURL = Bundle.main.url(forResource: "An Introduction to Gamebook Engine", withExtension: "gbook"),
             let jsonData = try? Data(contentsOf: introURL) {
             GameSerializer.standard.gameFromJSONData(jsonData, alert: false)
-            set(true, for: .createdIntro)
         }
     }
 
