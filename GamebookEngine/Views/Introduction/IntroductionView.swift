@@ -39,7 +39,7 @@ struct CardView: View {
                 .minimumScaleFactor(0.5)
                 .padding(24)
         }
-        .background(Color(UIColor(white: 0.95, alpha: 1)))
+        .background(Color(UIColor(named: "containerBackground")!))
         .foregroundColor(.black)
         .cornerRadius(10)
         .shadow(radius: 4)
@@ -48,13 +48,13 @@ struct CardView: View {
 
 struct IntroductionView: View {
     @State var cards: [CardData] = [
+//        CardData(
+//            title: "Salutations", text: "Welcome to Gamebook Engine, the all-in-one app for creating "
+//                + "and playing interactive stories, entirely on your phone or "
+//                + "tablet. No account needed, no cloud services, total privacy.", image: Image("magic-icon")
+//        ),
         CardData(
-            title: "Salutations", text: "Welcome to Gamebook Engine, the all-in-one app for creating "
-                + "and playing interactive stories, entirely on your phone or "
-                + "tablet. No account needed, no cloud services, total privacy.", image: Image("magic-icon")
-        ),
-        CardData(
-            title: "Create", text: "Edit gamebooks or create your own! Gamebook Engine has"
+            title: "Create", text: "Edit gamebooks or create your own! Gamebook Engine has "
                 + "a fully-featured interface for creating full length choosable path adventure "
                 + "games where readers get to influence the story.", image: Image("create-icon")
         ),
@@ -71,21 +71,45 @@ struct IntroductionView: View {
     ]
 
     var body: some View {
-        CardStack(
-            direction: LeftRight.direction,
-            data: cards,
-            onSwipe: { text, direction in
-                print("Swiped \(text) to \(direction)")
-                self.cards.append(text)
-            },
-            content: { data, _, _ in
-                CardView(data: data)
-            }
-        )
-        .padding()
-        .scaledToFit()
-        .frame(alignment: .center)
-        .frame(maxWidth: 400)
+        VStack {
+            Spacer()
+            Text("Welcome to\n Gamebook Engine")
+                .multilineTextAlignment(.center)
+                .font(.title)
+            Text("Gamebook Engine is an all-in-one app for creating "
+                + "and playing interactive stories, entirely on your device. "
+                + "No signup required, and no data is ever collected, ensuring total privacy.")
+                .font(.body)
+                .minimumScaleFactor(0.5)
+                .padding()
+            CardStack(
+                direction: LeftRight.direction,
+                data: cards,
+                onSwipe: { text, direction in
+                    print("Swiped \(text) to \(direction)")
+                    self.cards.append(text)
+                },
+                content: { data, _, _ in
+                    CardView(data: data)
+                }
+            )
+            .padding()
+            .scaledToFit()
+            .frame(alignment: .center)
+            .frame(maxWidth: 400)
+            Spacer()
+            Button(action: {
+                print("Do Stuff")
+            }, label: {
+                Text("Get Started Now")
+                    .padding()
+                    .background(Color.green)
+                    .foregroundColor(Color.white)
+                    .cornerRadius(100)
+            })
+            Spacer()
+        }
+        .background(Color(UIColor(named: "background")!))
     }
 }
 
