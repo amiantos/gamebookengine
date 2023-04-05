@@ -151,7 +151,7 @@ extension GameListTableViewController: GameListGameTableViewCellDelegate, UIDocu
     }
     
     @objc fileprivate func createDefaultGames() {
-        let alert = UIAlertController(title: "Add default games?", message: "Are you sure you want to add the default games back to your library? This may duplicate the games if you already have them.", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Add example games?", message: "Are you sure you want to add the example games to your library? This may duplicate the games if you already have them.", preferredStyle: .alert)
         
         let okButton = UIAlertAction(title: "OK", style: .default) { _ in
             UserDatabase.standard.createDefaultGames()
@@ -186,7 +186,7 @@ extension GameListTableViewController: GameListGameTableViewCellDelegate, UIDocu
         let createAction = UIAlertAction(title: "Create new game", style: .default) { _ in
             self.createGame()
         }
-        let createDefaultGamesAction = UIAlertAction(title: "Add default games", style: .default) { _ in
+        let createDefaultGamesAction = UIAlertAction(title: "Add example games", style: .default) { _ in
             self.createDefaultGames()
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
