@@ -45,7 +45,7 @@ If you're curious about what an exported Gamebook looks like, view [An Introduct
 ## To Install
 
 1. `git clone https://github.com/amiantos/gamebookengine.git`
-2. Open `GamebookEngine.xcworkspace` in Xcode 11 or higher.
+2. Open `GamebookEngine.xcproject` in Xcode 14.2 or higher.
 3. Build :)
 
 ## Authors

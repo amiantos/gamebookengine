@@ -8,6 +8,7 @@
 
 import Foundation
 import MarkdownKit
+import UIKit
 
 class BRMarkdownParser {
     static var standard: BRMarkdownParser = BRMarkdownParser()
