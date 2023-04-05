@@ -28,7 +28,7 @@ extension UserDefaults {
             set(true, for: .createdIntro)
         }
     }
-    
+
     func createDefaultGames() {
         if let introURL = Bundle.main.url(forResource: "An Introduction to Gamebook Engine", withExtension: "gbook"),
             let jsonData = try? Data(contentsOf: introURL) {

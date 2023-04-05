@@ -149,10 +149,10 @@ extension GameListTableViewController: GameListGameTableViewCellDelegate, UIDocu
         present(actionSheet, animated: true)
         actionSheet.view.tintColor = UIColor(named: "text") ?? .darkGray
     }
-    
+
     @objc fileprivate func createDefaultGames() {
         let alert = UIAlertController(title: "Add example games?", message: "Are you sure you want to add the example games to your library? This may duplicate the games if you already have them.", preferredStyle: .alert)
-        
+
         let okButton = UIAlertAction(title: "OK", style: .default) { _ in
             UserDatabase.standard.createDefaultGames()
             DispatchQueue.main.async {
@@ -160,10 +160,10 @@ extension GameListTableViewController: GameListGameTableViewCellDelegate, UIDocu
             }
         }
         alert.addAction(okButton)
-        
+
         let cancelButton = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         alert.addAction(cancelButton)
-        
+
         present(alert, animated: true)
     }
 
