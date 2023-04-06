@@ -24,7 +24,7 @@ jobs:
                   sudo cp -f .build/release/swiftformat /usr/local/bin/swiftformat
                 fi
               else
-                git clone --depth 1 --branch $ https://github.com/nicklockwood/SwiftFormat
+                git clone --depth 1 --branch master https://github.com/nicklockwood/SwiftFormat
                 cd SwiftFormat
                 swift build --disable-sandbox -c release
                 mv .build .. && cd ..
