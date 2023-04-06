@@ -22,7 +22,8 @@ struct CardView: View {
     var body: some View {
         VStack {
             Text(self.data.title)
-                .font(.largeTitle)
+                .font(.title)
+                .minimumScaleFactor(0.5)
                 .padding()
             Spacer()
             GeometryReader { geo in
