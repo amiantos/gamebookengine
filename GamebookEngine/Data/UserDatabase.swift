@@ -41,7 +41,8 @@ extension UserDefaults {
 
     func createGameWithResourceName(resourceName: String) {
         if let introURL = Bundle.main.url(forResource: resourceName, withExtension: "gbook"),
-            let jsonData = try? Data(contentsOf: introURL) {
+           let jsonData = try? Data(contentsOf: introURL)
+        {
             GameSerializer.standard.gameFromJSONData(jsonData, alert: false)
         }
     }
