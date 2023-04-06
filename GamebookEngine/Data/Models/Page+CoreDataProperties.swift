@@ -43,42 +43,42 @@ import Foundation
     }
 }
 
-extension Page {
-    public override var description: String { return "\(uuid.uuidString)" }
+public extension Page {
+    override var description: String { return "\(uuid.uuidString)" }
 
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<Page> {
+    @nonobjc class func fetchRequest() -> NSFetchRequest<Page> {
         return NSFetchRequest<Page>(entityName: "Page")
     }
 
-    @NSManaged public var content: String
-    @NSManaged public var type: PageType
-    @NSManaged public var uuid: UUID
-    @NSManaged public var consequences: NSSet?
-    @NSManaged public var decisions: NSOrderedSet?
-    @NSManaged public var game: Game
-    @NSManaged public var origins: NSSet?
+    @NSManaged var content: String
+    @NSManaged var type: PageType
+    @NSManaged var uuid: UUID
+    @NSManaged var consequences: NSSet?
+    @NSManaged var decisions: NSOrderedSet?
+    @NSManaged var game: Game
+    @NSManaged var origins: NSSet?
 }
 
 // MARK: Gamebook Engine Methods
 
-extension Page {
+public extension Page {
     // MARK: Updates
 
-    public func setContent(to content: String) {
+    func setContent(to content: String) {
         self.content = content
         GameDatabase.standard.saveContext()
     }
 
-    public func setType(to type: PageType) {
+    func setType(to type: PageType) {
         self.type = type
         if type == .ending {
             // Remove all decisions and consequences
-            if let decisions = self.decisions?.array as? [Decision] {
+            if let decisions = decisions?.array as? [Decision] {
                 for decision in decisions {
                     GameDatabase.standard.delete(decision)
                 }
             }
-            if let consequences = self.consequences?.allObjects as? [Consequence] {
+            if let consequences = consequences?.allObjects as? [Consequence] {
                 for consequence in consequences {
                     GameDatabase.standard.delete(consequence)
                 }
@@ -89,7 +89,7 @@ extension Page {
 
     // MARK: Issue Detection
 
-    public var hasIssues: Bool {
+    var hasIssues: Bool {
         if needsDecisions {
             return true
         } else if hasDecisionsWithIssues {
@@ -100,7 +100,7 @@ extension Page {
         return false
     }
 
-    public var needsDecisions: Bool {
+    var needsDecisions: Bool {
         let decisionCount = decisions?.count ?? 0
         if decisionCount == 0, type != .ending {
             return true
@@ -108,16 +108,16 @@ extension Page {
         return false
     }
 
-    public var hasDecisionsWithIssues: Bool {
-        guard let decisions = self.decisions?.array as? [Decision] else { return false }
+    var hasDecisionsWithIssues: Bool {
+        guard let decisions = decisions?.array as? [Decision] else { return false }
         for decision in decisions where decision.hasIssues {
             return true
         }
         return false
     }
 
-    public var hasConsequencesWithIssues: Bool {
-        guard let consequences = self.consequences?.allObjects as? [Consequence] else { return false }
+    var hasConsequencesWithIssues: Bool {
+        guard let consequences = consequences?.allObjects as? [Consequence] else { return false }
         for consequence in consequences where consequence.hasIssues {
             return true
         }
@@ -127,66 +127,66 @@ extension Page {
 
 // MARK: Generated accessors for consequences
 
-extension Page {
+public extension Page {
     @objc(addConsequencesObject:)
-    @NSManaged public func addToConsequences(_ value: Consequence)
+    @NSManaged func addToConsequences(_ value: Consequence)
 
     @objc(removeConsequencesObject:)
-    @NSManaged public func removeFromConsequences(_ value: Consequence)
+    @NSManaged func removeFromConsequences(_ value: Consequence)
 
     @objc(addConsequences:)
-    @NSManaged public func addToConsequences(_ values: NSSet)
+    @NSManaged func addToConsequences(_ values: NSSet)
 
     @objc(removeConsequences:)
-    @NSManaged public func removeFromConsequences(_ values: NSSet)
+    @NSManaged func removeFromConsequences(_ values: NSSet)
 }
 
 // MARK: Generated accessors for decisions
 
-extension Page {
+public extension Page {
     @objc(insertObject:inDecisionsAtIndex:)
-    @NSManaged public func insertIntoDecisions(_ value: Decision, at idx: Int)
+    @NSManaged func insertIntoDecisions(_ value: Decision, at idx: Int)
 
     @objc(removeObjectFromDecisionsAtIndex:)
-    @NSManaged public func removeFromDecisions(at idx: Int)
+    @NSManaged func removeFromDecisions(at idx: Int)
 
     @objc(insertDecisions:atIndexes:)
-    @NSManaged public func insertIntoDecisions(_ values: [Decision], at indexes: NSIndexSet)
+    @NSManaged func insertIntoDecisions(_ values: [Decision], at indexes: NSIndexSet)
 
     @objc(removeDecisionsAtIndexes:)
-    @NSManaged public func removeFromDecisions(at indexes: NSIndexSet)
+    @NSManaged func removeFromDecisions(at indexes: NSIndexSet)
 
     @objc(replaceObjectInDecisionsAtIndex:withObject:)
-    @NSManaged public func replaceDecisions(at idx: Int, with value: Decision)
+    @NSManaged func replaceDecisions(at idx: Int, with value: Decision)
 
     @objc(replaceDecisionsAtIndexes:withDecisions:)
-    @NSManaged public func replaceDecisions(at indexes: NSIndexSet, with values: [Decision])
+    @NSManaged func replaceDecisions(at indexes: NSIndexSet, with values: [Decision])
 
     @objc(addDecisionsObject:)
-    @NSManaged public func addToDecisions(_ value: Decision)
+    @NSManaged func addToDecisions(_ value: Decision)
 
     @objc(removeDecisionsObject:)
-    @NSManaged public func removeFromDecisions(_ value: Decision)
+    @NSManaged func removeFromDecisions(_ value: Decision)
 
     @objc(addDecisions:)
-    @NSManaged public func addToDecisions(_ values: NSOrderedSet)
+    @NSManaged func addToDecisions(_ values: NSOrderedSet)
 
     @objc(removeDecisions:)
-    @NSManaged public func removeFromDecisions(_ values: NSOrderedSet)
+    @NSManaged func removeFromDecisions(_ values: NSOrderedSet)
 }
 
 // MARK: Generated accessors for origins
 
-extension Page {
+public extension Page {
     @objc(addOriginsObject:)
-    @NSManaged public func addToOrigins(_ value: Decision)
+    @NSManaged func addToOrigins(_ value: Decision)
 
     @objc(removeOriginsObject:)
-    @NSManaged public func removeFromOrigins(_ value: Decision)
+    @NSManaged func removeFromOrigins(_ value: Decision)
 
     @objc(addOrigins:)
-    @NSManaged public func addToOrigins(_ values: NSSet)
+    @NSManaged func addToOrigins(_ values: NSSet)
 
     @objc(removeOrigins:)
-    @NSManaged public func removeFromOrigins(_ values: NSSet)
+    @NSManaged func removeFromOrigins(_ values: NSSet)
 }

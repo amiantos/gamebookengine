@@ -1,0 +1,8 @@
+--exclude Tests/XCTestManifests.swift,Tests/BadConfig,Snapshots,Build,PluginTests
+--binarygrouping none
+--decimalgrouping none
+--hexgrouping none
+--octalgrouping none
+--semicolons never
+--wrapcollections before-first
+--wrapparameters before-first

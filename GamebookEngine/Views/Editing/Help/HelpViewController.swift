@@ -16,7 +16,7 @@ class HelpViewController: UIViewController {
 
         title = "Editor Help"
         guard let readMeURL = Bundle.main.url(forResource: "Help", withExtension: "md"),
-            let readMeContents = try? String(contentsOf: readMeURL)
+              let readMeContents = try? String(contentsOf: readMeURL)
         else { return }
 
         textView.attributedText = BRMarkdownParser.standard.convertToAttributedString(readMeContents, with: .normal)

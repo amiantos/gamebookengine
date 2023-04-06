@@ -13,6 +13,8 @@
 		440EF3F22323279D000A7C9F /* ContentSizedTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 440EF3F12323279D000A7C9F /* ContentSizedTableView.swift */; };
 		4417DC292314867C00A6F96B /* RuleEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4417DC272314867C00A6F96B /* RuleEditorViewController.swift */; };
 		4417DC2A2314867C00A6F96B /* RuleEditorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4417DC282314867C00A6F96B /* RuleEditorViewController.xib */; };
+		4433010929DE28D800A90F42 /* IntroductionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4433010829DE28D800A90F42 /* IntroductionView.swift */; };
+		4433010C29DE2A9A00A90F42 /* CardStack in Frameworks */ = {isa = PBXBuildFile; productRef = 4433010B29DE2A9A00A90F42 /* CardStack */; };
 		4439E65C230B534D00C6A23C /* Game+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4439E652230B534D00C6A23C /* Game+CoreDataClass.swift */; };
 		4439E65D230B534D00C6A23C /* Game+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4439E653230B534D00C6A23C /* Game+CoreDataProperties.swift */; };
 		4439E65E230B534D00C6A23C /* Decision+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4439E654230B534D00C6A23C /* Decision+CoreDataClass.swift */; };
@@ -119,6 +121,7 @@
 		440EF3F12323279D000A7C9F /* ContentSizedTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentSizedTableView.swift; sourceTree = "<group>"; };
 		4417DC272314867C00A6F96B /* RuleEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleEditorViewController.swift; sourceTree = "<group>"; };
 		4417DC282314867C00A6F96B /* RuleEditorViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RuleEditorViewController.xib; sourceTree = "<group>"; };
+		4433010829DE28D800A90F42 /* IntroductionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroductionView.swift; sourceTree = "<group>"; };
 		4439E652230B534D00C6A23C /* Game+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Game+CoreDataClass.swift"; sourceTree = "<group>"; };
 		4439E653230B534D00C6A23C /* Game+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Game+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		4439E654230B534D00C6A23C /* Decision+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Decision+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -212,6 +215,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4407F51729DD21C400119893 /* MarkdownKit in Frameworks */,
+				4433010C29DE2A9A00A90F42 /* CardStack in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -225,6 +229,14 @@
 				4417DC282314867C00A6F96B /* RuleEditorViewController.xib */,
 			);
 			path = "Rule Editor";
+			sourceTree = "<group>";
+		};
+		4433010729DE28C700A90F42 /* Introduction */ = {
+			isa = PBXGroup;
+			children = (
+				4433010829DE28D800A90F42 /* IntroductionView.swift */,
+			);
+			path = Introduction;
 			sourceTree = "<group>";
 		};
 		444358B4230C56FD00A2E004 /* Page List */ = {
@@ -447,6 +459,7 @@
 		B4E9EFBA230A41AD00C9CA76 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				4433010729DE28C700A90F42 /* Introduction */,
 				B4789FEF23188B8E008DBE9F /* Game List */,
 				444358C1230C7BA800A2E004 /* Playing */,
 				444358BC230C789900A2E004 /* Editing */,
@@ -528,6 +541,7 @@
 			name = GamebookEngine;
 			packageProductDependencies = (
 				4407F51629DD21C400119893 /* MarkdownKit */,
+				4433010B29DE2A9A00A90F42 /* CardStack */,
 			);
 			productName = BRGamebookEngine;
 			productReference = B448874B23063A0D000E2FDD /* GamebookEngine.app */;
@@ -567,6 +581,7 @@
 			mainGroup = B448874223063A0D000E2FDD;
 			packageReferences = (
 				4407F51529DD21C400119893 /* XCRemoteSwiftPackageReference "MarkdownKit" */,
+				4433010A29DE2A9A00A90F42 /* XCRemoteSwiftPackageReference "SwiftUI-CardStackView" */,
 			);
 			productRefGroup = B448874C23063A0D000E2FDD /* Products */;
 			projectDirPath = "";
@@ -660,6 +675,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4433010929DE28D800A90F42 /* IntroductionView.swift in Sources */,
 				444358BF230C794400A2E004 /* PageEditorViewController.swift in Sources */,
 				B452531D2314C186002F628C /* UserDatabase.swift in Sources */,
 				B4F7C1482311AEB800EE055C /* PageEditorConsequenceTableViewCell.swift in Sources */,
@@ -908,7 +924,7 @@
 				CURRENT_PROJECT_VERSION = 15;
 				DEVELOPMENT_TEAM = 2Y9M69QJKZ;
 				INFOPLIST_FILE = GamebookEngine/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -930,7 +946,7 @@
 				CURRENT_PROJECT_VERSION = 15;
 				DEVELOPMENT_TEAM = 2Y9M69QJKZ;
 				INFOPLIST_FILE = GamebookEngine/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -983,6 +999,14 @@
 				minimumVersion = 1.7.0;
 			};
 		};
+		4433010A29DE2A9A00A90F42 /* XCRemoteSwiftPackageReference "SwiftUI-CardStackView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/dadalar/SwiftUI-CardStackView.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.0.6;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -990,6 +1014,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 4407F51529DD21C400119893 /* XCRemoteSwiftPackageReference "MarkdownKit" */;
 			productName = MarkdownKit;
+		};
+		4433010B29DE2A9A00A90F42 /* CardStack */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4433010A29DE2A9A00A90F42 /* XCRemoteSwiftPackageReference "SwiftUI-CardStackView" */;
+			productName = CardStack;
 		};
 /* End XCSwiftPackageProductDependency section */
 

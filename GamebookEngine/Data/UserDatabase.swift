@@ -11,9 +11,10 @@ import UIKit
 
 extension String {
     static let createdIntro = "createdIntro"
+    static let shownIntroductionScreen = "shownIntroductionScreen"
 }
 
-struct UserDatabase {
+enum UserDatabase {
     static var standard: UserDefaults {
         let database = UserDefaults.standard
         return database
@@ -21,6 +22,10 @@ struct UserDatabase {
 }
 
 extension UserDefaults {
+    func shouldShowIntroductoryScreen() -> Bool {
+        return !bool(forKey: .shownIntroductionScreen)
+    }
+
     func createIntroGameIfNeeded() {
         let status: Bool = bool(forKey: .createdIntro)
         if !status {

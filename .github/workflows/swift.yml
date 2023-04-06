@@ -1,0 +1,45 @@
+name: Swift Linters
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/swift.yml'
+      - '.swift.yml'
+      - '**/*.swift'
+
+
+jobs:
+    SwiftLint:
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v1
+        - name: GitHub Action for SwiftLint
+          uses: norio-nomura/action-swiftlint@3.1.0
+          env:
+            DIFF_BASE: ${{ github.base_ref }}
+    SwiftFormat:
+        runs-on: ubuntu-20.04
+        steps:
+          - uses: actions/checkout@v2
+          - uses: actions/cache@v2
+            with:
+              path: .build/release/swiftformat
+              key: $-linting-swiftformat-$
+          - name: Build nicklockwood/SwiftFormat
+            run: |
+              if [ -f ".build/release/swiftformat" ]; then
+                if ! [ -x "$(command -v swift-format)" ]; then
+                  sudo cp -f .build/release/swiftformat /usr/local/bin/swiftformat
+                fi
+              else
+                git clone --depth 1 --branch master https://github.com/nicklockwood/SwiftFormat
+                cd SwiftFormat
+                swift build --disable-sandbox -c release
+                mv .build .. && cd ..
+                rm -rf SwiftFormat
+                sudo cp -f .build/release/swiftformat /usr/local/bin/swiftformat
+              fi
+          - name: SwiftFormat
+            run: |
+              swiftformat --version
+              swiftformat . --config .swiftformat --lint

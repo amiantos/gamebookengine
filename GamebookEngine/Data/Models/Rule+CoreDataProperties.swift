@@ -50,22 +50,22 @@ import Foundation
     }
 }
 
-extension Rule {
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<Rule> {
+public extension Rule {
+    @nonobjc class func fetchRequest() -> NSFetchRequest<Rule> {
         return NSFetchRequest<Rule>(entityName: "Rule")
     }
 
-    @NSManaged public var type: RuleType
-    @NSManaged public var uuid: UUID
-    @NSManaged public var value: Float
-    @NSManaged public var decision: Decision
-    @NSManaged public var attribute: Attribute?
+    @NSManaged var type: RuleType
+    @NSManaged var uuid: UUID
+    @NSManaged var value: Float
+    @NSManaged var decision: Decision
+    @NSManaged var attribute: Attribute?
 }
 
 // MARK: Gamebook Engine Methods
 
-extension Rule {
-    public var hasIssues: Bool {
+public extension Rule {
+    var hasIssues: Bool {
         guard attribute != nil else { return true }
         return false
     }

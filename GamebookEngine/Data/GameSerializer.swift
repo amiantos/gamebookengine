@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 class GameSerializer {
-    static let standard: GameSerializer = GameSerializer()
+    static let standard: GameSerializer = .init()
 
     // MARK: - Game
 
@@ -38,8 +38,9 @@ class GameSerializer {
                             alert.addAction(alertButton)
                             DispatchQueue.main.async {
                                 if let appDelegate = UIApplication.shared.delegate,
-                                    let appWindow = appDelegate.window!,
-                                    let rootViewController = appWindow.rootViewController {
+                                   let appWindow = appDelegate.window!,
+                                   let rootViewController = appWindow.rootViewController
+                                {
                                     rootViewController.present(alert, animated: true, completion: nil)
                                 }
                             }
@@ -48,8 +49,9 @@ class GameSerializer {
                 }
                 DispatchQueue.main.async {
                     if let appDelegate = UIApplication.shared.delegate,
-                        let appWindow = appDelegate.window!,
-                        let rootViewController = appWindow.rootViewController {
+                       let appWindow = appDelegate.window!,
+                       let rootViewController = appWindow.rootViewController
+                    {
                         rootViewController.present(alert, animated: true, completion: nil)
                         alert.view.tintColor = UIColor(named: "text") ?? .darkGray
                     }
@@ -69,8 +71,9 @@ class GameSerializer {
             alert.addAction(alertButton)
             DispatchQueue.main.async {
                 if let appDelegate = UIApplication.shared.delegate,
-                    let appWindow = appDelegate.window!,
-                    let rootViewController = appWindow.rootViewController {
+                   let appWindow = appDelegate.window!,
+                   let rootViewController = appWindow.rootViewController
+                {
                     rootViewController.present(alert, animated: true, completion: nil)
                 }
             }

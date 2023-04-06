@@ -45,20 +45,20 @@ import Foundation
     }
 }
 
-extension Game {
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<Game> {
+public extension Game {
+    @nonobjc class func fetchRequest() -> NSFetchRequest<Game> {
         return NSFetchRequest<Game>(entityName: "Game")
     }
 
-    @NSManaged public var name: String
-    @NSManaged public var uuid: UUID
-    @NSManaged public var author: String
-    @NSManaged public var license: String?
-    @NSManaged public var website: URL?
-    @NSManaged public var about: String?
-    @NSManaged public var font: GameFont
-    @NSManaged public var attributes: NSSet?
-    @NSManaged public var pages: NSOrderedSet?
+    @NSManaged var name: String
+    @NSManaged var uuid: UUID
+    @NSManaged var author: String
+    @NSManaged var license: String?
+    @NSManaged var website: URL?
+    @NSManaged var about: String?
+    @NSManaged var font: GameFont
+    @NSManaged var attributes: NSSet?
+    @NSManaged var pages: NSOrderedSet?
 }
 
 // MARK: Gamebook Engine Methods
@@ -73,50 +73,50 @@ extension Game {
 
 // MARK: Generated accessors for attributes
 
-extension Game {
+public extension Game {
     @objc(addAttributesObject:)
-    @NSManaged public func addToAttributes(_ value: Attribute)
+    @NSManaged func addToAttributes(_ value: Attribute)
 
     @objc(removeAttributesObject:)
-    @NSManaged public func removeFromAttributes(_ value: Attribute)
+    @NSManaged func removeFromAttributes(_ value: Attribute)
 
     @objc(addAttributes:)
-    @NSManaged public func addToAttributes(_ values: NSSet)
+    @NSManaged func addToAttributes(_ values: NSSet)
 
     @objc(removeAttributes:)
-    @NSManaged public func removeFromAttributes(_ values: NSSet)
+    @NSManaged func removeFromAttributes(_ values: NSSet)
 }
 
 // MARK: Generated accessors for pages
 
-extension Game {
+public extension Game {
     @objc(insertObject:inPagesAtIndex:)
-    @NSManaged public func insertIntoPages(_ value: Page, at idx: Int)
+    @NSManaged func insertIntoPages(_ value: Page, at idx: Int)
 
     @objc(removeObjectFromPagesAtIndex:)
-    @NSManaged public func removeFromPages(at idx: Int)
+    @NSManaged func removeFromPages(at idx: Int)
 
     @objc(insertPages:atIndexes:)
-    @NSManaged public func insertIntoPages(_ values: [Page], at indexes: NSIndexSet)
+    @NSManaged func insertIntoPages(_ values: [Page], at indexes: NSIndexSet)
 
     @objc(removePagesAtIndexes:)
-    @NSManaged public func removeFromPages(at indexes: NSIndexSet)
+    @NSManaged func removeFromPages(at indexes: NSIndexSet)
 
     @objc(replaceObjectInPagesAtIndex:withObject:)
-    @NSManaged public func replacePages(at idx: Int, with value: Page)
+    @NSManaged func replacePages(at idx: Int, with value: Page)
 
     @objc(replacePagesAtIndexes:withPages:)
-    @NSManaged public func replacePages(at indexes: NSIndexSet, with values: [Page])
+    @NSManaged func replacePages(at indexes: NSIndexSet, with values: [Page])
 
     @objc(addPagesObject:)
-    @NSManaged public func addToPages(_ value: Page)
+    @NSManaged func addToPages(_ value: Page)
 
     @objc(removePagesObject:)
-    @NSManaged public func removeFromPages(_ value: Page)
+    @NSManaged func removeFromPages(_ value: Page)
 
     @objc(addPages:)
-    @NSManaged public func addToPages(_ values: NSOrderedSet)
+    @NSManaged func addToPages(_ values: NSOrderedSet)
 
     @objc(removePages:)
-    @NSManaged public func removeFromPages(_ values: NSOrderedSet)
+    @NSManaged func removeFromPages(_ values: NSOrderedSet)
 }

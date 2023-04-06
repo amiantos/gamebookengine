@@ -6,7 +6,9 @@
 //  Copyright © 2019 Brad Root. All rights reserved.
 //
 
+import SwiftUI
 import UIKit
+import UniformTypeIdentifiers
 
 class GameListTableViewController: UITableViewController {
     var games: [Game] = []
@@ -55,6 +57,7 @@ class GameListTableViewController: UITableViewController {
         super.viewDidAppear(animated)
 
         fetchGames()
+        showIntroductionScreen()
     }
 
     override func viewDidLayoutSubviews() {
@@ -96,7 +99,7 @@ class GameListTableViewController: UITableViewController {
     }
 
     override func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let game = self.games.item(at: indexPath.row) else { return }
+        guard let game = games.item(at: indexPath.row) else { return }
         loadGame(game)
     }
 }
@@ -119,7 +122,14 @@ extension GameListTableViewController: GameListGameTableViewCellDelegate, UIDocu
     }
 
     @objc fileprivate func importGame() {
-        let documentPicker = UIDocumentPickerViewController(documentTypes: ["net.amiantos.BRGamebookEngine.gbook"], in: .import)
+        var documentPicker: UIDocumentPickerViewController!
+        if #available(iOS 14, *) {
+            let supportedTypes: [UTType] = [UTType("net.amiantos.BRGamebookEngine.gbook")!]
+            documentPicker = UIDocumentPickerViewController(forOpeningContentTypes: supportedTypes)
+        } else {
+            let supportedTypes = ["net.amiantos.BRGamebookEngine.gbook"]
+            documentPicker = UIDocumentPickerViewController(documentTypes: supportedTypes, in: .import)
+        }
         documentPicker.delegate = self
         documentPicker.modalPresentationStyle = .formSheet
         present(documentPicker, animated: true, completion: nil)
@@ -179,6 +189,15 @@ extension GameListTableViewController: GameListGameTableViewCellDelegate, UIDocu
                     self.tableView.reloadData()
                 }
             }
+        }
+    }
+
+    @objc fileprivate func showIntroductionScreen() {
+        if UserDatabase.standard.shouldShowIntroductoryScreen() {
+            let swiftUIViewController = UIHostingController(rootView: IntroductionView())
+            swiftUIViewController.modalPresentationStyle = .pageSheet
+            swiftUIViewController.isModalInPresentation = true
+            present(swiftUIViewController, animated: true, completion: nil)
         }
     }
 
@@ -271,7 +290,7 @@ class GamebookProvider: UIActivityItemProvider {
 
     init(game: Game) {
         // Creates a URL to show a non-existent gamebook prior to loading the real gamebook
-        self.temporaryURL = NSURL(fileURLWithPath: NSTemporaryDirectory() + "\(game.name).gbook")
+        temporaryURL = NSURL(fileURLWithPath: NSTemporaryDirectory() + "\(game.name).gbook")
         Log.debug("Create temporary URL for \(game.name)")
 
         self.game = game

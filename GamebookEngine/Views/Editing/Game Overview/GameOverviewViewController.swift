@@ -59,7 +59,7 @@ class GameOverviewViewController: UIViewController, PagesTableViewDelegate {
             searchButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
             searchButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
             searchButton.heightAnchor.constraint(equalToConstant: 40),
-            searchButton.widthAnchor.constraint(equalToConstant: 40)
+            searchButton.widthAnchor.constraint(equalToConstant: 40),
         ])
     }
 
@@ -110,7 +110,5 @@ class GameOverviewViewController: UIViewController, PagesTableViewDelegate {
         pageEditor.pageScene = scene
     }
 
-    func deletedPage(_: Page) {
-        return
-    }
+    func deletedPage(_: Page) {}
 }
