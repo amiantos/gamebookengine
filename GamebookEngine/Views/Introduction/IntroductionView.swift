@@ -39,16 +39,18 @@ struct CardView: View {
                 .minimumScaleFactor(0.5)
                 .padding(24)
         }
-        .background(Color(UIColor(named: "containerBackground")!))
-        .foregroundColor(.black)
+        .background(Color(UIColor(white: 0.95, alpha: 1)))
+        .foregroundColor(Color.black)
         .cornerRadius(10)
         .shadow(radius: 4)
     }
 }
 
 struct IntroductionView: View {
+    @Environment(\.dismiss) var dismiss
+
     @State var cards: [CardData] = [
-//        CardData(
+        //        CardData(
 //            title: "Salutations", text: "Welcome to Gamebook Engine, the all-in-one app for creating "
 //                + "and playing interactive stories, entirely on your phone or "
 //                + "tablet. No account needed, no cloud services, total privacy.", image: Image("magic-icon")
@@ -56,32 +58,47 @@ struct IntroductionView: View {
         CardData(
             title: "Create", text: "Edit gamebooks or create your own! Gamebook Engine has "
                 + "a fully-featured interface for creating full length choosable path adventure "
-                + "games where readers get to influence the story.", image: Image("create-icon")
-        ),
-        CardData(
-            title: "Play", text: "And of course, you can play gamebooks! Gamebook Engine comes "
-                + "with a few simple games built in that you can play, but it’s more fun to play "
-                + "games made by friends and family.", image: Image("play-icon")
+                + "games.", image: Image("create-icon")
         ),
         CardData(
             title: "Share", text: "Stories written with Gamebook Engine can be exported to a "
-                + "plain text (JSON formatted) file that you can send to your friends. To play, they "
+                + "plain text file that you can send to your friends. To play, they "
                 + "just need their own copy of Gamebook Engine.", image: Image("share-icon")
+        ),
+        CardData(
+            title: "Play", text: "Gamebook Engine comes "
+                + "with a few simple games built in that you can play, but it’s more fun to play "
+                + "games made by friends and family. Get creative!", image: Image("play-icon")
         ),
     ]
 
     var body: some View {
         VStack {
+            if UIDevice.current.userInterfaceIdiom == .phone {
+                Spacer()
+            }
             Spacer()
-            Text("Welcome to\n Gamebook Engine")
-                .multilineTextAlignment(.center)
-                .font(.title)
+            HStack {
+                Image("icon-ios")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 80, height: 80)
+                    .cornerRadius(15)
+                    .shadow(radius: 5, x: 2, y: 2)
+                    .padding(.trailing, 10)
+                Text("Welcome to \nGamebook Engine")
+                    .multilineTextAlignment(.leading)
+                    .font(.title)
+            }
             Text("Gamebook Engine is an all-in-one app for creating "
                 + "and playing interactive stories, entirely on your device. "
-                + "No signup required, and no data is ever collected, ensuring total privacy.")
+                + "No sign-up or internet access required.")
                 .font(.body)
+                .multilineTextAlignment(.center)
                 .minimumScaleFactor(0.5)
-                .padding()
+                .padding(.horizontal, 32)
+                .padding(.vertical, 12)
+                .frame(maxWidth: 540)
             CardStack(
                 direction: LeftRight.direction,
                 data: cards,
@@ -99,17 +116,21 @@ struct IntroductionView: View {
             .frame(maxWidth: 400)
             Spacer()
             Button(action: {
-                print("Do Stuff")
+                self.dismiss()
             }, label: {
                 Text("Get Started Now")
                     .padding()
-                    .background(Color.green)
-                    .foregroundColor(Color.white)
+                    .background(Color(UIColor(named: "containerBackground")!))
+                    .foregroundColor(Color(UIColor(named: "text")!))
                     .cornerRadius(100)
             })
             Spacer()
+            if UIDevice.current.userInterfaceIdiom == .phone {
+                Spacer()
+            }
         }
         .background(Color(UIColor(named: "background")!))
+        .ignoresSafeArea(.all, edges: .vertical)
     }
 }
 
