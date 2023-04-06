@@ -24,7 +24,7 @@ jobs:
           - uses: actions/cache@v2
             with:
               path: .build/release/swiftformat
-              key: $-linting-swiftformat-$
+              key: linting-swiftformat-0.51.4
           - name: Build nicklockwood/SwiftFormat
             run: |
               if [ -f ".build/release/swiftformat" ]; then
@@ -32,7 +32,7 @@ jobs:
                   sudo cp -f .build/release/swiftformat /usr/local/bin/swiftformat
                 fi
               else
-                git clone --depth 1 --branch master https://github.com/nicklockwood/SwiftFormat
+                git clone --depth 1 --branch 0.51.4 https://github.com/nicklockwood/SwiftFormat
                 cd SwiftFormat
                 swift build --disable-sandbox -c release
                 mv .build .. && cd ..
