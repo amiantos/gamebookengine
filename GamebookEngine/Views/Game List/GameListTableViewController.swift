@@ -162,11 +162,14 @@ extension GameListTableViewController: GameListGameTableViewCellDelegate, UIDocu
             }
         }
     }
-    
+
     @objc fileprivate func showIntroductionScreen() {
-        let swiftUIViewController = UIHostingController(rootView: IntroductionView())
-        swiftUIViewController.modalPresentationStyle = .pageSheet
-        present(swiftUIViewController, animated: true, completion: nil)
+        if UserDatabase.standard.shouldShowIntroductoryScreen() {
+            let swiftUIViewController = UIHostingController(rootView: IntroductionView())
+            swiftUIViewController.modalPresentationStyle = .pageSheet
+            swiftUIViewController.isModalInPresentation = true
+            present(swiftUIViewController, animated: true, completion: nil)
+        }
     }
 
     fileprivate func showFilePicker(_ sender: UIButton) {

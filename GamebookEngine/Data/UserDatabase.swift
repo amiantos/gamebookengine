@@ -11,6 +11,7 @@ import UIKit
 
 extension String {
     static let createdIntro = "createdIntro"
+    static let shownIntroductionScreen = "shownIntroductionScreen"
 }
 
 struct UserDatabase {
@@ -21,6 +22,11 @@ struct UserDatabase {
 }
 
 extension UserDefaults {
+    
+    func shouldShowIntroductoryScreen() -> Bool {
+        return !bool(forKey: .shownIntroductionScreen)
+    }
+    
     func createIntroGameIfNeeded() {
         let status: Bool = bool(forKey: .createdIntro)
         if !status, let introURL = Bundle.main.url(forResource: "An Introduction to Gamebook Engine", withExtension: "gbook"),

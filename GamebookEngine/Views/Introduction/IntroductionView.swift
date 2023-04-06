@@ -125,12 +125,15 @@ struct IntroductionView: View {
                     .cornerRadius(100)
             })
             Spacer()
-            if UIDevice.current.userInterfaceIdiom == .phone {
+            if UIDevice.current.userInterfaceIdiom == .phone || UIDevice.current.orientation == .portrait {
                 Spacer()
             }
         }
         .background(Color(UIColor(named: "background")!))
         .ignoresSafeArea(.all, edges: .vertical)
+        .onAppear {
+            UserDatabase.standard.set(true, forKey: .shownIntroductionScreen)
+        }
     }
 }
 
