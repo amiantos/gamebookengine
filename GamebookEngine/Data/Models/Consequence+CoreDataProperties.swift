@@ -50,22 +50,22 @@ import Foundation
     }
 }
 
-extension Consequence {
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<Consequence> {
+public extension Consequence {
+    @nonobjc class func fetchRequest() -> NSFetchRequest<Consequence> {
         return NSFetchRequest<Consequence>(entityName: "Consequence")
     }
 
-    @NSManaged public var amount: Float
-    @NSManaged public var type: ConsequenceType
-    @NSManaged public var uuid: UUID?
-    @NSManaged public var attribute: Attribute?
-    @NSManaged public var page: Page?
+    @NSManaged var amount: Float
+    @NSManaged var type: ConsequenceType
+    @NSManaged var uuid: UUID?
+    @NSManaged var attribute: Attribute?
+    @NSManaged var page: Page?
 }
 
 // MARK: Gamebook Engine Methods
 
-extension Consequence {
-    public var hasIssues: Bool {
+public extension Consequence {
+    var hasIssues: Bool {
         guard attribute != nil else { return true }
         return false
     }

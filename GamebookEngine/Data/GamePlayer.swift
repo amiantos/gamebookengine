@@ -49,7 +49,7 @@ class GamePlayer: GamePlayerDelegate {
 
     func pickedDecision(at index: Int) {
         guard let decision = decisions.item(at: index),
-            let page = decision.destination else { return }
+              let page = decision.destination else { return }
         self.page = page
         loadPage()
     }
@@ -90,7 +90,7 @@ class GamePlayer: GamePlayerDelegate {
                     var passOrFail: [Bool] = []
                     for rule in rules {
                         guard let ruleAttributeUUID = rule.attribute?.uuid else { continue }
-                        var pass: Bool = false
+                        var pass = false
                         switch rule.type {
                         case .isEqualTo:
                             pass = Float(rule.value) == currentValues[ruleAttributeUUID] ? true : false
@@ -105,7 +105,7 @@ class GamePlayer: GamePlayerDelegate {
                     }
                     switch decision.matchStyle {
                     case .matchAll:
-                        var failure: Bool = false
+                        var failure = false
                         for passState in passOrFail where passState == false {
                             failure = true
                             break

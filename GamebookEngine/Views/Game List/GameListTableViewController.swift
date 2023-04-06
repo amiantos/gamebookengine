@@ -6,8 +6,8 @@
 //  Copyright © 2019 Brad Root. All rights reserved.
 //
 
-import UIKit
 import SwiftUI
+import UIKit
 import UniformTypeIdentifiers
 
 class GameListTableViewController: UITableViewController {
@@ -99,7 +99,7 @@ class GameListTableViewController: UITableViewController {
     }
 
     override func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let game = self.games.item(at: indexPath.row) else { return }
+        guard let game = games.item(at: indexPath.row) else { return }
         loadGame(game)
     }
 }
@@ -127,7 +127,7 @@ extension GameListTableViewController: GameListGameTableViewCellDelegate, UIDocu
             let supportedTypes: [UTType] = [UTType("net.amiantos.BRGamebookEngine.gbook")!]
             documentPicker = UIDocumentPickerViewController(forOpeningContentTypes: supportedTypes)
         } else {
-            let supportedTypes: [String] = ["net.amiantos.BRGamebookEngine.gbook"]
+            let supportedTypes = ["net.amiantos.BRGamebookEngine.gbook"]
             documentPicker = UIDocumentPickerViewController(documentTypes: supportedTypes, in: .import)
         }
         documentPicker.delegate = self
@@ -265,7 +265,7 @@ class GamebookProvider: UIActivityItemProvider {
 
     init(game: Game) {
         // Creates a URL to show a non-existent gamebook prior to loading the real gamebook
-        self.temporaryURL = NSURL(fileURLWithPath: NSTemporaryDirectory() + "\(game.name).gbook")
+        temporaryURL = NSURL(fileURLWithPath: NSTemporaryDirectory() + "\(game.name).gbook")
         Log.debug("Create temporary URL for \(game.name)")
 
         self.game = game

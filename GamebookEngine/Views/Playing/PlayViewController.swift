@@ -37,6 +37,7 @@ class PlayViewController: UIViewController {
         player.delegate = self
     }
 
+    @available(*, unavailable)
     required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -107,8 +108,8 @@ extension PlayViewController: GamePlayerDelegate {
 
 // MARK: UI Actions
 
-extension PlayViewController {
-    fileprivate func hidePage() {
+private extension PlayViewController {
+    func hidePage() {
         var textAreaFrame = textView.frame
         textAreaFrame.origin.x -= textAreaFrame.size.width / 2
         textView.frame = textAreaFrame
@@ -118,7 +119,7 @@ extension PlayViewController {
         optionsContainerView.alpha = 0
     }
 
-    fileprivate func showPage() {
+    func showPage() {
         textView.attributedText = player.getPageAttributedString()
         decisionsTableView.reloadData()
 
@@ -145,14 +146,14 @@ extension PlayViewController {
         }
     }
 
-    fileprivate func hideDecisionsView() {
+    func hideDecisionsView() {
         decisionsAreHidden = true
         optionsContainerTopConstraint?.isActive = false
         optionsContainerTopConstraint = optionsContainerView.topAnchor.constraint(equalTo: textView.bottomAnchor, constant: 32)
         optionsContainerTopConstraint?.isActive = true
     }
 
-    fileprivate func showDecisionsView() {
+    func showDecisionsView() {
         optionsContainerTopConstraint?.isActive = false
         decisionsAreHidden = false
         optionsContainerTopConstraint = optionsContainerView.topAnchor.constraint(

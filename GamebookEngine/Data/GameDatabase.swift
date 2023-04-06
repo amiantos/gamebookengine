@@ -11,7 +11,7 @@ import Foundation
 import UIKit
 
 class GameDatabase {
-    static let standard: GameDatabase = GameDatabase()
+    static let standard: GameDatabase = .init()
 
     var mainManagedObjectContext: NSManagedObjectContext
     var persistentContainer: NSPersistentContainer

@@ -68,7 +68,7 @@ class PageEditorDecisionTableViewCell: UITableViewCell {
             case .matchAny:
                 ruleText = "Match Style: Any\n"
             }
-            var showWarning: Bool = false
+            var showWarning = false
             for rule in rules {
                 if rule.attribute == nil {
                     showWarning = true

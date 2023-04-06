@@ -29,25 +29,25 @@ import Foundation
     }
 }
 
-extension Decision {
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<Decision> {
+public extension Decision {
+    @nonobjc class func fetchRequest() -> NSFetchRequest<Decision> {
         return NSFetchRequest<Decision>(entityName: "Decision")
     }
 
-    @NSManaged public var content: String
-    @NSManaged public var uuid: UUID
-    @NSManaged public var destination: Page?
-    @NSManaged public var page: Page
-    @NSManaged public var matchStyle: MatchType
-    @NSManaged public var rules: NSSet?
+    @NSManaged var content: String
+    @NSManaged var uuid: UUID
+    @NSManaged var destination: Page?
+    @NSManaged var page: Page
+    @NSManaged var matchStyle: MatchType
+    @NSManaged var rules: NSSet?
 }
 
 // MARK: Gamebook Engine Methods
 
-extension Decision {
-    public var hasIssues: Bool {
-        guard let destination = self.destination else { return true }
-        if let rules = self.rules?.allObjects as? [Rule] {
+public extension Decision {
+    var hasIssues: Bool {
+        guard let destination = destination else { return true }
+        if let rules = rules?.allObjects as? [Rule] {
             for rule in rules where rule.hasIssues {
                 return true
             }

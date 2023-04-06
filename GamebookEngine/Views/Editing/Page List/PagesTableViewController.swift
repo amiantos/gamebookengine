@@ -14,7 +14,7 @@ protocol PagesTableViewDelegate: AnyObject {
 }
 
 class PagesTableViewController: UITableViewController, UISearchBarDelegate {
-    @IBOutlet weak var pagesSearchBar: UISearchBar!
+    @IBOutlet var pagesSearchBar: UISearchBar!
     var game: Game
     var pages: [Page] = []
     var searchIndicator: UIActivityIndicatorView!
@@ -29,6 +29,7 @@ class PagesTableViewController: UITableViewController, UISearchBarDelegate {
         super.init(nibName: nil, bundle: nil)
     }
 
+    @available(*, unavailable)
     required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -52,7 +53,7 @@ class PagesTableViewController: UITableViewController, UISearchBarDelegate {
 
         NSLayoutConstraint.activate([
             searchIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            searchIndicator.topAnchor.constraint(equalTo: view.topAnchor, constant: 100)
+            searchIndicator.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
         ])
 
         noResultsLabel = UILabel()
@@ -65,7 +66,7 @@ class PagesTableViewController: UITableViewController, UISearchBarDelegate {
 
         NSLayoutConstraint.activate([
             noResultsLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            noResultsLabel.centerYAnchor.constraint(equalTo: view.topAnchor, constant: 200)
+            noResultsLabel.centerYAnchor.constraint(equalTo: view.topAnchor, constant: 200),
         ])
 
         loadPages()
@@ -90,7 +91,7 @@ class PagesTableViewController: UITableViewController, UISearchBarDelegate {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "pageCell", for: indexPath) as? PageTableViewCell,
-            let page = pages.item(at: indexPath.row) else { fatalError() }
+              let page = pages.item(at: indexPath.row) else { fatalError() }
 
         cell.page = page
 
@@ -108,7 +109,7 @@ class PagesTableViewController: UITableViewController, UISearchBarDelegate {
 
     // MARK: Search Bar
 
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+    func searchBar(_: UISearchBar, textDidChange searchText: String) {
         searchTimer?.invalidate()
         noResultsLabel.isHidden = true
 
@@ -140,7 +141,7 @@ class PagesTableViewController: UITableViewController, UISearchBarDelegate {
         }
     }
 
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+    func searchBarSearchButtonClicked(_: UISearchBar) {
         pagesSearchBar.endEditing(true)
     }
 }

@@ -24,7 +24,7 @@ class PagesScene: SKScene, PagesTableViewDelegate {
     var previousCameraPoint = CGPoint.zero
     var previousCameraScale = CGFloat()
     var currentCameraScale: CGFloat = 4
-    private var cameraNode: SKCameraNode = SKCameraNode()
+    private var cameraNode: SKCameraNode = .init()
 
     var nodeSize: CGFloat = 440
     var nodeSpacing: CGFloat = 100
@@ -40,7 +40,7 @@ class PagesScene: SKScene, PagesTableViewDelegate {
 
     var game: Game? {
         didSet {
-            if let game = self.game {
+            if let game = game {
                 GameDatabase.standard.fetchFirstPage(for: game) { page in
                     guard let page = page else { return }
                     self.firstPage = page
@@ -131,7 +131,8 @@ class PagesScene: SKScene, PagesTableViewDelegate {
 
         for relationship in relationships {
             guard let originNode = nodes[relationship.origin],
-                let destinationNode = nodes[relationship.destination] else {
+                  let destinationNode = nodes[relationship.destination]
+            else {
                 Log.error("Relationship match not found: \(relationship.origin) \(relationship.destination)")
                 continue
             }
@@ -346,9 +347,7 @@ class PagesScene: SKScene, PagesTableViewDelegate {
         camera?.position = translatedNodePosition
     }
 
-    func deletedPage(_: Page) {
-        return
-    }
+    func deletedPage(_: Page) {}
 
     func highlightPageNode() {
         selectionNode.removeFromParent()
@@ -360,7 +359,7 @@ class PagesScene: SKScene, PagesTableViewDelegate {
     }
 
     @objc func pinchGestureAction(_ sender: UIPinchGestureRecognizer) {
-        guard let camera = self.camera else {
+        guard let camera = camera else {
             return
         }
         if sender.state == .began {
@@ -375,7 +374,7 @@ class PagesScene: SKScene, PagesTableViewDelegate {
 
     @objc func panGestureAction(_ sender: UIPanGestureRecognizer) {
         // The camera has a weak reference, so test it
-        guard let camera = self.camera else {
+        guard let camera = camera else {
             return
         }
         // If the movement just began, save the first camera position
