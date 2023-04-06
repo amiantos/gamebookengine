@@ -10,36 +10,28 @@ on:
 
 jobs:
     swiftformat:
-      name: Check swiftformat
-      runs-on: ubuntu-latest
-      steps:
-        - name: Checkout repo
-          uses: actions/checkout@v2
-          with:
-            submodules: recursive
-  
-        - name: Update PATH
-          run: echo ::add-path::$HOME/bin
-  
-        - name: Cache packages/Tools/.build
-          uses: actions/cache@v1
-          with:
-            path: packages/Tools/.build
-            key: ${{ runner.os }}-swift-tools-build-${{ hashFiles('packages/Tools/Package.resolved') }}
-            restore-keys: |
-              ${{ runner.os }}-swift-tools-build-
-        - name: Cache ~/bin
-          uses: actions/cache@v1
-          with:
-            path: ~/bin
-            key: ${{ runner.os }}-home-bin-${{ hashFiles('packages/Tools/Package.resolved') }}
-            restore-keys: |
-              ${{ runner.os }}-home-bin-
-        - name: Install Swift tools
-          run: make swift-tools
-  
-        - name: Format Swift code
-          run: swiftformat --verbose .
-  
-        - name: Verify formatted code is unchanged
-          run: git diff --exit-code HEAD
+        runs-on: ubuntu-20.04
+        steps:
+          - uses: actions/checkout@v2
+          - uses: actions/cache@v2
+            with:
+              path: .build/release/swiftformat
+              key: $-linting-swiftformat-$
+          - name: Build nicklockwood/SwiftFormat
+            run: |
+              if [ -f ".build/release/swiftformat" ]; then
+                if ! [ -x "$(command -v swift-format)" ]; then
+                  sudo cp -f .build/release/swiftformat /usr/local/bin/swiftformat
+                fi
+              else
+                git clone --depth 1 --branch $ https://github.com/nicklockwood/SwiftFormat
+                cd SwiftFormat
+                swift build --disable-sandbox -c release
+                mv .build .. && cd ..
+                rm -rf SwiftFormat
+                sudo cp -f .build/release/swiftformat /usr/local/bin/swiftformat
+              fi
+          - name: SwiftFormat
+            run: |
+              swiftformat --version
+              swiftformat . --config .swiftformat --lint
