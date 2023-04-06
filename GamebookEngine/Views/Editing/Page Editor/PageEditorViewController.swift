@@ -257,7 +257,7 @@ class PageEditorViewController: UIViewController {
 
 extension PageEditorViewController: PagesTableViewDelegate {
     func deletedPage(_ page: Page) {
-        if currentPage == page, let currentGame = self.currentGame {
+        if currentPage == page, let currentGame = currentGame {
             if previousPage != nil {
                 currentPage = previousPage
             } else {
@@ -311,10 +311,10 @@ extension PageEditorViewController: UITableViewDelegate, UITableViewDataSource {
             return cell
         }
         guard let consequence = currentConsequences.item(at: indexPath.row),
-            let cell = tableView.dequeueReusableCell(
-                withIdentifier: "consequenceCell",
-                for: indexPath
-            ) as? PageEditorConsequenceTableViewCell else { fatalError() }
+              let cell = tableView.dequeueReusableCell(
+                  withIdentifier: "consequenceCell",
+                  for: indexPath
+              ) as? PageEditorConsequenceTableViewCell else { fatalError() }
         cell.selectionStyle = .none
         cell.consequence = consequence
         cell.delegate = self

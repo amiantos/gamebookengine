@@ -14,7 +14,7 @@ extension String {
     static let shownIntroductionScreen = "shownIntroductionScreen"
 }
 
-struct UserDatabase {
+enum UserDatabase {
     static var standard: UserDefaults {
         let database = UserDefaults.standard
         return database
@@ -22,15 +22,15 @@ struct UserDatabase {
 }
 
 extension UserDefaults {
-    
     func shouldShowIntroductoryScreen() -> Bool {
         return !bool(forKey: .shownIntroductionScreen)
     }
-    
+
     func createIntroGameIfNeeded() {
         let status: Bool = bool(forKey: .createdIntro)
         if !status, let introURL = Bundle.main.url(forResource: "An Introduction to Gamebook Engine", withExtension: "gbook"),
-            let jsonData = try? Data(contentsOf: introURL) {
+           let jsonData = try? Data(contentsOf: introURL)
+        {
             GameSerializer.standard.gameFromJSONData(jsonData, alert: false)
             set(true, for: .createdIntro)
         }

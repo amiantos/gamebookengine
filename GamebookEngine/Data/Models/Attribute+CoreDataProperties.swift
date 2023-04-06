@@ -10,15 +10,15 @@
 import CoreData
 import Foundation
 
-extension Attribute {
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<Attribute> {
+public extension Attribute {
+    @nonobjc class func fetchRequest() -> NSFetchRequest<Attribute> {
         return NSFetchRequest<Attribute>(entityName: "Attribute")
     }
 
-    @NSManaged public var name: String
-    @NSManaged public var uuid: UUID
-    @NSManaged public var consequences: NSSet?
-    @NSManaged public var game: Game
+    @NSManaged var name: String
+    @NSManaged var uuid: UUID
+    @NSManaged var consequences: NSSet?
+    @NSManaged var game: Game
 }
 
 // MARK: Gamebook Engine Methods
@@ -33,16 +33,16 @@ extension Attribute {
 
 // MARK: Generated accessors for consequences
 
-extension Attribute {
+public extension Attribute {
     @objc(addConsequencesObject:)
-    @NSManaged public func addToConsequences(_ value: Consequence)
+    @NSManaged func addToConsequences(_ value: Consequence)
 
     @objc(removeConsequencesObject:)
-    @NSManaged public func removeFromConsequences(_ value: Consequence)
+    @NSManaged func removeFromConsequences(_ value: Consequence)
 
     @objc(addConsequences:)
-    @NSManaged public func addToConsequences(_ values: NSSet)
+    @NSManaged func addToConsequences(_ values: NSSet)
 
     @objc(removeConsequences:)
-    @NSManaged public func removeFromConsequences(_ values: NSSet)
+    @NSManaged func removeFromConsequences(_ values: NSSet)
 }
