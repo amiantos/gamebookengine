@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftUI
+import UniformTypeIdentifiers
 
 class GameListTableViewController: UITableViewController {
     var games: [Game] = []
@@ -121,7 +122,14 @@ extension GameListTableViewController: GameListGameTableViewCellDelegate, UIDocu
     }
 
     @objc fileprivate func importGame() {
-        let documentPicker = UIDocumentPickerViewController(documentTypes: ["net.amiantos.BRGamebookEngine.gbook"], in: .import)
+        var documentPicker: UIDocumentPickerViewController!
+        if #available(iOS 14, *) {
+            let supportedTypes: [UTType] = [UTType("net.amiantos.BRGamebookEngine.gbook")!]
+            documentPicker = UIDocumentPickerViewController(forOpeningContentTypes: supportedTypes)
+        } else {
+            let supportedTypes: [String] = ["net.amiantos.BRGamebookEngine.gbook"]
+            documentPicker = UIDocumentPickerViewController(documentTypes: supportedTypes, in: .import)
+        }
         documentPicker.delegate = self
         documentPicker.modalPresentationStyle = .formSheet
         present(documentPicker, animated: true, completion: nil)
