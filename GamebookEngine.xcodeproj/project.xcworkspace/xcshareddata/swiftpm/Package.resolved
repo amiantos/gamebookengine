@@ -8,6 +8,24 @@
         "revision" : "5056f3305d3499f44d8815530d560b87082e0cf5",
         "version" : "1.7.1"
       }
+    },
+    {
+      "identity" : "swift-snapshot-testing",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/pointfreeco/swift-snapshot-testing.git",
+      "state" : {
+        "revision" : "cef5b3f6f11781dd4591bdd1dd0a3d22bd609334",
+        "version" : "1.11.0"
+      }
+    },
+    {
+      "identity" : "swiftui-cardstackview",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/dadalar/SwiftUI-CardStackView.git",
+      "state" : {
+        "revision" : "9b45ef54b9e7bfbee46fe4a5982ecf449ac2b47c",
+        "version" : "0.0.6"
+      }
     }
   ],
   "version" : 2
