@@ -1,64 +1,102 @@
 {
-  "name" : "Defeat the Dragon",
-  "uuid" : "4558BF56-B3BE-4223-95C2-AA3BA322AB7E",
-  "license" : "",
-  "about" : "You’ve been given a very important task by the mayor: defeat that dragon!",
   "font" : "normal",
+  "attributes" : [
+    {
+      "name" : "Dressed Nicely",
+      "uuid" : "43A71F09-C85D-4BE3-B268-F4FB01C2C90A"
+    }
+  ],
+  "about" : "You’ve been given a very important task by the Mayor: Defeat the Dragon! But you’re just a twelve year old kid! How do you think that’s gonna work out?",
   "author" : "Brad Root",
   "pages" : [
     {
+      "uuid" : "B17C8AE8-8069-4717-947F-5CF25DC25C69",
+      "type" : "first",
+      "content" : "# Introduction\n\nThis is a sample Gamebook that comes with Gamebook Engine. It’s meant to demonstrate how branching paths can create different outcomes.\n\nIn this short game, a few of your early decisions can have serious consequences later in the story.\n\nOnce you’ve found your way to the good ending, be sure to try to edit the Gamebook to add something new!",
       "decisions" : [
         {
-          "uuid" : "F5B74E7B-30AA-4A2C-87B4-D7502C611FEE",
+          "destination_uuid" : "B5A7C12C-1165-46C3-8111-84ADEAA4BCC9",
+          "match_style" : "match_all",
+          "content" : "Start your adventure!",
           "rules" : [
 
           ],
-          "content" : "Start your adventure!",
-          "match_style" : "match_all",
-          "destination_uuid" : "B5A7C12C-1165-46C3-8111-84ADEAA4BCC9"
+          "uuid" : "F5B74E7B-30AA-4A2C-87B4-D7502C611FEE"
         }
-      ],
-      "uuid" : "B17C8AE8-8069-4717-947F-5CF25DC25C69",
-      "type" : "first",
-      "content" : "# Introduction\n\nThis is a sample Gamebook that comes with Gamebook Engine. It’s meant to demonstrate how branching paths can create different outcomes.\n\nIn this short game, a few of your early decisions can have serious consequences later in the story.\n\nOnce you’ve found your way to the good ending, be sure to try to edit the Gamebook to add something new!"
+      ]
     },
     {
+      "type" : "",
+      "uuid" : "B5A7C12C-1165-46C3-8111-84ADEAA4BCC9",
+      "content" : "# Chapter 1\n\nWhen you woke up this morning, you had no idea that your day was going to take you on a fantastic journey. Maybe a brief journey. But no doubt fantastic, through and through. But, first, let’s get you introduced to yourself.\n\nYou’re twelve, and no one takes you seriously. You really like chewing bubble gum and you’ve got a terrible habit of sticking it under any surface you’re near. Your mother has to go to the chiropractor to get her back adjusted because she is so often hunched over, scraping your chewed bubble gum off the furniture.\n\nIf you had any friends, no doubt the undersides of their furniture would be covered by the time you left. But I assure you, it’s not the gum that causes you to have no friends, though you sternly refuse to share a piece with anyone who asks, it’s that you’re rude and careless. With people, with objects, with money—and especially objects and money that aren’t yours, which is basically everything because, again, you’re twelve.\n\nWhen you open your eyes, lying in bed, the mid-afternoon sun streaming in through your bedroom window, making your hair mat itself to your forehead in a way that feels disgusting, you hear a faint breathing at your door. You find your mother standing there, white knuckles wrapped around a telephone receiver.\n\n“What did you do this time? My beautiful, horrible child!” Her face contorts as she shrieks.\n\nYou shrug.\n\n“The mayor just called. He said he needs you to slay a dragon. Do you know anything about that? How would you know anything about that! You’re just a child. A beautiful, horrible child, but just a child at that. Do you have any idea what I am saying to you right now?”\n\nYou stare at her and try to muster an expression but nothing really comes to you, so you just shrug again.\n\nFor a second your mother’s face becomes very red and you think her eyes might pop out of her head and there’s a faint creaking sound coming from her mouth like glass being ground between stone. But then she blinks a few times and everything seems to be just dandy.\n\n“Okay, well the mayor would like to see you urgently. Please get dressed and then we’ll be off. Please be sure to wear something nice for the Mayor.”",
       "decisions" : [
         {
+          "rules" : [
+
+          ],
           "match_style" : "match_all",
-          "uuid" : "F1443240-BDD8-4695-99F1-1BB17AEA1D4C",
-          "content" : "Put on something nice",
           "destination_uuid" : "B847757D-8F9B-4D06-83C8-B0F20BCDE160",
+          "uuid" : "F1443240-BDD8-4695-99F1-1BB17AEA1D4C",
+          "content" : "Put on something nice"
+        },
+        {
+          "uuid" : "B04ADDDC-FE2F-40FF-A998-E5DD61FA8D44",
+          "content" : "Just wear whatever is lying on the floor, who cares anyway, it’s just the stupid mayor",
+          "rules" : [
+
+          ],
+          "match_style" : "match_all",
+          "destination_uuid" : "0E63FD55-9539-4D2C-8D9C-8EB1432018E0"
+        }
+      ]
+    },
+    {
+      "content" : "You head back to your room and pull a small suit out of your closet. You last wore it to your grandmothers funeral but with a light-colored shirt it makes you look quite dapper. The Mayor will surely be pleased.",
+      "type" : "",
+      "consequences" : [
+        {
+          "uuid" : "AC8BDF3B-FEDF-47A6-9E49-A41022ADD72B",
+          "type" : "set",
+          "attribute_uuid" : "43A71F09-C85D-4BE3-B268-F4FB01C2C90A",
+          "amount" : 1
+        }
+      ],
+      "decisions" : [
+        {
+          "uuid" : "0B272D3A-64A9-4845-B82B-B1D8972EE89F",
+          "destination_uuid" : "164326E4-1C98-49B9-83A7-1DCCE7389147",
+          "content" : "Go to City Hall",
+          "match_style" : "match_all",
           "rules" : [
 
           ]
-        },
+        }
+      ],
+      "uuid" : "B847757D-8F9B-4D06-83C8-B0F20BCDE160"
+    },
+    {
+      "content" : "You go back to your room and just throw on whatever you find crumpled up on the floor that doesn’t smell too badly. It’s just the mayor, right? Who cares what he thinks. And besides, if he wants you to do something for him, he should be fine with whatever you want to wear.",
+      "type" : "",
+      "decisions" : [
         {
-          "content" : "Just wear whatever is lying on the floor, who cares anyway, it’s just the stupid mayor",
-          "uuid" : "B04ADDDC-FE2F-40FF-A998-E5DD61FA8D44",
+          "content" : "Go to City Hall",
           "rules" : [
 
           ],
-          "destination_uuid" : "0E63FD55-9539-4D2C-8D9C-8EB1432018E0",
-          "match_style" : "match_all"
+          "match_style" : "match_all",
+          "uuid" : "EE79EA2A-E7AC-4855-87C3-1A1B030CF2AC",
+          "destination_uuid" : "164326E4-1C98-49B9-83A7-1DCCE7389147"
         }
       ],
-      "type" : "",
-      "content" : "# Chapter 1\n\nWhen you woke up this morning, you had no idea that your day was going to take you on a fantastic journey. Maybe a brief journey. But no doubt fantastic, through and through. But, first, let’s get you introduced to yourself.\n\nYou’re twelve, and no one takes you seriously. You really like chewing bubble gum and you’ve got a terrible habit of sticking it under any surface you’re near. Your mother has to go to the chiropractor to get her back adjusted because she is so often hunched over, scraping your chewed bubble gum off the furniture.\n\nIf you had any friends, no doubt the undersides of their furniture would be covered by the time you left. But I assure you, it’s not the gum that causes you to have no friends, though you sternly refuse to share a piece with anyone who asks, it’s that you’re rude and careless. With people, with objects, with money—and especially objects and money that aren’t yours, which is basically everything because, again, you’re twelve.\n\nWhen you open your eyes, lying in bed, the mid-afternoon sun streaming in through your bedroom window, making your hair mat itself to your forehead in a way that feels disgusting, you hear a faint breathing at your door. You find your mother standing there, white knuckles wrapped around a telephone receiver.\n\n“What did you do this time? My beautiful, horrible child!” Her face contorts as she shrieks.\n\nYou shrug.\n\n“The mayor just called. He said he needs you to slay a dragon. Do you know anything about that? How would you know anything about that! You’re just a child. A beautiful, horrible child, but just a child at that. Do you have any idea what I am saying to you right now?”\n\nYou stare at her and try to muster an expression but nothing really comes to you, so you just shrug again.\n\nFor a second your mother’s face becomes very red and you think her eyes might pop out of her head and there’s a faint creaking sound coming from her mouth like glass being ground between stone. But then she blinks a few times and everything seems to be just dandy.\n\n“Okay, well the mayor would like to see you urgently. Please get dressed and then we’ll be off. Please be sure to wear something nice for the Mayor.”",
-      "uuid" : "B5A7C12C-1165-46C3-8111-84ADEAA4BCC9"
+      "uuid" : "0E63FD55-9539-4D2C-8D9C-8EB1432018E0"
     },
     {
-      "uuid" : "B847757D-8F9B-4D06-83C8-B0F20BCDE160",
+      "content" : "When you get to city hall…",
       "type" : "",
-      "content" : "A decision will lead to this new page..."
-    },
-    {
-      "type" : "",
-      "uuid" : "0E63FD55-9539-4D2C-8D9C-8EB1432018E0",
-      "content" : "A decision will lead to this new page..."
+      "uuid" : "164326E4-1C98-49B9-83A7-1DCCE7389147"
     }
   ],
-  "attributes" : [
-
-  ]
+  "name" : "Defeat the Dragon",
+  "license" : "",
+  "uuid" : "4558BF56-B3BE-4223-95C2-AA3BA322AB7E"
 }

@@ -42,7 +42,7 @@
 		44C522EB232F0B6D00E7AC95 /* GamePlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C522EA232F0B6D00E7AC95 /* GamePlayer.swift */; };
 		44CB58C32326CFB6009E49D9 /* An Introduction to Gamebook Engine.gbook in Resources */ = {isa = PBXBuildFile; fileRef = 44CB58C22326CFB6009E49D9 /* An Introduction to Gamebook Engine.gbook */; };
 		44CB58C523286792009E49D9 /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44CB58C423286792009E49D9 /* Logging.swift */; };
-		44D767DF29DD537D001DFE82 /* Defeat the Dragon.gbook in Resources */ = {isa = PBXBuildFile; fileRef = 44D767DE29DD537D001DFE82 /* Defeat the Dragon.gbook */; };
+		44D1122529DFBDA700804C77 /* Defeat the Dragon.gbook in Resources */ = {isa = PBXBuildFile; fileRef = 44D1122429DFBDA700804C77 /* Defeat the Dragon.gbook */; };
 		B402FFEE2315FEFA00900020 /* MarkdownEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B402FFEC2315FEFA00900020 /* MarkdownEditorViewController.swift */; };
 		B402FFEF2315FEFA00900020 /* MarkdownEditorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B402FFED2315FEFA00900020 /* MarkdownEditorViewController.xib */; };
 		B402FFF22316055000900020 /* BRMarkdownParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B402FFF12316055000900020 /* BRMarkdownParser.swift */; };
@@ -150,7 +150,7 @@
 		44C522EA232F0B6D00E7AC95 /* GamePlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamePlayer.swift; sourceTree = "<group>"; };
 		44CB58C22326CFB6009E49D9 /* An Introduction to Gamebook Engine.gbook */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "An Introduction to Gamebook Engine.gbook"; sourceTree = "<group>"; };
 		44CB58C423286792009E49D9 /* Logging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logging.swift; sourceTree = "<group>"; };
-		44D767DE29DD537D001DFE82 /* Defeat the Dragon.gbook */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Defeat the Dragon.gbook"; sourceTree = "<group>"; };
+		44D1122429DFBDA700804C77 /* Defeat the Dragon.gbook */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Defeat the Dragon.gbook"; sourceTree = "<group>"; };
 		B402FFEC2315FEFA00900020 /* MarkdownEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkdownEditorViewController.swift; sourceTree = "<group>"; };
 		B402FFED2315FEFA00900020 /* MarkdownEditorViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MarkdownEditorViewController.xib; sourceTree = "<group>"; };
 		B402FFF12316055000900020 /* BRMarkdownParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BRMarkdownParser.swift; sourceTree = "<group>"; };
@@ -301,7 +301,7 @@
 		44CB58BF2326CDDB009E49D9 /* Built-in Gamebooks */ = {
 			isa = PBXGroup;
 			children = (
-				44D767DE29DD537D001DFE82 /* Defeat the Dragon.gbook */,
+				44D1122429DFBDA700804C77 /* Defeat the Dragon.gbook */,
 				44CB58C22326CFB6009E49D9 /* An Introduction to Gamebook Engine.gbook */,
 			);
 			path = "Built-in Gamebooks";
@@ -615,6 +615,7 @@
 				B4F7C13923118E2300EE055C /* DecisionEditorViewController.xib in Resources */,
 				444358B8230C592500A2E004 /* PageTableViewCell.xib in Resources */,
 				44CB58C32326CFB6009E49D9 /* An Introduction to Gamebook Engine.gbook in Resources */,
+				44D1122529DFBDA700804C77 /* Defeat the Dragon.gbook in Resources */,
 				B4789FEE2318880E008DBE9F /* GameListGameTableViewCell.xib in Resources */,
 				444358C5230C7BBE00A2E004 /* PlayViewController.xib in Resources */,
 				4407F51B29DD22CE00119893 /* README.md in Resources */,
@@ -622,7 +623,6 @@
 				B4A13AD6230F6D24004929B8 /* PageEditorDecisionTableViewCell.xib in Resources */,
 				B448875623063A0E000E2FDD /* Assets.xcassets in Resources */,
 				B4A13AD2230F5B08004929B8 /* PlayDecisionTableViewCell.xib in Resources */,
-				44D767DF29DD537D001DFE82 /* Defeat the Dragon.gbook in Resources */,
 				44ADBA8723404BBB00855649 /* fileicon-ipad-64px.png in Resources */,
 				4407F51929DD22C800119893 /* LICENSE in Resources */,
 				B4F7C1492311AEB800EE055C /* PageEditorConsequenceTableViewCell.xib in Resources */,
