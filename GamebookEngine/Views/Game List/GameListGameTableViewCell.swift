@@ -46,8 +46,10 @@ class GameListGameTableViewCell: UITableViewCell {
         delegate?.deleteGame(game)
     }
 
+    @IBOutlet weak var playGamebookButton: UIButton!
     override func awakeFromNib() {
         super.awakeFromNib()
+        playGamebookButton.layer.cornerRadius = 5
     }
 
     fileprivate func setup() {
