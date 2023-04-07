@@ -37,6 +37,7 @@ extension UserDefaults {
     func createDefaultGames() {
         createGameWithResourceName(resourceName: "An Introduction to Gamebook Engine")
         createGameWithResourceName(resourceName: "Defeat the Dragon")
+        createGameWithResourceName(resourceName: "A Pirate Adventure")
     }
 
     func createGameWithResourceName(resourceName: String) {

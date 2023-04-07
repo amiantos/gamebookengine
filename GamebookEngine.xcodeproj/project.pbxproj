@@ -43,6 +43,7 @@
 		44CB58C32326CFB6009E49D9 /* An Introduction to Gamebook Engine.gbook in Resources */ = {isa = PBXBuildFile; fileRef = 44CB58C22326CFB6009E49D9 /* An Introduction to Gamebook Engine.gbook */; };
 		44CB58C523286792009E49D9 /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44CB58C423286792009E49D9 /* Logging.swift */; };
 		44D1122529DFBDA700804C77 /* Defeat the Dragon.gbook in Resources */ = {isa = PBXBuildFile; fileRef = 44D1122429DFBDA700804C77 /* Defeat the Dragon.gbook */; };
+		44D1122729DFDC2C00804C77 /* A Pirate Adventure.gbook in Resources */ = {isa = PBXBuildFile; fileRef = 44D1122629DFDC2B00804C77 /* A Pirate Adventure.gbook */; };
 		B402FFEE2315FEFA00900020 /* MarkdownEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B402FFEC2315FEFA00900020 /* MarkdownEditorViewController.swift */; };
 		B402FFEF2315FEFA00900020 /* MarkdownEditorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B402FFED2315FEFA00900020 /* MarkdownEditorViewController.xib */; };
 		B402FFF22316055000900020 /* BRMarkdownParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B402FFF12316055000900020 /* BRMarkdownParser.swift */; };
@@ -151,6 +152,7 @@
 		44CB58C22326CFB6009E49D9 /* An Introduction to Gamebook Engine.gbook */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "An Introduction to Gamebook Engine.gbook"; sourceTree = "<group>"; };
 		44CB58C423286792009E49D9 /* Logging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logging.swift; sourceTree = "<group>"; };
 		44D1122429DFBDA700804C77 /* Defeat the Dragon.gbook */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Defeat the Dragon.gbook"; sourceTree = "<group>"; };
+		44D1122629DFDC2B00804C77 /* A Pirate Adventure.gbook */ = {isa = PBXFileReference; lastKnownFileType = text; path = "A Pirate Adventure.gbook"; sourceTree = "<group>"; };
 		B402FFEC2315FEFA00900020 /* MarkdownEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkdownEditorViewController.swift; sourceTree = "<group>"; };
 		B402FFED2315FEFA00900020 /* MarkdownEditorViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MarkdownEditorViewController.xib; sourceTree = "<group>"; };
 		B402FFF12316055000900020 /* BRMarkdownParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BRMarkdownParser.swift; sourceTree = "<group>"; };
@@ -303,6 +305,7 @@
 			children = (
 				44D1122429DFBDA700804C77 /* Defeat the Dragon.gbook */,
 				44CB58C22326CFB6009E49D9 /* An Introduction to Gamebook Engine.gbook */,
+				44D1122629DFDC2B00804C77 /* A Pirate Adventure.gbook */,
 			);
 			path = "Built-in Gamebooks";
 			sourceTree = "<group>";
@@ -627,6 +630,7 @@
 				4407F51929DD22C800119893 /* LICENSE in Resources */,
 				B4F7C1492311AEB800EE055C /* PageEditorConsequenceTableViewCell.xib in Resources */,
 				B47F7BDE2310F79900BB072A /* AttributeTableViewCell.xib in Resources */,
+				44D1122729DFDC2C00804C77 /* A Pirate Adventure.gbook in Resources */,
 				44ADBA8623404BBB00855649 /* fileicon-iphone-44x58.png in Resources */,
 				B4F7C14D2311B3E800EE055C /* HelpViewController.xib in Resources */,
 				B47F7BD92310F77B00BB072A /* AttributesTableViewController.xib in Resources */,

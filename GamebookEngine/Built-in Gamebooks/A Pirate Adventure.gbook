@@ -1,0 +1,294 @@
+{
+  "uuid" : "6AAFC1A6-5835-474A-8499-696CAB78F105",
+  "font" : "normal",
+  "pages" : [
+    {
+      "content" : "Ahoy there matey! You find yourself aboard a pirate ship, surrounded by a ragtag crew of swashbucklers and ne'er-do-wells. The salty sea air fills your lungs and the sun beats down on your skin. As you look around, you see the ship's captain eyeing you up and down, sizing you up for the adventure that lies ahead. Suddenly, a cry goes up from the crow's nest - \"Land ho!\" You rush to the edge of the ship to get a better look. In the distance, you can see a small island with a shimmering treasure chest sitting atop a hill. What do you do?",
+      "decisions" : [
+        {
+          "content" : "Grab a rowboat and head to the island to claim the treasure for yourself",
+          "destination_uuid" : "08240EDF-C3AC-4B3B-8DF6-41EE612134AB",
+          "rules" : [
+
+          ],
+          "uuid" : "FCA54CC3-F05D-4F72-979E-FAAC3E555732",
+          "match_style" : "match_all"
+        },
+        {
+          "uuid" : "FCBAF914-161C-496E-9A28-11D5BDE89007",
+          "match_style" : "match_all",
+          "destination_uuid" : "88BB4DCC-223D-4198-AB73-8D839F7EEE24",
+          "rules" : [
+
+          ],
+          "content" : "Stay on the ship and help the crew prepare for a potential battle with any other pirates who might be after the treasure"
+        }
+      ],
+      "uuid" : "78F8B522-A27E-430F-92F9-F41B5DD942BD",
+      "type" : "first"
+    },
+    {
+      "content" : "You hop in a rowboat and paddle your way towards the island, the anticipation building with every stroke. As you draw closer, you can see the treasure chest is guarded by a group of fierce-looking pirates. You pause, weighing your options. Do you try to sneak past them and grab the treasure, or do you engage in a battle to claim it? The pirates spot you and draw their swords, ready to defend their loot. It's time to make a decision.",
+      "uuid" : "08240EDF-C3AC-4B3B-8DF6-41EE612134AB",
+      "type" : "",
+      "decisions" : [
+        {
+          "match_style" : "match_all",
+          "rules" : [
+
+          ],
+          "uuid" : "FD360C79-09C9-485E-BC3D-B29B9694D9C0",
+          "destination_uuid" : "232D5AC8-035C-4DEF-ACAD-EAE4D962FF46",
+          "content" : "Try to sneak past the pirates and grab the treasure chest"
+        },
+        {
+          "destination_uuid" : "04BF1472-CA7D-47ED-A75C-03A516FF4771",
+          "rules" : [
+
+          ],
+          "uuid" : "B011FFEF-0DFD-4727-A3F0-3A58794E9BA9",
+          "match_style" : "match_all",
+          "content" : "Fight the pirates and claim the treasure chest by force"
+        }
+      ]
+    },
+    {
+      "decisions" : [
+        {
+          "match_style" : "match_all",
+          "rules" : [
+
+          ],
+          "content" : "Help load and fire the cannons at the approaching ship",
+          "destination_uuid" : "663FD9FD-F716-4EC9-8391-5B037CA66267",
+          "uuid" : "3EC2FEBB-3A16-4D26-BEB2-BB0499A62EB7"
+        },
+        {
+          "destination_uuid" : "019B43D3-BDFB-4A43-8B41-5409AD01477D",
+          "uuid" : "278F41AB-7594-4418-897E-D5F5BBFE6986",
+          "content" : "Stay below deck and avoid the battle altogether",
+          "match_style" : "match_all",
+          "rules" : [
+
+          ]
+        }
+      ],
+      "content" : "You decide to stay on the ship and help the crew prepare for a potential battle with any other pirates who might be after the treasure. The captain barks out orders, and the crew jumps into action, hoisting the sails and loading the cannons. As you work alongside your new pirate companions, you can't help but feel a sense of excitement and adrenaline coursing through your veins. Suddenly, you spot another pirate ship on the horizon, making its way towards your vessel. The crew springs into action, ready to defend their ship and claim the treasure for themselves. What do you do?",
+      "uuid" : "88BB4DCC-223D-4198-AB73-8D839F7EEE24",
+      "type" : ""
+    },
+    {
+      "content" : "You try to sneak past the pirates and make your way towards the treasure chest. You move slowly and cautiously, but the pirates are on high alert and quickly spot you. They surround you, brandishing their swords and demanding to know what you're doing. You try to explain yourself, but they don't seem to believe you. The leader of the pirates steps forward and challenges you to a duel - winner takes all. Do you accept the challenge?",
+      "type" : "",
+      "decisions" : [
+        {
+          "destination_uuid" : "D28D6C6A-F68B-4FDE-982E-0A449B1F8332",
+          "content" : "Accept the challenge and engage in a one-on-one duel with the pirate leader",
+          "match_style" : "match_all",
+          "rules" : [
+
+          ],
+          "uuid" : "A4CEC773-5B04-4A5E-ACFC-070465862A71"
+        },
+        {
+          "match_style" : "match_all",
+          "uuid" : "40E8D195-65A2-46D4-8872-B79FEAC2969A",
+          "destination_uuid" : "211FD6A9-AB42-4B52-98EE-A3A94DF8ED81",
+          "content" : "Try to negotiate and come up with a different solution",
+          "rules" : [
+
+          ]
+        }
+      ],
+      "uuid" : "232D5AC8-035C-4DEF-ACAD-EAE4D962FF46"
+    },
+    {
+      "content" : "You choose to fight the pirates head-on, brandishing your own weapon as you charge into battle alongside your new pirate crew. The clash of swords fills the air as you exchange blows with the opposing pirates, determined to emerge victorious. As the battle reaches its climax, you find yourself face to face with the pirate leader. The two of you lock eyes, both ready to fight to the death for the treasure chest. With a sneer, the pirate leader challenges you to a duel. Do you accept?",
+      "uuid" : "04BF1472-CA7D-47ED-A75C-03A516FF4771",
+      "type" : "",
+      "decisions" : [
+        {
+          "content" : "Accept the challenge and engage in a one-on-one duel with the pirate leader",
+          "match_style" : "match_all",
+          "uuid" : "E9BBCB70-B5FE-4ACD-BCFE-A1C7F7D9C0E8",
+          "destination_uuid" : "D28D6C6A-F68B-4FDE-982E-0A449B1F8332",
+          "rules" : [
+
+          ]
+        },
+        {
+          "uuid" : "BFF3153B-9281-4C4C-B0BD-D5D2A0C7C01B",
+          "match_style" : "match_all",
+          "rules" : [
+
+          ],
+          "content" : "Try to negotiate and come up with a different solution",
+          "destination_uuid" : "211FD6A9-AB42-4B52-98EE-A3A94DF8ED81"
+        }
+      ]
+    },
+    {
+      "decisions" : [
+        {
+          "uuid" : "8FFA2720-8F0B-4624-A232-63F52B238C2A",
+          "rules" : [
+
+          ],
+          "destination_uuid" : "71415FBE-06A3-40AA-80B0-71890C38E15A",
+          "match_style" : "match_all",
+          "content" : "Fight the pirates head-on and engage in close-quarters combat"
+        },
+        {
+          "uuid" : "D60B1FF6-D669-4D2C-9AC3-30700BAA5C37",
+          "rules" : [
+
+          ],
+          "content" : "Try to repel the pirates using ranged weapons",
+          "match_style" : "match_all",
+          "destination_uuid" : "59DF9EE6-CFAE-402C-97A8-2EDE9E415D2E"
+        }
+      ],
+      "uuid" : "663FD9FD-F716-4EC9-8391-5B037CA66267",
+      "type" : "",
+      "content" : "You rush to help load the cannons and prepare to defend your ship against the approaching pirate vessel. The captain gives the order to fire, and you and your crewmates light the fuses and watch as the cannonballs sail through the air towards the enemy ship. There's a loud boom as the cannonballs hit their mark, but the opposing pirates are relentless and continue to bear down on your ship. The captain orders another round of cannon fire, but the enemy ship is getting closer and closer. It's clear that a hand-to-hand battle is inevitable. As the enemy ship pulls up alongside yours, the pirates begin to board. It's time to fight for your lives."
+    },
+    {
+      "uuid" : "019B43D3-BDFB-4A43-8B41-5409AD01477D",
+      "type" : "ending",
+      "content" : "You choose to stay below deck, hoping to avoid the battle altogether. You hide in your cabin, trying to ignore the sounds of cannon fire and clashing swords above you. But suddenly, you hear footsteps outside your door. You freeze, hoping that the pirates won't find you. But it's no use. The door bursts open and a pirate enters your cabin, his sword drawn. You try to run, but he's too fast. He lunges at you with his blade, catching you off guard. You feel a searing pain as the sword pierces your flesh. The pirate quickly disappears back above deck, leaving you to die alone in your cabin.\n\n# THE END"
+    },
+    {
+      "content" : "You accept the pirate leader’s offer to duel. He sneers and draws his sword, challenging you to a one-on-one duel for the treasure chest. You accept, feeling the weight of the moment as you and the pirate leader face off.",
+      "decisions" : [
+        {
+          "content" : "Use your sword fighting skills to defeat the pirate leader in an intense and dramatic battle",
+          "match_style" : "match_all",
+          "destination_uuid" : "955EBBC9-E68D-4686-ABC2-866816B2022C",
+          "rules" : [
+
+          ],
+          "uuid" : "7E2301E7-5E00-4417-B618-FE416551C338"
+        },
+        {
+          "uuid" : "E33670D8-FA06-4521-8DFD-56E80853CEF6",
+          "rules" : [
+
+          ],
+          "match_style" : "match_all",
+          "content" : "Use your wits to outsmart the pirate leader and gain the upper hand in the duel",
+          "destination_uuid" : "3EE1023B-BAE4-4D5A-ADC3-A4834D520821"
+        }
+      ],
+      "type" : "",
+      "uuid" : "D28D6C6A-F68B-4FDE-982E-0A449B1F8332"
+    },
+    {
+      "decisions" : [
+        {
+          "destination_uuid" : "25D727B4-451E-48BC-BB5E-F92492109E9E",
+          "match_style" : "match_all",
+          "content" : "Report to the Captain",
+          "uuid" : "7B8FB86B-48B0-4064-83CA-D06C7C695CFA",
+          "rules" : [
+
+          ]
+        }
+      ],
+      "type" : "",
+      "content" : "You approach the pirate leader and try to negotiate for the treasure chest. At first, he seems open to discussion, but it quickly becomes clear that he has no intention of giving up the chest without a fight.\n\nHe demands a large sum of gold in exchange for the chest, far more than your crew could ever afford. You try to reason with him, but he grows increasingly hostile, and it becomes clear that negotiation is not an option.\n\nThe situation escalates quickly, with the pirate leader drawing his sword and charging at you. You barely manage to dodge his attack and draw your own sword in response. The two of you engage in a fierce battle, both determined to come out on top.\n\nDespite your best efforts, the pirate leader proves to be a skilled fighter, and you begin to realize that you may not be able to defeat him. As you struggle to stay on your feet, you see one of your crewmates sneaking up behind the pirate leader with a makeshift club.\n\nYou yell out a warning, and the pirate leader turns just in time to see the attack coming. He manages to dodge at the last second, but the distraction is enough for you to land a decisive blow, disarming him and knocking him to the ground.\n\nIn the chaos that follows, your crew manages to secure the treasure chest and flee the island. Though negotiations failed, you're relieved that you were able to retrieve the treasure and defeat the pirate leader.",
+      "uuid" : "211FD6A9-AB42-4B52-98EE-A3A94DF8ED81"
+    },
+    {
+      "type" : "",
+      "decisions" : [
+        {
+          "rules" : [
+
+          ],
+          "destination_uuid" : "78F79DEC-1281-4B16-8215-5A785EFE3E27",
+          "match_style" : "match_all",
+          "uuid" : "BAB6DFF8-5258-4F0A-8DDB-C932790AB2B2",
+          "content" : "Report to your Captain"
+        }
+      ],
+      "content" : "You choose to fight the pirates head-on, grabbing a sword and joining your crewmates in the battle aboard your ship. It's a fierce fight, with swords clanging and fists flying. But despite the enemy's best efforts, your crew is able to overpower them. As the battle ends, the enemy ship is left in shambles, with many of their crewmates either captured or thrown overboard. Your crew begins to ransack the ship, looking for any treasure or valuables that they can claim as their own. Once everything of value has been taken, the captain gives the order to set the enemy ship on fire. As you watch the flames consume the vessel, you can't help but feel a sense of satisfaction at your victory over the opposing pirates.",
+      "uuid" : "71415FBE-06A3-40AA-80B0-71890C38E15A"
+    },
+    {
+      "content" : "You choose to stay back and help repel the pirates using ranged weapons like pistols and muskets. You take aim and fire, watching as the enemy pirates fall one by one. The battle is intense, with cannonballs and musket fire raining down on your ship. But your crew is able to hold their own, and soon the enemy ship is within range. You and your fellow crewmates continue to fire, taking out more and more of the opposing pirates. Eventually, they're forced to retreat, leaving their ship behind. Your captain orders the crew to board the enemy vessel and claim any treasure or valuables they can find. Once everything of value has been taken, the captain gives the order to set the enemy ship on fire. As you watch the flames consume the vessel, you can't help but feel a sense of relief that the battle is over, and pride at your successful defense of the ship.",
+      "decisions" : [
+        {
+          "content" : "Report to your captain",
+          "match_style" : "match_all",
+          "uuid" : "08851A84-D0DE-4C28-817C-B3FAD854187B",
+          "destination_uuid" : "78F79DEC-1281-4B16-8215-5A785EFE3E27",
+          "rules" : [
+
+          ]
+        }
+      ],
+      "type" : "",
+      "uuid" : "59DF9EE6-CFAE-402C-97A8-2EDE9E415D2E"
+    },
+    {
+      "uuid" : "78F79DEC-1281-4B16-8215-5A785EFE3E27",
+      "content" : "After the battle is won, you approach the captain, who congratulates you and your fellow crewmates on a job well done. He then turns to you and gives you a new task: to secure the treasure chest on the island. He explains that he trusts you to handle this important task, and reminds you that the chest must be brought back to the ship safely. You feel a sense of pride that the captain has put so much trust in you, and you vow to complete the task successfully. You set off towards the island, excited for the challenge that lies ahead.",
+      "type" : "",
+      "decisions" : [
+        {
+          "destination_uuid" : "08240EDF-C3AC-4B3B-8DF6-41EE612134AB",
+          "match_style" : "match_all",
+          "content" : "Get moving! Your captain wants that treasure!",
+          "uuid" : "C25E1D57-4D9F-402C-BFB6-C689282D5581",
+          "rules" : [
+
+          ]
+        }
+      ]
+    },
+    {
+      "decisions" : [
+        {
+          "uuid" : "1F385A4E-F1F4-4ED3-BD3C-7BCA6194FE76",
+          "rules" : [
+
+          ],
+          "destination_uuid" : "25D727B4-451E-48BC-BB5E-F92492109E9E",
+          "content" : "Report to the Captain",
+          "match_style" : "match_all"
+        }
+      ],
+      "content" : "You draw your sword, feeling its weight in your hand, and take a deep breath. The pirate leader charges at you, his sword raised high. You respond with a flurry of slashes and parries, matching his every move. The fight is intense, with sweat pouring down your face as you try to stay one step ahead of the pirate leader.\n\nDespite his skill, you manage to gain the upper hand, pushing him back with a fierce combination of strikes. He staggers, his sword arm dropping for just a moment, and you seize the opportunity. You lunge forward, your sword finding its mark and sinking deep into the pirate leader's chest.\n\nHe falls to the ground, gasping for breath, and you stand over him, victorious. You feel a sense of relief, knowing that you've protected your crew and secured the treasure chest. As you make your way back to the ship, you can't help but feel a sense of pride in your sword fighting skills and the bravery you displayed in the face of danger.",
+      "uuid" : "955EBBC9-E68D-4686-ABC2-866816B2022C",
+      "type" : ""
+    },
+    {
+      "content" : "You draw your sword, feeling its weight in your hand, and take a deep breath. The pirate leader charges at you, his sword raised high. Instead of engaging him in a direct sword fight, you take a step back, dodging his strike and throwing him off balance.\n\nYou then feint left, but quickly change direction and strike right, catching the pirate leader off guard. You continue to use quick and unpredictable movements, never giving him a chance to gain the upper hand.\n\nAs the duel wears on, the pirate leader becomes increasingly frustrated, making careless mistakes in his attempts to land a blow on you. You stay calm and focused, biding your time until you see the perfect opportunity.\n\nFinally, the moment comes. The pirate leader lunges at you with his sword, but you sidestep and trip him, causing him to stumble and fall to the ground. You stand over him, your sword at his throat, and he surrenders.\n\nYou take the treasure chest and make your way back to the ship, feeling proud of your ability to outsmart the pirate leader and secure the treasure without resorting to violence.",
+      "type" : "",
+      "uuid" : "3EE1023B-BAE4-4D5A-ADC3-A4834D520821",
+      "decisions" : [
+        {
+          "destination_uuid" : "25D727B4-451E-48BC-BB5E-F92492109E9E",
+          "rules" : [
+
+          ],
+          "uuid" : "FD68A7A1-B66B-4D54-9D24-405FD16D36EE",
+          "match_style" : "match_all",
+          "content" : "Report to the Captain"
+        }
+      ]
+    },
+    {
+      "content" : "As you and your crew make your way back to the ship with the treasure chest in tow, you can feel the excitement in the air. When you arrive, the crew erupts into cheers and applause, congratulating you on your success.\n\nYour captain steps forward, a broad smile on his face. \"I've never seen anything like it,\" he says. \"You've proven yourself a true pirate, and it's time for me to step down and pass the torch.\"\n\nThe crew cheers again as your captain officially appoints you the new captain of the ship. It's a dream come true, and you can hardly believe it's really happening.\n\nAs the celebration continues into the night, you feel a sense of pride and accomplishment wash over you. You've fought off other pirates, outsmarted your enemies, and secured a treasure that will ensure the prosperity of your crew for years to come.\n\nYou take a deep breath, feeling the salty sea air fill your lungs, and look out at the open sea. With your crew at your side and the wind in your sails, you know that the adventure is only just beginning.\n\n# THE END",
+      "type" : "ending",
+      "uuid" : "25D727B4-451E-48BC-BB5E-F92492109E9E"
+    }
+  ],
+  "name" : "Pirate Adventure",
+  "license" : "",
+  "author" : "Brad Root",
+  "about" : "In this sample gamebook, you can go on a pirate adventure!",
+  "attributes" : [
+
+  ]
+}
