@@ -71,7 +71,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sJ9-4C-RVc">
-                                <rect key="frame" x="540" y="128.5" width="60" height="40"/>
+                                <rect key="frame" x="540" y="148.5" width="60" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="wbl-Pr-Oc3"/>
                                 </constraints>
@@ -86,7 +86,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mt5-IZ-x0y">
-                                <rect key="frame" x="540" y="168.5" width="60" height="40"/>
+                                <rect key="frame" x="540" y="188.5" width="60" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="Dql-iS-zZU"/>
                                 </constraints>
@@ -101,7 +101,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j6w-8v-Pvn">
-                                <rect key="frame" x="540" y="88.5" width="60" height="40"/>
+                                <rect key="frame" x="540" y="108.5" width="60" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="r21-Rf-BBd"/>
                                 </constraints>
@@ -121,16 +121,32 @@
                                     <constraint firstAttribute="height" constant="0.5" id="nWO-8P-MyZ"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TZS-zg-1RN">
+                                <rect key="frame" x="540" y="68.5" width="60" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="VC6-hd-bOh"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="tintColor" name="button"/>
+                                <state key="normal" image="play">
+                                    <color key="titleColor" name="button"/>
+                                </state>
+                                <connections>
+                                    <action selector="editAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="z93-98-H0u"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="2HE-Te-U1h" secondAttribute="bottom" constant="20" id="4gF-Cp-a6m"/>
                             <constraint firstAttribute="trailing" secondItem="sJ9-4C-RVc" secondAttribute="trailing" id="6RP-sS-NIQ"/>
                             <constraint firstAttribute="trailing" secondItem="2HE-Te-U1h" secondAttribute="trailing" constant="60" id="78f-4h-2if"/>
+                            <constraint firstItem="TZS-zg-1RN" firstAttribute="leading" secondItem="2HE-Te-U1h" secondAttribute="trailing" id="7mY-y1-hZH"/>
                             <constraint firstAttribute="trailing" secondItem="j6w-8v-Pvn" secondAttribute="trailing" id="CM3-D0-6Oo"/>
                             <constraint firstAttribute="trailing" secondItem="Mt5-IZ-x0y" secondAttribute="trailing" id="FNQ-lF-id3"/>
                             <constraint firstItem="2HE-Te-U1h" firstAttribute="leading" secondItem="ASd-yJ-ExA" secondAttribute="leading" constant="20" id="QTp-XJ-zS4"/>
                             <constraint firstItem="sJ9-4C-RVc" firstAttribute="leading" secondItem="2HE-Te-U1h" secondAttribute="trailing" id="THZ-4b-3nS"/>
+                            <constraint firstAttribute="trailing" secondItem="TZS-zg-1RN" secondAttribute="trailing" id="Xxr-rV-1nh"/>
                             <constraint firstAttribute="trailing" secondItem="oBE-Zr-4AM" secondAttribute="trailing" constant="80" id="bu8-6X-5sV"/>
                             <constraint firstItem="j6w-8v-Pvn" firstAttribute="leading" secondItem="2HE-Te-U1h" secondAttribute="trailing" id="f77-Xh-G3p"/>
                             <constraint firstAttribute="width" relation="lessThanOrEqual" constant="600" id="ggy-01-k6F"/>
@@ -138,8 +154,9 @@
                             <constraint firstItem="Mt5-IZ-x0y" firstAttribute="leading" secondItem="2HE-Te-U1h" secondAttribute="trailing" id="kMS-2S-WsK"/>
                             <constraint firstItem="oBE-Zr-4AM" firstAttribute="leading" secondItem="ASd-yJ-ExA" secondAttribute="leading" constant="38" id="ml9-mk-gOj"/>
                             <constraint firstAttribute="bottom" secondItem="oBE-Zr-4AM" secondAttribute="bottom" id="o52-al-w1S"/>
-                            <constraint firstItem="sJ9-4C-RVc" firstAttribute="centerY" secondItem="2HE-Te-U1h" secondAttribute="centerY" id="pen-tt-gb4"/>
+                            <constraint firstItem="sJ9-4C-RVc" firstAttribute="centerY" secondItem="2HE-Te-U1h" secondAttribute="centerY" constant="20" id="pen-tt-gb4"/>
                             <constraint firstItem="Mt5-IZ-x0y" firstAttribute="top" secondItem="sJ9-4C-RVc" secondAttribute="bottom" id="tfy-Bk-F6M"/>
+                            <constraint firstItem="j6w-8v-Pvn" firstAttribute="top" secondItem="TZS-zg-1RN" secondAttribute="bottom" id="uJ2-Dj-seU"/>
                             <constraint firstItem="sJ9-4C-RVc" firstAttribute="top" secondItem="j6w-8v-Pvn" secondAttribute="bottom" id="un9-zh-D2U"/>
                         </constraints>
                     </view>
@@ -173,6 +190,7 @@
         <image name="delete" width="24" height="24"/>
         <image name="edit" width="24" height="24"/>
         <image name="export" width="24" height="24"/>
+        <image name="play" width="24" height="24"/>
         <namedColor name="background">
             <color red="0.94117647058823528" green="0.93725490196078431" blue="0.96470588235294119" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
