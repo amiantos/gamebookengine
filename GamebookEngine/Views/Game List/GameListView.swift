@@ -20,15 +20,18 @@ struct GameCard: View {
                     .font(.title)
                     .fixedSize(horizontal: false, vertical: true)
                     .padding(EdgeInsets(top: 22, leading: 22, bottom: 4, trailing: 22))
+
                 Text(game.author)
                     .font(.headline)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .foregroundColor(.secondary)
                     .padding(EdgeInsets(top: 0, leading: 22, bottom: 8, trailing: 22))
+
                 Text(game.about ?? "")
                     .font(.subheadline)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(EdgeInsets(top: 0, leading: 22, bottom: 8, trailing: 22))
+
                 Text("Play Gamebook")
                     .fontWeight(.medium)
                     .foregroundColor(Color("button"))
@@ -50,28 +53,36 @@ struct GameCard: View {
                 } label: {
                     Image("play")
                         .foregroundColor(Color("button"))
-                }.frame(width: 50, height: 30, alignment: .center)
+                }
+                .frame(width: 50, height: 30, alignment: .center)
+                .buttonStyle(.borderless)
 
                 Button {
                     print("Play")
                 } label: {
                     Image("edit")
                         .foregroundColor(Color("button"))
-                }.frame(width: 50, height: 30, alignment: .center)
+                }
+                .frame(width: 50, height: 30, alignment: .center)
+                .buttonStyle(.borderless)
 
                 Button {
                     print("Play")
                 } label: {
                     Image("export")
                         .foregroundColor(Color("button"))
-                }.frame(width: 50, height: 30, alignment: .center)
+                }
+                .frame(width: 50, height: 30, alignment: .center)
+                .buttonStyle(.borderless)
 
                 Button {
                     print("Play")
                 } label: {
                     Image("delete")
                         .foregroundColor(Color("button"))
-                }.frame(width: 50, height: 30, alignment: .center)
+                }
+                .frame(width: 50, height: 30, alignment: .center)
+                .buttonStyle(.borderless)
             }
             .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 10))
         }
@@ -86,7 +97,6 @@ struct GameListView: View {
             List(games, id: \.uuid) { game in
                 GameCard(game: game)
                     .listRowBackground(Color("background"))
-//                    .listRowSeparator(.hidden)
                     .listRowInsets(EdgeInsets())
             }
             .listStyle(.plain)
