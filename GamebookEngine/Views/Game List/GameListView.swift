@@ -87,7 +87,7 @@ struct GameListView: View {
     @State private var games: [Game] = []
 
     var body: some View {
-        NavigationView {
+        NavigationStack {
             List(games, id: \.uuid) { game in
                 GameCard(game: game)
                     .listRowBackground(Color("background"))
