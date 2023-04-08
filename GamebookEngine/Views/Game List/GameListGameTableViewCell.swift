@@ -12,6 +12,7 @@ protocol GameListGameTableViewCellDelegate: AnyObject {
     func editGame(_ game: Game)
     func deleteGame(_ game: Game)
     func exportGame(_ game: Game)
+    func loadGame(_ game: Game)
 }
 
 class GameListGameTableViewCell: UITableViewCell {
@@ -46,7 +47,13 @@ class GameListGameTableViewCell: UITableViewCell {
         delegate?.deleteGame(game)
     }
 
+    @IBAction func playAction(_: UIButton) {
+        guard let game = game else { return }
+        delegate?.loadGame(game)
+    }
+
     @IBOutlet var playGamebookButton: UIButton!
+
     override func awakeFromNib() {
         super.awakeFromNib()
         playGamebookButton.layer.cornerRadius = 5
