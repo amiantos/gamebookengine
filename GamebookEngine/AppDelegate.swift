@@ -8,6 +8,7 @@
 
 import CoreData
 import UIKit
+import SwiftUI
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -27,7 +28,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         window = UIWindow(frame: UIScreen.main.bounds)
         guard let window = window else { return false }
-        window.rootViewController = GameListTableViewController()
+//        window.rootViewController = GameListTableViewController()
+        window.rootViewController = UIHostingController(rootView: GameListView())
         window.makeKeyAndVisible()
         return true
     }
