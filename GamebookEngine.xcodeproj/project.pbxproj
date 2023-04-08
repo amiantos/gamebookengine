@@ -35,6 +35,7 @@
 		4451A4B7232DCD36003D9FE9 /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4451A4B6232DCD36003D9FE9 /* PreviewViewController.swift */; };
 		4451A4BA232DCD36003D9FE9 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4451A4B8232DCD36003D9FE9 /* MainInterface.storyboard */; };
 		4451A4BE232DCD36003D9FE9 /* GamebookPreviewExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 4451A4B2232DCD36003D9FE9 /* GamebookPreviewExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		44764DB829E1535C00CD95DD /* HelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44764DB729E1535C00CD95DD /* HelpView.swift */; };
 		44ADBA8623404BBB00855649 /* fileicon-iphone-44x58.png in Resources */ = {isa = PBXBuildFile; fileRef = 44ADBA8223404BBA00855649 /* fileicon-iphone-44x58.png */; };
 		44ADBA8723404BBB00855649 /* fileicon-ipad-64px.png in Resources */ = {isa = PBXBuildFile; fileRef = 44ADBA8323404BBB00855649 /* fileicon-ipad-64px.png */; };
 		44ADBA8823404BBB00855649 /* fileicon-iphone-22x29.png in Resources */ = {isa = PBXBuildFile; fileRef = 44ADBA8423404BBB00855649 /* fileicon-iphone-22x29.png */; };
@@ -142,6 +143,7 @@
 		4451A4B6232DCD36003D9FE9 /* PreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewViewController.swift; sourceTree = "<group>"; };
 		4451A4B9232DCD36003D9FE9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		4451A4BB232DCD36003D9FE9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		44764DB729E1535C00CD95DD /* HelpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpView.swift; sourceTree = "<group>"; };
 		44ADBA8223404BBA00855649 /* fileicon-iphone-44x58.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fileicon-iphone-44x58.png"; sourceTree = "<group>"; };
 		44ADBA8323404BBB00855649 /* fileicon-ipad-64px.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fileicon-ipad-64px.png"; sourceTree = "<group>"; };
 		44ADBA8423404BBB00855649 /* fileicon-iphone-22x29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fileicon-iphone-22x29.png"; sourceTree = "<group>"; };
@@ -284,6 +286,14 @@
 				4451A4BB232DCD36003D9FE9 /* Info.plist */,
 			);
 			path = GamebookPreviewExtension;
+			sourceTree = "<group>";
+		};
+		44764DB629E1534B00CD95DD /* Help */ = {
+			isa = PBXGroup;
+			children = (
+				44764DB729E1535C00CD95DD /* HelpView.swift */,
+			);
+			path = Help;
 			sourceTree = "<group>";
 		};
 		4497ED48232489C70038C6A9 /* Help */ = {
@@ -456,6 +466,7 @@
 		B4E9EFBA230A41AD00C9CA76 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				44764DB629E1534B00CD95DD /* Help */,
 				4433010729DE28C700A90F42 /* Introduction */,
 				B4789FEF23188B8E008DBE9F /* Game List */,
 				444358C1230C7BA800A2E004 /* Playing */,
@@ -694,6 +705,7 @@
 				B48C4B8523332896008C77ED /* Alerts.swift in Sources */,
 				B4F7C14C2311B3E800EE055C /* HelpViewController.swift in Sources */,
 				B4A13AD5230F6D24004929B8 /* PageEditorDecisionTableViewCell.swift in Sources */,
+				44764DB829E1535C00CD95DD /* HelpView.swift in Sources */,
 				B48C4B8323332297008C77ED /* ContainerView.swift in Sources */,
 				B448874F23063A0D000E2FDD /* AppDelegate.swift in Sources */,
 				B4B6B3B523170B9F00E72320 /* CodableModels.swift in Sources */,
