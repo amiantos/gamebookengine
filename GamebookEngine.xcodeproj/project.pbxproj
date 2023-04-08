@@ -42,6 +42,7 @@
 		44C522EB232F0B6D00E7AC95 /* GamePlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44C522EA232F0B6D00E7AC95 /* GamePlayer.swift */; };
 		44CB58C32326CFB6009E49D9 /* An Introduction to Gamebook Engine.gbook in Resources */ = {isa = PBXBuildFile; fileRef = 44CB58C22326CFB6009E49D9 /* An Introduction to Gamebook Engine.gbook */; };
 		44CB58C523286792009E49D9 /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44CB58C423286792009E49D9 /* Logging.swift */; };
+		44F8AA9B29E12F0F0031BCBB /* GameListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44F8AA9A29E12F0F0031BCBB /* GameListView.swift */; };
 		B402FFEE2315FEFA00900020 /* MarkdownEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B402FFEC2315FEFA00900020 /* MarkdownEditorViewController.swift */; };
 		B402FFEF2315FEFA00900020 /* MarkdownEditorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B402FFED2315FEFA00900020 /* MarkdownEditorViewController.xib */; };
 		B402FFF22316055000900020 /* BRMarkdownParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B402FFF12316055000900020 /* BRMarkdownParser.swift */; };
@@ -149,6 +150,7 @@
 		44C522EA232F0B6D00E7AC95 /* GamePlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamePlayer.swift; sourceTree = "<group>"; };
 		44CB58C22326CFB6009E49D9 /* An Introduction to Gamebook Engine.gbook */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "An Introduction to Gamebook Engine.gbook"; sourceTree = "<group>"; };
 		44CB58C423286792009E49D9 /* Logging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logging.swift; sourceTree = "<group>"; };
+		44F8AA9A29E12F0F0031BCBB /* GameListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameListView.swift; sourceTree = "<group>"; };
 		B402FFEC2315FEFA00900020 /* MarkdownEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkdownEditorViewController.swift; sourceTree = "<group>"; };
 		B402FFED2315FEFA00900020 /* MarkdownEditorViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MarkdownEditorViewController.xib; sourceTree = "<group>"; };
 		B402FFF12316055000900020 /* BRMarkdownParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BRMarkdownParser.swift; sourceTree = "<group>"; };
@@ -384,6 +386,7 @@
 				B4789FE8231887E3008DBE9F /* GameListTableViewController.xib */,
 				B4789FEB2318880E008DBE9F /* GameListGameTableViewCell.swift */,
 				B4789FEC2318880E008DBE9F /* GameListGameTableViewCell.xib */,
+				44F8AA9A29E12F0F0031BCBB /* GameListView.swift */,
 			);
 			path = "Game List";
 			sourceTree = "<group>";
@@ -708,6 +711,7 @@
 				B4CB7FBA23120176009B4DF0 /* Rule+CoreDataClass.swift in Sources */,
 				4439E65F230B534D00C6A23C /* Decision+CoreDataProperties.swift in Sources */,
 				44CB58C523286792009E49D9 /* Logging.swift in Sources */,
+				44F8AA9B29E12F0F0031BCBB /* GameListView.swift in Sources */,
 				B4B6B3B923174CBD00E72320 /* MetadataEditorViewController.swift in Sources */,
 				B4E9EFBF230B6DD500C9CA76 /* Extensions.swift in Sources */,
 				444358C4230C7BBE00A2E004 /* PlayViewController.swift in Sources */,
@@ -921,7 +925,7 @@
 				CURRENT_PROJECT_VERSION = 15;
 				DEVELOPMENT_TEAM = 2Y9M69QJKZ;
 				INFOPLIST_FILE = GamebookEngine/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -943,7 +947,7 @@
 				CURRENT_PROJECT_VERSION = 15;
 				DEVELOPMENT_TEAM = 2Y9M69QJKZ;
 				INFOPLIST_FILE = GamebookEngine/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
