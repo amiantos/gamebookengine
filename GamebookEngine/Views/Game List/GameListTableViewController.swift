@@ -115,12 +115,6 @@ extension GameListTableViewController: GameListGameTableViewCellDelegate, UIDocu
         }
     }
 
-    fileprivate func loadGame(_ game: Game) {
-        let playPageView = PlayViewController(for: game)
-        playPageView.modalPresentationStyle = .fullScreen
-        present(playPageView, animated: true, completion: nil)
-    }
-
     @objc fileprivate func importGame() {
         var documentPicker: UIDocumentPickerViewController!
         if #available(iOS 14, *) {
@@ -196,6 +190,12 @@ extension GameListTableViewController: GameListGameTableViewCellDelegate, UIDocu
         actionSheet.popoverPresentationController?.sourceRect = CGRect(x: sender.frame.width / 2 - 3, y: sender.frame.height, width: 0, height: 0)
         present(actionSheet, animated: true, completion: nil)
         actionSheet.view.tintColor = UIColor(named: "text") ?? .darkGray
+    }
+
+    func loadGame(_ game: Game) {
+        let playPageView = PlayViewController(for: game)
+        playPageView.modalPresentationStyle = .fullScreen
+        present(playPageView, animated: true, completion: nil)
     }
 
     func editGame(_ game: Game) {
