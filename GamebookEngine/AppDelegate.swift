@@ -7,8 +7,8 @@
 //
 
 import CoreData
-import UIKit
 import SwiftUI
+import UIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

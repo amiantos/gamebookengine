@@ -7,8 +7,8 @@
 //
 
 import Foundation
-import UIKit
 import SwiftUI
+import UIKit
 
 extension View {
     /// Sets the text color for a navigation bar title.
@@ -20,8 +20,8 @@ extension View {
         let uiColor = UIColor(color)
 
         // Set appearance for both normal and large sizes.
-        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: uiColor ]
-        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: uiColor ]
+        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: uiColor]
+        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: uiColor]
 
         return self
     }

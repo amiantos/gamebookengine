@@ -37,16 +37,12 @@ struct GameCard: View {
                     .background(Color("background"))
                     .cornerRadius(5)
                     .padding(EdgeInsets(top: 0, leading: 22, bottom: 22, trailing: 22))
-
-
             }
             .background(Color("containerBackground"))
             .foregroundColor(Color("text"))
             .cornerRadius(10)
             .padding(EdgeInsets(top: 20, leading: 20, bottom: 20, trailing: 0))
             .shadow(color: Color(white: 0, opacity: 0.1), radius: 10)
-
-
 
             VStack {
                 Button {
@@ -81,7 +77,6 @@ struct GameCard: View {
         }
     }
 }
-
 
 struct GameListView: View {
     @State private var games: [Game] = []
