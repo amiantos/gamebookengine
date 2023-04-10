@@ -298,7 +298,7 @@
       "uuid" : "92DE2C8E-15A9-47B1-80A9-19211D0E5A57"
     }
   ],
-  "name" : "A Pirate Adventure",
+  "name" : "Pirate Adventure",
   "about" : "In this sample gamebook, you can go on a pirate adventure! It was written with AI assistance, so it’s not very good.",
   "uuid" : "6AAFC1A6-5835-474A-8499-696CAB78F105",
   "license" : "MIT License",
