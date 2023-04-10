@@ -13,36 +13,19 @@ Gamebook Engine is an iOS app for creating and playing gamebooks, a type of inte
 
 ![Gamebook Engine Screenshots](/images/github-screenshots.jpg?raw=true)
 
+## Download
+
+- [Download Gamebook Engine for iOS 15.6 and later on the App Store](https://apps.apple.com/us/app/gamebook-engine/id1478537871)
+
 ## Beta Test
 
-If you're interested in using pre-release versions of Gamebook Engine and providing feedback, you can join the beta!
+- [Sign up for the beta on TestFlight](https://testflight.apple.com/join/FjHHmoVy)
 
-**[Sign up for the beta on TestFlight](https://testflight.apple.com/join/FjHHmoVy)**
+## Learn More
 
-## Gamebook Structure
+- [Check out the Gamebook Engine wiki](https://github.com/amiantos/gamebookengine/wiki)
 
-* **Attributes**
-  * These are essentially just global variables shared throughout a game
-  * They hold a name, and an decimal value which defaults to 0.0
-* **Pages**
-  * **Content**
-    * The text of the page, formatted with a limited set of Markdown attributes
-  * **Consequences**
-    * Method for manipulating a player's stored attributes
-    * A consequence can affect attributes in three ways:
-      * Set (to a value)
-      * Increment (by a value)
-      * Decrement (by a value)
-      * Multiply (by a value)
-  * **Decisions**
-    * **Destination**
-      * The page that the decision leads to
-    * **Rules**
-      * Match Any or All rules (based on the value of Attributes) to determine if a decision appears on the page
-
-If you're curious about what an exported Gamebook looks like, view [An Introduction to Gamebook Engine.gbook](https://github.com/amiantos/gamebookengine/blob/master/GamebookEngine/Built-in%20Gamebooks/An%20Introduction%20to%20Gamebook%20Engine.gbook) as a simple example.
-
-## To Install
+## Development
 
 1. `git clone https://github.com/amiantos/gamebookengine.git`
 2. Open `GamebookEngine.xcproject` in Xcode 14.2 or higher.
