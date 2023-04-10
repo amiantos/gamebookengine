@@ -8,6 +8,12 @@
 
 import UIKit
 
+protocol PageEditorDelegate: AnyObject {
+    func selectedPage(_ page: Page)
+    func deletedPage(_ page: Page)
+    func setFirstPage(_ page: Page)
+}
+
 class PageEditorViewController: UIViewController {
     var currentGame: Game?
     var currentPage: Page?
@@ -17,7 +23,7 @@ class PageEditorViewController: UIViewController {
     var mapButton = UIBarButtonItem()
     var helpButton = UIBarButtonItem()
 
-    var pageScene: PagesTableViewDelegate?
+    var pageScene: PageEditorDelegate?
 
     var previousPage: Page? {
         didSet {
@@ -31,7 +37,25 @@ class PageEditorViewController: UIViewController {
     var currentConsequences: [Consequence] = []
     @IBOutlet var pageTypeSegmentedControl: UISegmentedControl!
     @IBAction func pageTypeValueChanged(_ sender: UISegmentedControl) {
-        if sender.selectedSegmentIndex == 2 {
+        switch sender.selectedSegmentIndex {
+        case 0:
+            guard let currentPage = currentPage, let currentGame = currentGame else { return }
+            let alert = UIAlertController.createCancelableAlert(
+                title: "Warning!",
+                message: "This will replace the current first page with this page. It will not delete any pages or otherwise modify your game. Continue?",
+                primaryActionTitle: "Set to First Page"
+            ) { _ in
+                GameDatabase.standard.fetchFirstPage(for: currentGame, completion: { page in
+                    page?.setType(to: .none)
+                })
+                currentPage.setType(to: .first)
+                self.showOrHideWarningLabel()
+                self.loadContent()
+                self.pageScene?.setFirstPage(currentPage)
+            }
+            navigationController?.present(alert, animated: true, completion: nil)
+            alert.view.tintColor = UIColor(named: "text") ?? .darkGray
+        case 2:
             let alert = UIAlertController.createCancelableAlert(
                 title: "Warning!",
                 message: "Turning a page into an ending will remove any decisions and consequences on the page. Are you sure?",
@@ -43,7 +67,7 @@ class PageEditorViewController: UIViewController {
             }
             navigationController?.present(alert, animated: true, completion: nil)
             alert.view.tintColor = UIColor(named: "text") ?? .darkGray
-        } else {
+        default:
             currentPage?.setType(to: .none)
         }
         showOrHideWarningLabel()
