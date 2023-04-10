@@ -155,24 +155,18 @@ extension GameListTableViewController: GameListGameTableViewCellDelegate, UIDocu
     }
 
     @objc fileprivate func createDefaultGames() {
-        let alert = UIAlertController(
+        let alert = UIAlertController.createCancelableAlert(
             title: "Add example games?",
             message: "Are you sure you want to add the example games to your library? This may duplicate the games if you already have them.",
-            preferredStyle: .alert
-        )
-
-        let okButton = UIAlertAction(title: "OK", style: .default) { _ in
+            primaryActionTitle: "Add games"
+        ) { _ in
             UserDatabase.standard.createDefaultGames()
             DispatchQueue.main.async {
                 self.fetchGames()
             }
         }
-        alert.addAction(okButton)
-
-        let cancelButton = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        alert.addAction(cancelButton)
-
-        present(alert, animated: true)
+        present(alert, animated: true, completion: nil)
+        alert.view.tintColor = UIColor(named: "text") ?? .darkGray
     }
 
     @objc fileprivate func fetchGames() {
