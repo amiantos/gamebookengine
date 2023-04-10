@@ -6,8 +6,8 @@
 //  Copyright © 2019 Brad Root. All rights reserved.
 //
 
-import UIKit
 import SwiftUI
+import UIKit
 
 protocol PageEditorDelegate: AnyObject {
     func selectedPage(_ page: Page)
@@ -128,7 +128,6 @@ class PageEditorViewController: UIViewController {
         navigationItem.leftItemsSupplementBackButton = true
         navigationItem.rightBarButtonItems = [addButton, backButton]
         navigationItem.leftBarButtonItems = [helpButton]
-
 
         navigationItem.largeTitleDisplayMode = .never
 

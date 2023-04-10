@@ -40,7 +40,8 @@ class GameOverviewViewController: UIViewController, PagesTableViewDelegate {
         navigationItem.rightBarButtonItem = metaButton
 
         navigationItem.backBarButtonItem = UIBarButtonItem(
-            title: "Overview", style: .plain, target: nil, action: nil)
+            title: "Overview", style: .plain, target: nil, action: nil
+        )
 
         searchButton = UIButton()
         searchButton.translatesAutoresizingMaskIntoConstraints = false
