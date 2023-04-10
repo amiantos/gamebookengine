@@ -58,7 +58,7 @@ struct HelpView: View {
             ScrollView {
                 VStack {
                     HelpContainer(title: "Documentation", content: "Need help understanding what a gamebook is, and how Gamebook Engine helps you write them? Check out the Wiki for a deep dive on Gamebook structure.", url: URL(string: "https://github.com/amiantos/gamebookengine/wiki")!, cta: "Go to the Wiki")
-                    HelpContainer(title: "Report Bugs", content: "If you find bugs, GitHub Issues is the best place to report them. Gamebook Engine is free open source software. That means the entire source code is available online for you to look at, modify, or use in your own projects.", url: URL(string: "https://github.com/amiantos/gamebookengine/issues")!, cta: "Report Issues on GitHub")
+                    HelpContainer(title: "Report Bugs", content: "If you find bugs, GitHub Issues is the best place to report them. Gamebook Engine is on GitHub because it is free open source software. That means the source code is available online for you to look at, modify, or use in your own projects.", url: URL(string: "https://github.com/amiantos/gamebookengine/issues")!, cta: "Report Issues on GitHub")
 
                     HelpContainer(title: "Discord Community", content: "Want to chat with the developer and other Gamebook Engine users? Did you write a great gamebook and want to get opinions on it? Join the Discord community.", url: URL(string: "https://discord.gg/QncPzv4PXc")!, cta: "Join on Discord")
 
