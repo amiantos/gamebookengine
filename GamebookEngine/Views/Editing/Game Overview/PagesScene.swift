@@ -347,7 +347,9 @@ class PagesScene: SKScene, PagesTableViewDelegate {
         camera?.position = translatedNodePosition
     }
 
-    func deletedPage(_: Page) {}
+    func deletedPage(_: Page) {
+        redrawPages()
+    }
 
     func highlightPageNode() {
         selectionNode.removeFromParent()
