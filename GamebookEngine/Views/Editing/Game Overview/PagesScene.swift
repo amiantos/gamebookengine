@@ -347,9 +347,7 @@ class PagesScene: SKScene, PageEditorDelegate {
         camera?.position = translatedNodePosition
     }
 
-    func deletedPage(_: Page) {
-        redrawPages()
-    }
+    func deletedPage(_: Page) {}
 
     func setFirstPage(_ page: Page) {
         firstPage = page
