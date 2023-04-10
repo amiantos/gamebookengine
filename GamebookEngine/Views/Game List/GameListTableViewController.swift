@@ -20,7 +20,6 @@ class GameListTableViewController: UITableViewController {
     @IBAction func patronButtonAction(_: UIButton) {
         let swiftUIViewController = UIHostingController(rootView: HelpView())
         swiftUIViewController.modalPresentationStyle = .pageSheet
-//        swiftUIViewController.isModalInPresentation = true
         present(swiftUIViewController, animated: true, completion: nil)
     }
 

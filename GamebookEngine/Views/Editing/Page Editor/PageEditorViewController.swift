@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SwiftUI
 
 protocol PageEditorDelegate: AnyObject {
     func selectedPage(_ page: Page)
@@ -122,11 +123,12 @@ class PageEditorViewController: UIViewController {
 
         addButton = UIBarButtonItem(title: "Add", style: .plain, target: self, action: #selector(showAddActionSheet))
         backButton = UIBarButtonItem(title: "Prev Page", style: .plain, target: self, action: #selector(goToPreviousPage))
-        mapButton = UIBarButtonItem(title: "Overview", style: .plain, target: self, action: #selector(exitAction))
-        helpButton = UIBarButtonItem(title: "Help", style: .plain, target: self, action: #selector(helpAction))
+        helpButton = UIBarButtonItem(image: UIImage(systemName: "questionmark.circle"), style: .plain, target: self, action: #selector(helpAction))
 
+        navigationItem.leftItemsSupplementBackButton = true
         navigationItem.rightBarButtonItems = [addButton, backButton]
-        navigationItem.leftBarButtonItems = [mapButton, helpButton]
+        navigationItem.leftBarButtonItems = [helpButton]
+
 
         navigationItem.largeTitleDisplayMode = .never
 
@@ -218,7 +220,10 @@ class PageEditorViewController: UIViewController {
     }
 
     @objc func helpAction() {
-        navigationController?.pushViewController(HelpViewController(), animated: true)
+        let swiftUIViewController = UIHostingController(rootView: HelpView())
+        swiftUIViewController.modalPresentationStyle = .pageSheet
+//        present(swiftUIViewController, animated: true, completion: nil)
+        navigationController?.pushViewController(swiftUIViewController, animated: true)
     }
 
     @objc func exitAction() {

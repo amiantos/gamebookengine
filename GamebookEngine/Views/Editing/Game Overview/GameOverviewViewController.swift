@@ -39,6 +39,9 @@ class GameOverviewViewController: UIViewController, PagesTableViewDelegate {
         navigationItem.leftBarButtonItem = exitButton
         navigationItem.rightBarButtonItem = metaButton
 
+        navigationItem.backBarButtonItem = UIBarButtonItem(
+            title: "Overview", style: .plain, target: nil, action: nil)
+
         searchButton = UIButton()
         searchButton.translatesAutoresizingMaskIntoConstraints = false
         searchButton.addTarget(self, action: #selector(searchButtonTapped), for: .touchUpInside)
