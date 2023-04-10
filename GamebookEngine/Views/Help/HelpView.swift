@@ -69,6 +69,7 @@ struct HelpView: View {
             .navigationTitle("Get Help")
             .navigationBarTitleDisplayMode(.inline)
         }
+        .navigationViewStyle(.stack)
     }
 }
 

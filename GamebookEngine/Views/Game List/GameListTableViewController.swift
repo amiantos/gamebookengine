@@ -41,11 +41,7 @@ class GameListTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         fetchGames()
         super.viewWillAppear(animated)
-
         patronButton.layer.cornerRadius = 10
-        patronButton.layer.shadowRadius = 10
-        patronButton.layer.shadowOffset = .zero
-        patronButton.layer.shadowOpacity = 0.1
     }
 
     override func viewDidAppear(_ animated: Bool) {
