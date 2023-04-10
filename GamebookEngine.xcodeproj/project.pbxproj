@@ -48,7 +48,6 @@
 		B402FFEF2315FEFA00900020 /* MarkdownEditorViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B402FFED2315FEFA00900020 /* MarkdownEditorViewController.xib */; };
 		B402FFF22316055000900020 /* BRMarkdownParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B402FFF12316055000900020 /* BRMarkdownParser.swift */; };
 		B402FFF5231613FA00900020 /* GameSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B402FFF4231613FA00900020 /* GameSerializer.swift */; };
-		B407897F2313587200D09F87 /* Help.md in Resources */ = {isa = PBXBuildFile; fileRef = B407897E2313587100D09F87 /* Help.md */; };
 		B407898223136E2F00D09F87 /* DecisionEditorRuleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B407898023136E2F00D09F87 /* DecisionEditorRuleTableViewCell.swift */; };
 		B407898323136E2F00D09F87 /* DecisionEditorRuleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B407898123136E2F00D09F87 /* DecisionEditorRuleTableViewCell.xib */; };
 		B43EE2F0231F3FF7005D563D /* GameOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B43EE2EF231F3FF7005D563D /* GameOverviewViewController.swift */; };
@@ -88,8 +87,6 @@
 		B4F7C1452311ACDC00EE055C /* Page+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F7C1432311ACDC00EE055C /* Page+CoreDataProperties.swift */; };
 		B4F7C1482311AEB800EE055C /* PageEditorConsequenceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F7C1462311AEB800EE055C /* PageEditorConsequenceTableViewCell.swift */; };
 		B4F7C1492311AEB800EE055C /* PageEditorConsequenceTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B4F7C1472311AEB800EE055C /* PageEditorConsequenceTableViewCell.xib */; };
-		B4F7C14C2311B3E800EE055C /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F7C14A2311B3E700EE055C /* HelpViewController.swift */; };
-		B4F7C14D2311B3E800EE055C /* HelpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B4F7C14B2311B3E800EE055C /* HelpViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -157,7 +154,6 @@
 		B402FFED2315FEFA00900020 /* MarkdownEditorViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MarkdownEditorViewController.xib; sourceTree = "<group>"; };
 		B402FFF12316055000900020 /* BRMarkdownParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BRMarkdownParser.swift; sourceTree = "<group>"; };
 		B402FFF4231613FA00900020 /* GameSerializer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSerializer.swift; sourceTree = "<group>"; };
-		B407897E2313587100D09F87 /* Help.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = Help.md; sourceTree = "<group>"; };
 		B407898023136E2F00D09F87 /* DecisionEditorRuleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecisionEditorRuleTableViewCell.swift; sourceTree = "<group>"; };
 		B407898123136E2F00D09F87 /* DecisionEditorRuleTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DecisionEditorRuleTableViewCell.xib; sourceTree = "<group>"; };
 		B43EE2EF231F3FF7005D563D /* GameOverviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverviewViewController.swift; sourceTree = "<group>"; };
@@ -199,8 +195,6 @@
 		B4F7C1432311ACDC00EE055C /* Page+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Page+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		B4F7C1462311AEB800EE055C /* PageEditorConsequenceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageEditorConsequenceTableViewCell.swift; sourceTree = "<group>"; };
 		B4F7C1472311AEB800EE055C /* PageEditorConsequenceTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PageEditorConsequenceTableViewCell.xib; sourceTree = "<group>"; };
-		B4F7C14A2311B3E700EE055C /* HelpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpViewController.swift; sourceTree = "<group>"; };
-		B4F7C14B2311B3E800EE055C /* HelpViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HelpViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -264,7 +258,6 @@
 				B4F7C13F23118E4200EE055C /* Consequence Editor */,
 				B47F7BDA2310F78000BB072A /* Attribute List */,
 				444358B4230C56FD00A2E004 /* Page List */,
-				4497ED48232489C70038C6A9 /* Help */,
 			);
 			path = Editing;
 			sourceTree = "<group>";
@@ -294,16 +287,6 @@
 			isa = PBXGroup;
 			children = (
 				44764DB729E1535C00CD95DD /* HelpView.swift */,
-			);
-			path = Help;
-			sourceTree = "<group>";
-		};
-		4497ED48232489C70038C6A9 /* Help */ = {
-			isa = PBXGroup;
-			children = (
-				B4F7C14A2311B3E700EE055C /* HelpViewController.swift */,
-				B4F7C14B2311B3E800EE055C /* HelpViewController.xib */,
-				B407897E2313587100D09F87 /* Help.md */,
 			);
 			path = Help;
 			sourceTree = "<group>";
@@ -639,14 +622,12 @@
 				B4F7C1492311AEB800EE055C /* PageEditorConsequenceTableViewCell.xib in Resources */,
 				B47F7BDE2310F79900BB072A /* AttributeTableViewCell.xib in Resources */,
 				44ADBA8623404BBB00855649 /* fileicon-iphone-44x58.png in Resources */,
-				B4F7C14D2311B3E800EE055C /* HelpViewController.xib in Resources */,
 				B47F7BD92310F77B00BB072A /* AttributesTableViewController.xib in Resources */,
 				4417DC2A2314867C00A6F96B /* RuleEditorViewController.xib in Resources */,
 				B4789FEA231887E3008DBE9F /* GameListTableViewController.xib in Resources */,
 				444358BA230C665E00A2E004 /* PagesTableViewController.xib in Resources */,
 				B4B6B3BA23174CBD00E72320 /* MetadataEditorViewController.xib in Resources */,
 				B402FFEF2315FEFA00900020 /* MarkdownEditorViewController.xib in Resources */,
-				B407897F2313587200D09F87 /* Help.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -707,7 +688,6 @@
 				4439E662230B534D00C6A23C /* Consequence+CoreDataClass.swift in Sources */,
 				4439E65D230B534D00C6A23C /* Game+CoreDataProperties.swift in Sources */,
 				B48C4B8523332896008C77ED /* Alerts.swift in Sources */,
-				B4F7C14C2311B3E800EE055C /* HelpViewController.swift in Sources */,
 				B4A13AD5230F6D24004929B8 /* PageEditorDecisionTableViewCell.swift in Sources */,
 				44764DB829E1535C00CD95DD /* HelpView.swift in Sources */,
 				B48C4B8323332297008C77ED /* ContainerView.swift in Sources */,
