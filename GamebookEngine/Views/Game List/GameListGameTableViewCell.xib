@@ -132,7 +132,7 @@
                                     <color key="titleColor" name="button"/>
                                 </state>
                                 <connections>
-                                    <action selector="editAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="z93-98-H0u"/>
+                                    <action selector="playAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="pBr-74-eXe"/>
                                 </connections>
                             </button>
                         </subviews>

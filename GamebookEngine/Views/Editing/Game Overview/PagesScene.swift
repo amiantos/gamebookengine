@@ -12,7 +12,7 @@ class PageNode: SKSpriteNode {
     var page: Page?
 }
 
-class PagesScene: SKScene, PagesTableViewDelegate {
+class PagesScene: SKScene, PageEditorDelegate {
     var relationships: [(origin: Page, destination: Page)] = []
     var nodes: [Page: SKSpriteNode] = [:]
     var groupNodes: [SKSpriteNode: SKSpriteNode] = [:]
@@ -348,6 +348,11 @@ class PagesScene: SKScene, PagesTableViewDelegate {
     }
 
     func deletedPage(_: Page) {}
+
+    func setFirstPage(_ page: Page) {
+        firstPage = page
+        redrawPages()
+    }
 
     func highlightPageNode() {
         selectionNode.removeFromParent()
