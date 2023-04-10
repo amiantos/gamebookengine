@@ -18,14 +18,9 @@ class GameListTableViewController: UITableViewController {
 
     @IBOutlet var patronButton: UIButton!
     @IBAction func patronButtonAction(_: UIButton) {
-        Log.debug("Tapped on website button.")
-        UIApplication.shared.open(
-            URL(
-                string: "https://amiantos.net?utm_source=gamebook_ios&utm_medium=button&utm_campaign=game_list"
-            )!,
-            options: [:],
-            completionHandler: nil
-        )
+        let swiftUIViewController = UIHostingController(rootView: HelpView())
+        swiftUIViewController.modalPresentationStyle = .pageSheet
+        present(swiftUIViewController, animated: true, completion: nil)
     }
 
     @IBAction func topBarAddAction(_ sender: UIButton) {
@@ -46,11 +41,7 @@ class GameListTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         fetchGames()
         super.viewWillAppear(animated)
-
         patronButton.layer.cornerRadius = 10
-        patronButton.layer.shadowRadius = 10
-        patronButton.layer.shadowOffset = .zero
-        patronButton.layer.shadowOpacity = 0.1
     }
 
     override func viewDidAppear(_ animated: Bool) {

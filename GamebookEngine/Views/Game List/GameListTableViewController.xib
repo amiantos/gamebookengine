@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="ipad9_7" orientation="portrait" layout="fullscreen" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="GameListTableViewController" customModule="GamebookEngine" customModuleProvider="target">
             <connections>
                 <outlet property="bottomBarView" destination="gfU-Z8-RuF" id="CjA-1g-k5G"/>
-                <outlet property="patronButton" destination="Pgl-R7-3eY" id="bWN-Yw-VOa"/>
+                <outlet property="patronButton" destination="e95-B7-cwD" id="5wT-ow-Vsp"/>
                 <outlet property="topBarView" destination="WPI-ZJ-buf" id="xhk-bT-eix"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -21,10 +22,10 @@
         <tableView opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" bouncesZoom="NO" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <viewLayoutGuide key="safeArea" id="vLr-E1-eTs"/>
             <color key="backgroundColor" name="background"/>
             <nil key="simulatedTopBarMetrics"/>
-            <viewLayoutGuide key="safeArea" id="vLr-E1-eTs"/>
-            <color key="separatorColor" systemColor="separatorColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.28999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="separatorColor" systemColor="separatorColor"/>
             <connections>
                 <outlet property="dataSource" destination="-1" id="Tng-2m-Rnh"/>
                 <outlet property="delegate" destination="-1" id="9aC-8N-iBw"/>
@@ -36,23 +37,23 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W1k-Li-yY4">
-                    <rect key="frame" x="0.0" y="20" width="428" height="54"/>
+                    <rect key="frame" x="0.0" y="40" width="428" height="34"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="752" text="Your Gamebooks" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9iv-0G-y3R">
-                            <rect key="frame" x="22" y="2" width="220" height="36"/>
+                            <rect key="frame" x="22" y="2" width="249" height="16"/>
                             <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
-                            <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="textColor" systemColor="secondaryLabelColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zhE-Px-uOj">
-                            <rect key="frame" x="38" y="53.5" width="310" height="0.5"/>
-                            <color key="backgroundColor" systemColor="separatorColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.28999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                            <rect key="frame" x="38" y="33.5" width="310" height="0.5"/>
+                            <color key="backgroundColor" systemColor="separatorColor"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="0.5" id="M5O-4N-3td"/>
                             </constraints>
                         </view>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dra-1W-Ppa">
-                            <rect key="frame" x="366" y="0.0" width="62" height="40"/>
+                            <rect key="frame" x="366" y="-10" width="62" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="OPC-oI-wrP"/>
                                 <constraint firstAttribute="width" constant="62" id="yGb-9o-bJy"/>
@@ -78,6 +79,7 @@
                     </constraints>
                 </view>
             </subviews>
+            <viewLayoutGuide key="safeArea" id="kr4-IM-vNG"/>
             <color key="backgroundColor" name="background"/>
             <constraints>
                 <constraint firstItem="W1k-Li-yY4" firstAttribute="top" secondItem="kr4-IM-vNG" secondAttribute="top" constant="20" id="0qu-ZJ-Ytp"/>
@@ -90,71 +92,111 @@
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <viewLayoutGuide key="safeArea" id="kr4-IM-vNG"/>
             <point key="canvasLocation" x="-19.53125" y="-359.1796875"/>
         </view>
         <view contentMode="scaleToFill" id="gfU-Z8-RuF">
-            <rect key="frame" x="0.0" y="0.0" width="414" height="297"/>
+            <rect key="frame" x="0.0" y="0.0" width="857" height="361"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GuC-NQ-gh0">
-                    <rect key="frame" x="119.5" y="12" width="175" height="0.5"/>
-                    <color key="backgroundColor" systemColor="separatorColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.28999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                    <rect key="frame" x="341" y="12" width="175" height="0.5"/>
+                    <color key="backgroundColor" systemColor="separatorColor"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="0.5" id="11W-A0-bCH"/>
                         <constraint firstAttribute="width" constant="175" id="FNi-fh-H7K"/>
                     </constraints>
                 </view>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0EW-x5-QVL">
-                    <rect key="frame" x="57" y="58.5" width="300" height="108.5"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VYv-QL-vfa">
+                    <rect key="frame" x="149" y="72.5" width="559" height="180.5"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IqW-lI-kB1" customClass="ContainerView" customModule="GamebookEngine" customModuleProvider="target">
+                            <rect key="frame" x="20" y="0.0" width="479" height="180.5"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" text="Need Help?" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KZZ-uL-P5s">
+                                    <rect key="frame" x="22" y="22" width="435" height="26.5"/>
+                                    <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                    <color key="textColor" name="text"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uFV-pe-0ce">
+                                    <rect key="frame" x="22" y="56.5" width="435" height="58"/>
+                                    <string key="text">Thanks for using Gamebook Engine. If you're not sure what Gamebook Engine is, let's get you some help. There's plenty of options.</string>
+                                    <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                    <color key="textColor" name="text"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <button opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e95-B7-cwD">
+                                    <rect key="frame" x="18" y="130.5" width="443" height="34"/>
+                                    <color key="backgroundColor" name="background"/>
+                                    <state key="normal" title="Get Help">
+                                        <color key="titleColor" name="button"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="patronButtonAction:" destination="-1" eventType="touchUpInside" id="ae9-12-7Ds"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" name="containerBackground"/>
+                            <constraints>
+                                <constraint firstItem="e95-B7-cwD" firstAttribute="top" secondItem="uFV-pe-0ce" secondAttribute="bottom" constant="16" id="BHS-ve-Z3b"/>
+                                <constraint firstAttribute="bottom" secondItem="e95-B7-cwD" secondAttribute="bottom" constant="16" id="FIN-eN-UKo"/>
+                                <constraint firstItem="KZZ-uL-P5s" firstAttribute="top" secondItem="IqW-lI-kB1" secondAttribute="top" constant="22" id="Mdn-TD-jSl"/>
+                                <constraint firstItem="KZZ-uL-P5s" firstAttribute="leading" secondItem="IqW-lI-kB1" secondAttribute="leading" constant="22" id="Sb2-Zy-hOy"/>
+                                <constraint firstItem="uFV-pe-0ce" firstAttribute="leading" secondItem="IqW-lI-kB1" secondAttribute="leading" constant="22" id="aM1-Ij-LMZ"/>
+                                <constraint firstAttribute="trailing" secondItem="e95-B7-cwD" secondAttribute="trailing" constant="18" id="eaV-va-b4w"/>
+                                <constraint firstItem="e95-B7-cwD" firstAttribute="leading" secondItem="IqW-lI-kB1" secondAttribute="leading" constant="18" id="egJ-Dj-qiI"/>
+                                <constraint firstAttribute="trailing" secondItem="uFV-pe-0ce" secondAttribute="trailing" constant="22" id="lA5-m0-yPz"/>
+                                <constraint firstItem="uFV-pe-0ce" firstAttribute="top" secondItem="KZZ-uL-P5s" secondAttribute="bottom" constant="8" id="nSo-DZ-C3K"/>
+                                <constraint firstAttribute="trailing" secondItem="KZZ-uL-P5s" secondAttribute="trailing" constant="22" id="sp4-Vc-Obz"/>
+                                <constraint firstItem="e95-B7-cwD" firstAttribute="centerX" secondItem="IqW-lI-kB1" secondAttribute="centerX" id="wfe-Ha-ceG"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="300" id="8Zn-0V-6O1"/>
+                        <constraint firstAttribute="bottom" secondItem="IqW-lI-kB1" secondAttribute="bottom" id="0e3-8u-BFL"/>
+                        <constraint firstAttribute="trailing" secondItem="IqW-lI-kB1" secondAttribute="trailing" constant="60" id="Cak-uo-JPQ"/>
+                        <constraint firstItem="IqW-lI-kB1" firstAttribute="top" secondItem="VYv-QL-vfa" secondAttribute="top" id="jP6-hz-jdG"/>
+                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="600" id="n0x-f2-BEc"/>
+                        <constraint firstItem="IqW-lI-kB1" firstAttribute="leading" secondItem="VYv-QL-vfa" secondAttribute="leading" constant="20" id="rnB-gX-EBA"/>
                     </constraints>
-                    <string key="text">Gamebook Engine is free, open source software created by Brad Root. If you like it, check out my website to see other apps I've created and read about what I'm working on every week.</string>
-                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                    <color key="textColor" name="button"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pgl-R7-3eY">
-                    <rect key="frame" x="117.5" y="199" width="179" height="52"/>
-                    <color key="backgroundColor" name="containerBackground"/>
-                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                    <inset key="contentEdgeInsets" minX="20" minY="12" maxX="20" maxY="12"/>
-                    <state key="normal" title="Visit Amiantos.net">
-                        <color key="titleColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
-                    </state>
-                    <connections>
-                        <action selector="patronButtonAction:" destination="-1" eventType="touchUpInside" id="O7w-Zv-2Se"/>
-                    </connections>
-                </button>
+                </view>
             </subviews>
+            <viewLayoutGuide key="safeArea" id="Yjh-LH-U7C"/>
             <color key="backgroundColor" name="background"/>
             <constraints>
-                <constraint firstItem="Yjh-LH-U7C" firstAttribute="bottom" secondItem="Pgl-R7-3eY" secondAttribute="bottom" constant="46" id="1cD-hg-L0i"/>
-                <constraint firstItem="Pgl-R7-3eY" firstAttribute="top" secondItem="0EW-x5-QVL" secondAttribute="bottom" constant="32" id="D2o-xF-aMH"/>
+                <constraint firstItem="VYv-QL-vfa" firstAttribute="centerX" secondItem="Yjh-LH-U7C" secondAttribute="centerX" id="5lw-vm-jfR"/>
                 <constraint firstItem="GuC-NQ-gh0" firstAttribute="top" secondItem="gfU-Z8-RuF" secondAttribute="top" constant="12" id="NKx-lL-LqO"/>
-                <constraint firstItem="Pgl-R7-3eY" firstAttribute="centerX" secondItem="Yjh-LH-U7C" secondAttribute="centerX" id="RKF-kC-Y6q"/>
-                <constraint firstItem="0EW-x5-QVL" firstAttribute="top" secondItem="GuC-NQ-gh0" secondAttribute="bottom" constant="46" id="bDw-V9-LYD"/>
                 <constraint firstItem="GuC-NQ-gh0" firstAttribute="centerX" secondItem="Yjh-LH-U7C" secondAttribute="centerX" id="kPl-oM-3oF"/>
-                <constraint firstItem="0EW-x5-QVL" firstAttribute="centerX" secondItem="Yjh-LH-U7C" secondAttribute="centerX" id="pqd-Ow-Zsp"/>
+                <constraint firstAttribute="leading" relation="lessThanOrEqual" secondItem="VYv-QL-vfa" secondAttribute="leading" id="pxe-DD-Y3s"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="VYv-QL-vfa" secondAttribute="trailing" id="vSx-Qw-HPF"/>
+                <constraint firstItem="VYv-QL-vfa" firstAttribute="top" secondItem="GuC-NQ-gh0" secondAttribute="bottom" constant="60" id="x8U-zm-gqI"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <viewLayoutGuide key="safeArea" id="Yjh-LH-U7C"/>
-            <point key="canvasLocation" x="-817.96875" y="-176.66015625"/>
+            <point key="canvasLocation" x="-991.015625" y="-157.91015625"/>
         </view>
     </objects>
     <resources>
         <image name="add" width="24" height="24"/>
         <namedColor name="background">
-            <color red="0.10999999940395355" green="0.10999999940395355" blue="0.11400000005960464" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.94117647058823528" green="0.93725490196078431" blue="0.96470588235294119" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="button">
-            <color white="0.43599998950958252" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color white="0.5" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </namedColor>
         <namedColor name="containerBackground">
-            <color white="0.22300000488758087" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <namedColor name="text">
+            <color white="0.10000000149011612" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </namedColor>
+        <systemColor name="secondaryLabelColor">
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="separatorColor">
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.28999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
     </resources>
 </document>
