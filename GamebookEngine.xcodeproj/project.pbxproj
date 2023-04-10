@@ -452,11 +452,11 @@
 		B4E9EFBA230A41AD00C9CA76 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				44764DB629E1534B00CD95DD /* Help */,
 				4433010729DE28C700A90F42 /* Introduction */,
 				B4789FEF23188B8E008DBE9F /* Game List */,
 				444358C1230C7BA800A2E004 /* Playing */,
 				444358BC230C789900A2E004 /* Editing */,
+				44764DB629E1534B00CD95DD /* Help */,
 				440EF3F12323279D000A7C9F /* ContentSizedTableView.swift */,
 				B48C4B8223332297008C77ED /* ContainerView.swift */,
 				B48C4B8423332896008C77ED /* Alerts.swift */,
