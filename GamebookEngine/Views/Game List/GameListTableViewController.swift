@@ -154,6 +154,21 @@ extension GameListTableViewController: GameListGameTableViewCellDelegate, UIDocu
         actionSheet.view.tintColor = UIColor(named: "text") ?? .darkGray
     }
 
+    @objc fileprivate func createDefaultGames() {
+        let alert = UIAlertController.createCancelableAlert(
+            title: "Add example games?",
+            message: "Are you sure you want to add the example games to your library? This may duplicate the games if you already have them.",
+            primaryActionTitle: "Add games"
+        ) { _ in
+            UserDatabase.standard.createDefaultGames()
+            DispatchQueue.main.async {
+                self.fetchGames()
+            }
+        }
+        present(alert, animated: true, completion: nil)
+        alert.view.tintColor = UIColor(named: "text") ?? .darkGray
+    }
+
     @objc fileprivate func fetchGames() {
         GameDatabase.standard.fetchGames { games in
             if let games = games {
@@ -175,16 +190,20 @@ extension GameListTableViewController: GameListGameTableViewCellDelegate, UIDocu
     }
 
     fileprivate func showFilePicker(_ sender: UIButton) {
-        let actionSheet = UIAlertController(title: "Add Game", message: nil, preferredStyle: .actionSheet)
-        let importAction = UIAlertAction(title: "Import from file", style: .default) { _ in
+        let actionSheet = UIAlertController(title: "Add game", message: nil, preferredStyle: .actionSheet)
+        let importAction = UIAlertAction(title: "Import game from file", style: .default) { _ in
             self.importGame()
         }
-        let createAction = UIAlertAction(title: "Create New", style: .default) { _ in
+        let createAction = UIAlertAction(title: "Create new game", style: .default) { _ in
             self.createGame()
         }
+        let createDefaultGamesAction = UIAlertAction(title: "Add example games", style: .default) { _ in
+            self.createDefaultGames()
+        }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        actionSheet.addAction(importAction)
         actionSheet.addAction(createAction)
+        actionSheet.addAction(importAction)
+        actionSheet.addAction(createDefaultGamesAction)
         actionSheet.addAction(cancelAction)
         actionSheet.popoverPresentationController?.sourceView = sender
         actionSheet.popoverPresentationController?.sourceRect = CGRect(x: sender.frame.width / 2 - 3, y: sender.frame.height, width: 0, height: 0)
