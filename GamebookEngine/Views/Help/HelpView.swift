@@ -9,8 +9,6 @@
 import SwiftUI
 
 struct HelpContainer: View {
-    @Environment(\.openURL) var openURL
-
     let title: String
     let content: String
     let url: URL
@@ -32,7 +30,8 @@ struct HelpContainer: View {
                 .padding(EdgeInsets(top: 0, leading: 22, bottom: 8, trailing: 22))
 
             Button {
-                openURL(url)
+//                openURL(url)
+                UIApplication.shared.open(url)
             } label: {
                 Text(cta)
                     .fontWeight(.medium)
@@ -65,8 +64,7 @@ struct HelpView: View {
                     HelpContainer(title: "Email Brad", content: "If none of those other options are working out for you, you can always email me directly. My name is Brad. Say hello!", url: URL(string: "mailto:bradroot@me.com?subject=Gamebook%20Engine%20Feedback")!, cta: "Email bradroot@me.com")
                 }
             }
-            .navigationTitle("Get Help")
-            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarTitle("Get Help", displayMode: .inline)
         }
         .navigationViewStyle(.stack)
     }
