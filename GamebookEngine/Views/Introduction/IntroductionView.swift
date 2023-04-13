@@ -131,7 +131,6 @@ struct IntroductionView: View {
             }
         }
         .background(Color(UIColor(named: "background")!))
-//        .ignoresSafeArea(.all, edges: .vertical)
         .onAppear {
             UserDatabase.standard.set(true, forKey: .shownIntroductionScreen)
         }
