@@ -30,7 +30,6 @@ struct HelpContainer: View {
                 .padding(EdgeInsets(top: 0, leading: 22, bottom: 8, trailing: 22))
 
             Button {
-//                openURL(url)
                 UIApplication.shared.open(url)
             } label: {
                 Text(cta)
