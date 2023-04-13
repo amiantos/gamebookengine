@@ -14,11 +14,23 @@ class GameDatabase {
     static let standard: GameDatabase = .init()
 
     var mainManagedObjectContext: NSManagedObjectContext
-    var persistentContainer: NSPersistentContainer
+    var persistentContainer: NSPersistentCloudKitContainer
 
     init() {
         persistentContainer = {
-            let container = NSPersistentContainer(name: "BRGamebookEngine")
+            let container = NSPersistentCloudKitContainer(name: "BRGamebookEngine")
+
+            // Only initialize the schema when building the app with the
+            // Debug build configuration.
+            #if DEBUG
+            do {
+                // Use the container to initialize the development schema.
+                try container.initializeCloudKitSchema(options: [])
+            } catch {
+                // Handle any errors.
+            }
+            #endif
+
             container.loadPersistentStores(completionHandler: { _, error in
                 if let error = error as NSError? {
                     fatalError("Unresolved error \(error), \(error.userInfo)")
