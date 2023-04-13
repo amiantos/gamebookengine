@@ -48,7 +48,7 @@ struct CardView: View {
 }
 
 struct IntroductionView: View {
-    @Environment(\.dismiss) var dismiss
+    @Environment(\.presentationMode) var presentationMode
 
     @State var cards: [CardData] = [
         //        CardData(
@@ -117,7 +117,7 @@ struct IntroductionView: View {
             .frame(maxWidth: 400)
             Spacer()
             Button(action: {
-                self.dismiss()
+                presentationMode.wrappedValue.dismiss()
             }, label: {
                 Text("Get Started Now")
                     .padding()
@@ -131,7 +131,6 @@ struct IntroductionView: View {
             }
         }
         .background(Color(UIColor(named: "background")!))
-        .ignoresSafeArea(.all, edges: .vertical)
         .onAppear {
             UserDatabase.standard.set(true, forKey: .shownIntroductionScreen)
         }
