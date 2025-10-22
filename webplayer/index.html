@@ -248,6 +248,54 @@
         .game-content {
             background: var(--bg-secondary);
             padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @keyframes slideOutLeft {
+            from {
+                opacity: 1;
+                transform: translateX(0);
+            }
+            to {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+        }
+
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+            }
+            to {
+                opacity: 0;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .page-content.exit {
+            animation: slideOutLeft 0.3s ease-out forwards;
+        }
+
+        .decisions.exit {
+            animation: fadeOut 0.2s ease-out forwards;
+        }
+
+        .page-content.enter {
+            animation: fadeIn 0.4s ease-out forwards;
+        }
+
+        .decisions.enter {
+            animation: fadeIn 0.3s ease-out 0.2s forwards;
+            opacity: 0;
         }
 
         .page-content {
@@ -733,7 +781,7 @@
 
                 let decisionsHtml = '';
                 if (availableDecisions.length > 0) {
-                    decisionsHtml = '<div class="decisions">';
+                    decisionsHtml = '<div class="decisions enter">';
                     availableDecisions.forEach((decision, index) => {
                         decisionsHtml += `
                             <button class="decision-btn" onclick="player.makeDecision(${index})">
@@ -748,7 +796,7 @@
                 const endingMarker = isEnding ? '<div class="ending-marker">THE END</div>' : '';
 
                 contentEl.innerHTML = `
-                    <div class="page-content">${parsedContent}</div>
+                    <div class="page-content enter">${parsedContent}</div>
                     ${decisionsHtml}
                     ${endingMarker}
                 `;
@@ -862,17 +910,38 @@
                     return;
                 }
 
-                // Save current state to history before navigating
-                this.history.push({
-                    pageUuid: this.currentPage.uuid,
-                    attributes: { ...this.attributes }
-                });
+                // Disable decision buttons during transition
+                const decisionButtons = document.querySelectorAll('.decision-btn');
+                decisionButtons.forEach(btn => btn.disabled = true);
 
-                this.currentPage = nextPage;
-                this.displayPage();
+                // Add exit animations
+                const contentEl = document.getElementById('game-content');
+                const pageContent = contentEl.querySelector('.page-content');
+                const decisions = contentEl.querySelector('.decisions');
 
-                // Scroll to top
-                window.scrollTo({ top: 0, behavior: 'smooth' });
+                if (pageContent) {
+                    pageContent.classList.remove('enter');
+                    pageContent.classList.add('exit');
+                }
+                if (decisions) {
+                    decisions.classList.remove('enter');
+                    decisions.classList.add('exit');
+                }
+
+                // Wait for exit animation to complete
+                setTimeout(() => {
+                    // Save current state to history before navigating
+                    this.history.push({
+                        pageUuid: this.currentPage.uuid,
+                        attributes: { ...this.attributes }
+                    });
+
+                    this.currentPage = nextPage;
+                    this.displayPage();
+
+                    // Scroll to top
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }, 300);
             }
         }
 

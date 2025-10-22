@@ -217,4 +217,66 @@ class GameSerializer {
         attributeDictionary["name"] = attribute.name
         return attributeDictionary
     }
+
+    // MARK: - HTML Export
+
+    func toHTMLFile(game: Game) -> String? {
+        // Load the HTML template from the bundle
+        guard let templateURL = Bundle.main.url(forResource: "index", withExtension: "html"),
+              let templateHTML = try? String(contentsOf: templateURL, encoding: .utf8) else {
+            Log.error("Could not load webplayer/index.html template")
+            return nil
+        }
+
+        // Get the game JSON
+        let gameJSON = toJSONString(game: game)
+
+        // Create the injection script that will:
+        // 1. Auto-load the game on page load
+        // 2. Hide the "Load Different Game" button
+        let injectionScript = """
+        <script>
+        // Auto-load embedded game
+        window.EMBEDDED_GAME_DATA = \(gameJSON);
+
+        document.addEventListener('DOMContentLoaded', function() {
+            if (window.EMBEDDED_GAME_DATA) {
+                try {
+                    const game = window.EMBEDDED_GAME_DATA;
+                    window.player = new GamePlayer();
+                    window.player.loadGame(game);
+
+                    // Hide the "Load Different Game" button
+                    const style = document.createElement('style');
+                    style.textContent = '.btn:contains("Load Different Game") { display: none !important; }';
+                    document.head.appendChild(style);
+
+                    // More reliable way: hide by button text after page loads
+                    setTimeout(function() {
+                        const buttons = document.querySelectorAll('.btn');
+                        buttons.forEach(function(btn) {
+                            if (btn.textContent.includes('Load Different Game')) {
+                                btn.style.display = 'none';
+                            }
+                        });
+                    }, 100);
+                } catch (error) {
+                    console.error('Failed to load embedded game:', error);
+                }
+            }
+        });
+        </script>
+        """
+
+        // Insert the script before the closing </body> tag
+        guard let bodyCloseRange = templateHTML.range(of: "</body>", options: .backwards) else {
+            Log.error("Could not find </body> tag in template")
+            return nil
+        }
+
+        var modifiedHTML = templateHTML
+        modifiedHTML.insert(contentsOf: injectionScript, at: bodyCloseRange.lowerBound)
+
+        return modifiedHTML
+    }
 }
