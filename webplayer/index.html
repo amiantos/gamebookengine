@@ -12,26 +12,30 @@
         }
 
         :root {
-            --bg-primary: #f5f5f5;
+            --bg-primary: #efeff4;
             --bg-secondary: #ffffff;
-            --text-primary: #333333;
+            --text-primary: #000000;
             --text-secondary: #666666;
             --accent: #007AFF;
             --accent-hover: #0056b3;
-            --border: #dddddd;
-            --shadow: rgba(0, 0, 0, 0.1);
+            --border: #e5e5ea;
+            --shadow: rgba(0, 0, 0, 0.05);
+            --decision-bg: #f9f9f9;
+            --decision-border: #e5e5ea;
         }
 
         @media (prefers-color-scheme: dark) {
             :root {
-                --bg-primary: #1c1c1e;
-                --bg-secondary: #2c2c2e;
+                --bg-primary: #000000;
+                --bg-secondary: #1c1c1e;
                 --text-primary: #ffffff;
                 --text-secondary: #999999;
                 --accent: #0A84FF;
                 --accent-hover: #409CFF;
-                --border: #3a3a3c;
+                --border: #2c2c2e;
                 --shadow: rgba(0, 0, 0, 0.3);
+                --decision-bg: #2c2c2e;
+                --decision-border: #3a3a3c;
             }
         }
 
@@ -39,10 +43,11 @@
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             background-color: var(--bg-primary);
             color: var(--text-primary);
-            line-height: 1.6;
-            padding: 20px;
-            max-width: 800px;
+            line-height: 1.5;
+            padding: 0;
             margin: 0 auto;
+            min-height: 100vh;
+            max-width: 800px;
         }
 
         body.font-serif {
@@ -50,29 +55,118 @@
         }
 
         .header {
+            background: var(--bg-secondary);
             text-align: center;
-            margin-bottom: 30px;
-            padding-bottom: 20px;
-            border-bottom: 2px solid var(--border);
+            padding: 20px;
+            border-bottom: 1px solid var(--border);
+            position: relative;
         }
 
         .header h1 {
-            font-size: 2em;
-            margin-bottom: 10px;
+            font-size: 1.5em;
+            font-weight: 600;
+            margin-bottom: 5px;
         }
 
         .header .subtitle {
             color: var(--text-secondary);
-            font-size: 0.9em;
+            font-size: 0.85em;
+        }
+
+        .game-header {
+            background: var(--bg-secondary);
+            text-align: center;
+            padding: 12px 20px;
+            border-bottom: 1px solid var(--border);
+            position: relative;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .game-header:hover {
+            background: var(--bg-primary);
+        }
+
+        .game-header-title {
+            font-size: 0.95em;
+            font-weight: 500;
+            color: var(--text-primary);
+            margin: 0;
+        }
+
+        .game-header-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .game-header.expanded .game-header-details {
+            max-height: 200px;
+            padding-top: 10px;
+        }
+
+        .game-header-details .meta {
+            color: var(--text-secondary);
+            font-size: 0.85em;
+            margin-bottom: 5px;
+            line-height: 1.4;
+        }
+
+        .game-header-expand-icon {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-secondary);
+            font-size: 0.8em;
+            transition: transform 0.3s ease;
+        }
+
+        .game-header.expanded .game-header-expand-icon {
+            transform: translateY(-50%) rotate(180deg);
+        }
+
+        body.light-mode {
+            color-scheme: light;
+        }
+
+        body.dark-mode {
+            color-scheme: dark;
+        }
+
+        body.dark-mode {
+            --bg-primary: #000000;
+            --bg-secondary: #1c1c1e;
+            --text-primary: #ffffff;
+            --text-secondary: #999999;
+            --accent: #0A84FF;
+            --accent-hover: #409CFF;
+            --border: #2c2c2e;
+            --shadow: rgba(0, 0, 0, 0.3);
+            --decision-bg: #2c2c2e;
+            --decision-border: #3a3a3c;
+        }
+
+        body.light-mode {
+            --bg-primary: #efeff4;
+            --bg-secondary: #ffffff;
+            --text-primary: #000000;
+            --text-secondary: #666666;
+            --accent: #007AFF;
+            --accent-hover: #0056b3;
+            --border: #e5e5ea;
+            --shadow: rgba(0, 0, 0, 0.05);
+            --decision-bg: #f9f9f9;
+            --decision-border: #e5e5ea;
         }
 
         .import-section {
             background: var(--bg-secondary);
-            border-radius: 12px;
-            padding: 30px;
-            margin-bottom: 20px;
+            padding: 40px 20px;
+            margin: 20px;
             text-align: center;
             border: 2px dashed var(--border);
+            border-radius: 10px;
             transition: all 0.3s ease;
         }
 
@@ -83,11 +177,14 @@
 
         .import-section h2 {
             margin-bottom: 15px;
+            font-weight: 600;
+            font-size: 1.3em;
         }
 
         .import-section p {
             color: var(--text-secondary);
             margin-bottom: 20px;
+            font-size: 0.95em;
         }
 
         .file-input-wrapper {
@@ -108,7 +205,7 @@
             cursor: pointer;
             font-size: 1em;
             font-weight: 500;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.2s ease;
             display: inline-block;
         }
 
@@ -116,64 +213,72 @@
             background-color: var(--accent-hover);
         }
 
+        .btn:active {
+            opacity: 0.8;
+        }
+
         .btn-secondary {
-            background-color: var(--bg-secondary);
-            color: var(--text-primary);
-            border: 2px solid var(--border);
+            flex: 1;
+            background-color: transparent;
+            color: var(--accent);
+            border: none;
+            border-right: 1px solid var(--border);
+            padding: 16px;
+            font-size: 0.95em;
+            font-weight: 400;
+            border-radius: 0;
+        }
+
+        .btn-secondary:last-child {
+            border-right: none;
         }
 
         .btn-secondary:hover {
             background-color: var(--bg-primary);
         }
 
+        .btn-secondary:active {
+            opacity: 0.6;
+        }
+
         .game-info {
-            background: var(--bg-secondary);
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 8px var(--shadow);
-        }
-
-        .game-info h2 {
-            margin-bottom: 10px;
-        }
-
-        .game-info .meta {
-            color: var(--text-secondary);
-            font-size: 0.9em;
-            margin-bottom: 5px;
+            display: none;
         }
 
         .game-content {
             background: var(--bg-secondary);
-            border-radius: 12px;
-            padding: 30px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 8px var(--shadow);
-            min-height: 200px;
+            padding: 20px;
         }
 
         .page-content {
-            margin-bottom: 30px;
+            margin-bottom: 0;
+            padding: 0;
         }
 
         .page-content h1 {
-            font-size: 1.8em;
-            margin: 20px 0 15px 0;
+            font-size: 1.6em;
+            font-weight: 700;
+            margin: 24px 0 16px 0;
+            line-height: 1.3;
         }
 
         .page-content h2 {
-            font-size: 1.4em;
-            margin: 18px 0 12px 0;
+            font-size: 1.35em;
+            font-weight: 600;
+            margin: 20px 0 12px 0;
+            line-height: 1.3;
         }
 
         .page-content h3 {
-            font-size: 1.2em;
+            font-size: 1.15em;
+            font-weight: 600;
             margin: 16px 0 10px 0;
+            line-height: 1.3;
         }
 
         .page-content p {
-            margin-bottom: 15px;
+            margin-bottom: 16px;
+            line-height: 1.6;
         }
 
         .page-content em {
@@ -221,35 +326,45 @@
         .decisions {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 0;
+            margin-top: 30px;
+            border-top: 1px solid var(--border);
         }
 
         .decision-btn {
-            background: var(--bg-primary);
+            background: var(--decision-bg);
             color: var(--text-primary);
-            border: 2px solid var(--border);
-            padding: 16px 20px;
-            border-radius: 8px;
+            border: none;
+            border-bottom: 1px solid var(--decision-border);
+            padding: 18px 20px;
             cursor: pointer;
-            font-size: 1em;
+            font-size: 0.95em;
             text-align: left;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
             font-family: inherit;
-            line-height: 1.4;
+            line-height: 1.5;
+            font-weight: 400;
+        }
+
+        .decision-btn:last-child {
+            border-bottom: none;
         }
 
         .decision-btn:hover {
-            border-color: var(--accent);
             background: var(--bg-secondary);
-            transform: translateX(5px);
+        }
+
+        .decision-btn:active {
+            opacity: 0.6;
         }
 
         .controls {
             display: flex;
-            gap: 12px;
-            justify-content: center;
+            gap: 0;
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border);
+            padding: 0;
             margin-top: 20px;
-            flex-wrap: wrap;
         }
 
         .hidden {
@@ -266,38 +381,43 @@
 
         .ending-marker {
             text-align: center;
-            font-size: 2em;
-            margin-top: 20px;
-            color: var(--accent);
+            font-size: 1.8em;
+            margin-top: 30px;
+            margin-bottom: 20px;
+            color: var(--text-secondary);
+            font-weight: 700;
         }
 
         @media (max-width: 600px) {
-            body {
-                padding: 10px;
+            .import-section {
+                margin: 15px;
+                padding: 30px 20px;
             }
 
-            .import-section, .game-content {
-                padding: 20px;
+            .game-content {
+                padding: 15px;
             }
 
-            .header h1 {
-                font-size: 1.5em;
+            .page-content h1 {
+                font-size: 1.4em;
             }
 
-            .controls {
-                flex-direction: column;
-            }
-
-            .btn {
-                width: 100%;
+            .page-content h2 {
+                font-size: 1.25em;
             }
         }
     </style>
 </head>
 <body>
-    <div class="header">
+    <div id="initial-header" class="header">
         <h1>Gamebook Engine</h1>
         <p class="subtitle">Web Player</p>
+    </div>
+
+    <div id="game-header" class="game-header hidden" onclick="toggleGameHeader()">
+        <h1 class="game-header-title" id="game-header-title"></h1>
+        <div class="game-header-details" id="game-header-details"></div>
+        <span class="game-header-expand-icon">▼</span>
     </div>
 
     <div id="error-container"></div>
@@ -316,11 +436,68 @@
     <div id="controls" class="controls hidden"></div>
 
     <script>
+        // Theme Management
+        function initTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+            if (savedTheme) {
+                document.body.classList.add(savedTheme);
+                updateThemeIcon(savedTheme);
+            } else if (prefersDark) {
+                document.body.classList.add('dark-mode');
+                updateThemeIcon('dark-mode');
+            } else {
+                document.body.classList.add('light-mode');
+                updateThemeIcon('light-mode');
+            }
+        }
+
+        function toggleTheme() {
+            const body = document.body;
+            const isDark = body.classList.contains('dark-mode');
+
+            body.classList.remove('light-mode', 'dark-mode');
+
+            const newTheme = isDark ? 'light-mode' : 'dark-mode';
+            body.classList.add(newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
+        }
+
+        function updateThemeIcon(theme) {
+            const icon = document.getElementById('theme-icon');
+            const newIcon = theme === 'dark-mode' ? '☀️' : '🌙';
+            if (icon) {
+                icon.textContent = newIcon;
+            }
+        }
+
+        function toggleGameHeader() {
+            const header = document.getElementById('game-header');
+            header.classList.toggle('expanded');
+        }
+
+        // Initialize theme on page load
+        initTheme();
+
         // Simple Markdown parser
         function parseMarkdown(text) {
             let html = text;
 
-            // Escape HTML first to prevent XSS
+            // Store escaped characters temporarily
+            const escapeMap = new Map();
+            let escapeIndex = 0;
+
+            // Replace escaped characters with placeholders
+            html = html.replace(/\\(.)/g, (match, char) => {
+                const placeholder = `\uE000${escapeIndex}\uE000`;
+                escapeMap.set(placeholder, char);
+                escapeIndex++;
+                return placeholder;
+            });
+
+            // Escape HTML to prevent XSS
             html = html.replace(/&/g, '&amp;')
                        .replace(/</g, '&lt;')
                        .replace(/>/g, '&gt;');
@@ -394,6 +571,11 @@
             // Paragraphs
             html = html.replace(/^(?!<[hbulo]|<\/[uo]l>)(.+)$/gm, '<p>$1</p>');
             html = html.replace(/<\/blockquote>\n<blockquote>/g, '<br>');
+
+            // Restore escaped characters
+            escapeMap.forEach((char, placeholder) => {
+                html = html.replace(new RegExp(placeholder, 'g'), char);
+            });
 
             return html;
         }
@@ -481,13 +663,27 @@
             }
 
             displayGameInfo() {
-                const infoEl = document.getElementById('game-info');
-                infoEl.innerHTML = `
-                    <h2>${this.game.name}</h2>
-                    ${this.game.author ? `<p class="meta">By ${this.game.author}</p>` : ''}
-                    ${this.game.about ? `<p class="meta">${this.game.about}</p>` : ''}
-                `;
-                infoEl.classList.remove('hidden');
+                // Hide initial header and import section
+                document.getElementById('initial-header').classList.add('hidden');
+                document.getElementById('import-section').classList.add('hidden');
+
+                // Show and populate game header
+                const gameHeader = document.getElementById('game-header');
+                const gameHeaderTitle = document.getElementById('game-header-title');
+                const gameHeaderDetails = document.getElementById('game-header-details');
+
+                gameHeaderTitle.textContent = this.game.name;
+
+                let detailsHTML = '';
+                if (this.game.author) {
+                    detailsHTML += `<p class="meta">By ${this.game.author}</p>`;
+                }
+                if (this.game.about) {
+                    detailsHTML += `<p class="meta">${this.game.about}</p>`;
+                }
+                gameHeaderDetails.innerHTML = detailsHTML;
+
+                gameHeader.classList.remove('hidden');
 
                 // Set font
                 if (this.game.font === 'serif') {
@@ -536,9 +732,14 @@
 
                 // Show controls
                 const controlsEl = document.getElementById('controls');
+                const currentTheme = document.body.classList.contains('dark-mode') ? 'dark-mode' : 'light-mode';
+                const themeIcon = currentTheme === 'dark-mode' ? '☀️' : '🌙';
                 controlsEl.innerHTML = `
                     <button class="btn btn-secondary" onclick="player.restart()">Restart Game</button>
                     <button class="btn btn-secondary" onclick="location.reload()">Load Different Game</button>
+                    <button class="btn btn-secondary" onclick="toggleTheme()" aria-label="Toggle theme">
+                        <span id="theme-icon">${themeIcon}</span>
+                    </button>
                 `;
                 controlsEl.classList.remove('hidden');
 
