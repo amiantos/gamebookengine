@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gamebook Engine Web Player</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #f5f5f5;
+            --bg-secondary: #ffffff;
+            --text-primary: #333333;
+            --text-secondary: #666666;
+            --accent: #007AFF;
+            --accent-hover: #0056b3;
+            --border: #dddddd;
+            --shadow: rgba(0, 0, 0, 0.1);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-primary: #1c1c1e;
+                --bg-secondary: #2c2c2e;
+                --text-primary: #ffffff;
+                --text-secondary: #999999;
+                --accent: #0A84FF;
+                --accent-hover: #409CFF;
+                --border: #3a3a3c;
+                --shadow: rgba(0, 0, 0, 0.3);
+            }
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        body.font-serif {
+            font-family: 'Georgia', 'Times New Roman', serif;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .header h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .header .subtitle {
+            color: var(--text-secondary);
+            font-size: 0.9em;
+        }
+
+        .import-section {
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 20px;
+            text-align: center;
+            border: 2px dashed var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .import-section.drag-over {
+            border-color: var(--accent);
+            background: var(--bg-primary);
+        }
+
+        .import-section h2 {
+            margin-bottom: 15px;
+        }
+
+        .import-section p {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .file-input-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+
+        .file-input-wrapper input[type="file"] {
+            display: none;
+        }
+
+        .btn {
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            background-color: var(--accent-hover);
+        }
+
+        .btn-secondary {
+            background-color: var(--bg-secondary);
+            color: var(--text-primary);
+            border: 2px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--bg-primary);
+        }
+
+        .game-info {
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px var(--shadow);
+        }
+
+        .game-info h2 {
+            margin-bottom: 10px;
+        }
+
+        .game-info .meta {
+            color: var(--text-secondary);
+            font-size: 0.9em;
+            margin-bottom: 5px;
+        }
+
+        .game-content {
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px var(--shadow);
+            min-height: 200px;
+        }
+
+        .page-content {
+            margin-bottom: 30px;
+        }
+
+        .page-content h1 {
+            font-size: 1.8em;
+            margin: 20px 0 15px 0;
+        }
+
+        .page-content h2 {
+            font-size: 1.4em;
+            margin: 18px 0 12px 0;
+        }
+
+        .page-content h3 {
+            font-size: 1.2em;
+            margin: 16px 0 10px 0;
+        }
+
+        .page-content p {
+            margin-bottom: 15px;
+        }
+
+        .page-content em {
+            font-style: italic;
+        }
+
+        .page-content strong {
+            font-weight: bold;
+        }
+
+        .page-content blockquote {
+            border-left: 4px solid var(--accent);
+            padding-left: 20px;
+            margin: 20px 0;
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
+        .page-content ul, .page-content ol {
+            margin-left: 30px;
+            margin-bottom: 15px;
+        }
+
+        .page-content li {
+            margin-bottom: 8px;
+        }
+
+        .page-content code {
+            background: var(--bg-primary);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+
+        .page-content a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .page-content a:hover {
+            text-decoration: underline;
+        }
+
+        .decisions {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .decision-btn {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            border: 2px solid var(--border);
+            padding: 16px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            text-align: left;
+            transition: all 0.3s ease;
+            font-family: inherit;
+            line-height: 1.4;
+        }
+
+        .decision-btn:hover {
+            border-color: var(--accent);
+            background: var(--bg-secondary);
+            transform: translateX(5px);
+        }
+
+        .controls {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .error {
+            background: #ff3b30;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .ending-marker {
+            text-align: center;
+            font-size: 2em;
+            margin-top: 20px;
+            color: var(--accent);
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+
+            .import-section, .game-content {
+                padding: 20px;
+            }
+
+            .header h1 {
+                font-size: 1.5em;
+            }
+
+            .controls {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Gamebook Engine</h1>
+        <p class="subtitle">Web Player</p>
+    </div>
+
+    <div id="error-container"></div>
+
+    <div id="import-section" class="import-section">
+        <h2>Import a Gamebook</h2>
+        <p>Drag and drop a .gbook file here, or click the button below to select one</p>
+        <div class="file-input-wrapper">
+            <input type="file" id="file-input" accept=".gbook,application/json">
+            <label for="file-input" class="btn">Choose File</label>
+        </div>
+    </div>
+
+    <div id="game-info" class="game-info hidden"></div>
+    <div id="game-content" class="game-content hidden"></div>
+    <div id="controls" class="controls hidden"></div>
+
+    <script>
+        // Simple Markdown parser
+        function parseMarkdown(text) {
+            let html = text;
+
+            // Escape HTML first to prevent XSS
+            html = html.replace(/&/g, '&amp;')
+                       .replace(/</g, '&lt;')
+                       .replace(/>/g, '&gt;');
+
+            // Headers
+            html = html.replace(/^### (.*?)$/gm, '<h3>$1</h3>');
+            html = html.replace(/^## (.*?)$/gm, '<h2>$1</h2>');
+            html = html.replace(/^# (.*?)$/gm, '<h1>$1</h1>');
+
+            // Bold and Italic
+            html = html.replace(/\*\*\*(.+?)\*\*\*/g, '<strong><em>$1</em></strong>');
+            html = html.replace(/___(.+?)___/g, '<strong><em>$1</em></strong>');
+            html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+            html = html.replace(/__(.+?)__/g, '<strong>$1</strong>');
+            html = html.replace(/\*(.+?)\*/g, '<em>$1</em>');
+            html = html.replace(/_(.+?)_/g, '<em>$1</em>');
+
+            // Code
+            html = html.replace(/`(.+?)`/g, '<code>$1</code>');
+
+            // Links
+            html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank">$1</a>');
+
+            // Blockquotes
+            html = html.replace(/^&gt; (.+)$/gm, '<blockquote>$1</blockquote>');
+
+            // Lists
+            const lines = html.split('\n');
+            let inList = false;
+            let listType = null;
+            const processedLines = [];
+
+            for (let i = 0; i < lines.length; i++) {
+                const line = lines[i];
+                const isUnorderedItem = /^\* (.+)$/.test(line);
+                const isOrderedItem = /^\d+\. (.+)$/.test(line);
+
+                if (isUnorderedItem || isOrderedItem) {
+                    const currentListType = isUnorderedItem ? 'ul' : 'ol';
+                    const itemContent = isUnorderedItem ?
+                        line.replace(/^\* /, '') :
+                        line.replace(/^\d+\. /, '');
+
+                    if (!inList) {
+                        processedLines.push(`<${currentListType}>`);
+                        inList = true;
+                        listType = currentListType;
+                    } else if (listType !== currentListType) {
+                        processedLines.push(`</${listType}>`);
+                        processedLines.push(`<${currentListType}>`);
+                        listType = currentListType;
+                    }
+
+                    processedLines.push(`<li>${itemContent}</li>`);
+                } else {
+                    if (inList) {
+                        processedLines.push(`</${listType}>`);
+                        inList = false;
+                        listType = null;
+                    }
+                    processedLines.push(line);
+                }
+            }
+
+            if (inList) {
+                processedLines.push(`</${listType}>`);
+            }
+
+            html = processedLines.join('\n');
+
+            // Paragraphs
+            html = html.replace(/^(?!<[hbulo]|<\/[uo]l>)(.+)$/gm, '<p>$1</p>');
+            html = html.replace(/<\/blockquote>\n<blockquote>/g, '<br>');
+
+            return html;
+        }
+
+        class GamePlayer {
+            constructor() {
+                this.game = null;
+                this.currentPage = null;
+                this.attributes = {};
+                this.saveKey = null;
+            }
+
+            loadGame(gameData) {
+                this.game = gameData;
+                this.saveKey = `gamebook_save_${this.game.uuid}`;
+
+                // Initialize attributes
+                this.attributes = {};
+                if (this.game.attributes) {
+                    this.game.attributes.forEach(attr => {
+                        this.attributes[attr.uuid] = 0.0;
+                    });
+                }
+
+                // Try to load saved progress
+                const savedState = this.loadSavedState();
+                if (savedState) {
+                    this.attributes = savedState.attributes;
+                    this.currentPage = this.findPageByUuid(savedState.currentPageUuid);
+                }
+
+                // If no save or invalid save, start from first page
+                if (!this.currentPage) {
+                    this.currentPage = this.findFirstPage();
+                    this.saveState();
+                }
+
+                this.displayGameInfo();
+                this.displayPage();
+            }
+
+            findFirstPage() {
+                return this.game.pages.find(page => page.type === 'first') || this.game.pages[0];
+            }
+
+            findPageByUuid(uuid) {
+                return this.game.pages.find(page => page.uuid === uuid);
+            }
+
+            loadSavedState() {
+                try {
+                    const saved = localStorage.getItem(this.saveKey);
+                    return saved ? JSON.parse(saved) : null;
+                } catch (e) {
+                    console.error('Error loading saved state:', e);
+                    return null;
+                }
+            }
+
+            saveState() {
+                try {
+                    const state = {
+                        currentPageUuid: this.currentPage.uuid,
+                        attributes: this.attributes
+                    };
+                    localStorage.setItem(this.saveKey, JSON.stringify(state));
+                } catch (e) {
+                    console.error('Error saving state:', e);
+                }
+            }
+
+            restart() {
+                if (confirm('Are you sure you want to restart the game? All progress will be lost.')) {
+                    localStorage.removeItem(this.saveKey);
+                    this.attributes = {};
+                    if (this.game.attributes) {
+                        this.game.attributes.forEach(attr => {
+                            this.attributes[attr.uuid] = 0.0;
+                        });
+                    }
+                    this.currentPage = this.findFirstPage();
+                    this.saveState();
+                    this.displayPage();
+                }
+            }
+
+            displayGameInfo() {
+                const infoEl = document.getElementById('game-info');
+                infoEl.innerHTML = `
+                    <h2>${this.game.name}</h2>
+                    ${this.game.author ? `<p class="meta">By ${this.game.author}</p>` : ''}
+                    ${this.game.about ? `<p class="meta">${this.game.about}</p>` : ''}
+                `;
+                infoEl.classList.remove('hidden');
+
+                // Set font
+                if (this.game.font === 'serif') {
+                    document.body.classList.add('font-serif');
+                } else {
+                    document.body.classList.remove('font-serif');
+                }
+            }
+
+            displayPage() {
+                // Process consequences
+                this.processConsequences();
+
+                // Get available decisions
+                const availableDecisions = this.getAvailableDecisions();
+
+                // Display content
+                const contentEl = document.getElementById('game-content');
+                const parsedContent = parseMarkdown(this.currentPage.content);
+
+                let decisionsHtml = '';
+                if (availableDecisions.length > 0) {
+                    decisionsHtml = '<div class="decisions">';
+                    availableDecisions.forEach((decision, index) => {
+                        decisionsHtml += `
+                            <button class="decision-btn" onclick="player.makeDecision(${index})">
+                                ${decision.content}
+                            </button>
+                        `;
+                    });
+                    decisionsHtml += '</div>';
+                }
+
+                const isEnding = this.currentPage.type === 'ending';
+                const endingMarker = isEnding ? '<div class="ending-marker">THE END</div>' : '';
+
+                contentEl.innerHTML = `
+                    <div class="page-content">${parsedContent}</div>
+                    ${decisionsHtml}
+                    ${endingMarker}
+                `;
+                contentEl.classList.remove('hidden');
+
+                // Store decisions for later reference
+                this.currentDecisions = availableDecisions;
+
+                // Show controls
+                const controlsEl = document.getElementById('controls');
+                controlsEl.innerHTML = `
+                    <button class="btn btn-secondary" onclick="player.restart()">Restart Game</button>
+                    <button class="btn btn-secondary" onclick="location.reload()">Load Different Game</button>
+                `;
+                controlsEl.classList.remove('hidden');
+
+                // Save state
+                this.saveState();
+            }
+
+            processConsequences() {
+                if (!this.currentPage.consequences) return;
+
+                this.currentPage.consequences.forEach(consequence => {
+                    if (!consequence.attribute_uuid) return;
+
+                    const attrUuid = consequence.attribute_uuid;
+                    let currentValue = this.attributes[attrUuid] || 0.0;
+
+                    switch (consequence.type) {
+                        case 'set':
+                            currentValue = consequence.amount;
+                            break;
+                        case 'add':
+                            currentValue += consequence.amount;
+                            break;
+                        case 'subtract':
+                            currentValue -= consequence.amount;
+                            break;
+                        case 'multiply':
+                            currentValue *= consequence.amount;
+                            break;
+                    }
+
+                    this.attributes[attrUuid] = currentValue;
+                });
+            }
+
+            getAvailableDecisions() {
+                if (!this.currentPage.decisions) return [];
+
+                const available = [];
+
+                this.currentPage.decisions.forEach(decision => {
+                    if (this.evaluateDecisionRules(decision)) {
+                        available.push(decision);
+                    }
+                });
+
+                return available;
+            }
+
+            evaluateDecisionRules(decision) {
+                if (!decision.rules || decision.rules.length === 0) {
+                    return true;
+                }
+
+                const results = decision.rules.map(rule => {
+                    const attrValue = this.attributes[rule.attribute_uuid] || 0.0;
+                    const ruleValue = rule.value;
+
+                    switch (rule.type) {
+                        case 'equal':
+                            return attrValue === ruleValue;
+                        case 'not_equal':
+                            return attrValue !== ruleValue;
+                        case 'greater_than':
+                            return attrValue > ruleValue;
+                        case 'less_than':
+                            return attrValue < ruleValue;
+                        default:
+                            return false;
+                    }
+                });
+
+                // Apply match style
+                const matchStyle = decision.match_style || 'match_all';
+                if (matchStyle === 'match_all') {
+                    return results.every(r => r === true);
+                } else if (matchStyle === 'match_any') {
+                    return results.some(r => r === true);
+                }
+
+                return false;
+            }
+
+            makeDecision(index) {
+                const decision = this.currentDecisions[index];
+                if (!decision || !decision.destination_uuid) return;
+
+                const nextPage = this.findPageByUuid(decision.destination_uuid);
+                if (!nextPage) {
+                    showError('Could not find the destination page. The game file may be corrupted.');
+                    return;
+                }
+
+                this.currentPage = nextPage;
+                this.displayPage();
+
+                // Scroll to top
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        // Global player instance
+        let player = null;
+
+        // File handling
+        const fileInput = document.getElementById('file-input');
+        const importSection = document.getElementById('import-section');
+
+        fileInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) loadGameFile(file);
+        });
+
+        // Drag and drop
+        importSection.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            importSection.classList.add('drag-over');
+        });
+
+        importSection.addEventListener('dragleave', () => {
+            importSection.classList.remove('drag-over');
+        });
+
+        importSection.addEventListener('drop', (e) => {
+            e.preventDefault();
+            importSection.classList.remove('drag-over');
+
+            const file = e.dataTransfer.files[0];
+            if (file) loadGameFile(file);
+        });
+
+        function loadGameFile(file) {
+            if (!file.name.endsWith('.gbook')) {
+                showError('Please select a .gbook file');
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                try {
+                    const gameData = JSON.parse(e.target.result);
+
+                    // Validate game data
+                    if (!gameData.uuid || !gameData.name || !gameData.pages) {
+                        throw new Error('Invalid game file format');
+                    }
+
+                    // Hide import section
+                    importSection.classList.add('hidden');
+
+                    // Start game
+                    player = new GamePlayer();
+                    player.loadGame(gameData);
+
+                } catch (error) {
+                    showError('Failed to load game file: ' + error.message);
+                }
+            };
+            reader.readAsText(file);
+        }
+
+        function showError(message) {
+            const errorContainer = document.getElementById('error-container');
+            errorContainer.innerHTML = `<div class="error">${message}</div>`;
+            setTimeout(() => {
+                errorContainer.innerHTML = '';
+            }, 5000);
+        }
+    </script>
+</body>
+</html>
