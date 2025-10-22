@@ -659,11 +659,16 @@
                 // If no save or invalid save, start from first page
                 if (!this.currentPage) {
                     this.currentPage = this.findFirstPage();
-                    this.saveState();
                 }
 
                 this.displayGameInfo();
-                this.displayPage();
+                // Process consequences for first page if new game, don't process if loading saved game
+                const shouldProcessConsequences = !savedState;
+                if (shouldProcessConsequences) {
+                    this.processConsequences();
+                }
+                // Always display without adding to history on initial load
+                this.displayPageContent();
             }
 
             findFirstPage() {
@@ -733,7 +738,8 @@
                 this.currentPage = this.findPageByUuid(previousState.pageUuid);
                 this.attributes = { ...previousState.attributes };
 
-                // Display the page without adding to history
+                // Display the page without processing consequences
+                // saveState() will be called by displayPageContent()
                 this.displayPage(false);
             }
 
@@ -768,10 +774,16 @@
                 }
             }
 
-            displayPage(addToHistory = true) {
-                // Process consequences
-                this.processConsequences();
+            displayPage(processConsequences = true) {
+                // Process consequences if needed
+                if (processConsequences) {
+                    this.processConsequences();
+                }
 
+                this.displayPageContent();
+            }
+
+            displayPageContent() {
                 // Get available decisions
                 const availableDecisions = this.getAvailableDecisions();
 
@@ -784,7 +796,7 @@
                     decisionsHtml = '<div class="decisions enter">';
                     availableDecisions.forEach((decision, index) => {
                         decisionsHtml += `
-                            <button class="decision-btn" onclick="player.makeDecision(${index})">
+                            <button class="decision-btn" data-decision-index="${index}" onclick="window.player.makeDecision(${index})">
                                 ${decision.content}
                             </button>
                         `;
@@ -811,8 +823,8 @@
                 const themeIcon = currentTheme === 'dark-mode' ? '☀️' : '🌙';
                 const canUndo = this.history.length > 0;
                 controlsEl.innerHTML = `
-                    <button class="btn btn-secondary" onclick="player.undo()" ${!canUndo ? 'disabled' : ''} style="${!canUndo ? 'opacity: 0.5; cursor: not-allowed;' : ''}">Undo</button>
-                    <button class="btn btn-secondary" onclick="player.restart()">Restart Game</button>
+                    <button class="btn btn-secondary" onclick="window.player.undo()" ${!canUndo ? 'disabled' : ''} style="${!canUndo ? 'opacity: 0.5; cursor: not-allowed;' : ''}">Undo</button>
+                    <button class="btn btn-secondary" onclick="window.player.restart()">Restart Game</button>
                     <button class="btn btn-secondary" onclick="location.reload()">Load Different Game</button>
                     <button class="btn btn-secondary" onclick="toggleTheme()" aria-label="Toggle theme">
                         <span id="theme-icon">${themeIcon}</span>
@@ -910,6 +922,12 @@
                     return;
                 }
 
+                // Save current state to history BEFORE leaving
+                this.history.push({
+                    pageUuid: this.currentPage.uuid,
+                    attributes: { ...this.attributes }
+                });
+
                 // Disable decision buttons during transition
                 const decisionButtons = document.querySelectorAll('.decision-btn');
                 decisionButtons.forEach(btn => btn.disabled = true);
@@ -930,12 +948,6 @@
 
                 // Wait for exit animation to complete
                 setTimeout(() => {
-                    // Save current state to history before navigating
-                    this.history.push({
-                        pageUuid: this.currentPage.uuid,
-                        attributes: { ...this.attributes }
-                    });
-
                     this.currentPage = nextPage;
                     this.displayPage();
 
@@ -995,8 +1007,8 @@
                     importSection.classList.add('hidden');
 
                     // Start game
-                    player = new GamePlayer();
-                    player.loadGame(gameData);
+                    window.player = new GamePlayer();
+                    window.player.loadGame(gameData);
 
                 } catch (error) {
                     showError('Failed to load game file: ' + error.message);

@@ -239,19 +239,18 @@ class GameSerializer {
         // Auto-load embedded game
         window.EMBEDDED_GAME_DATA = \(gameJSON);
 
+        // Initialize player globally before DOMContentLoaded
+        window.player = null;
+
         document.addEventListener('DOMContentLoaded', function() {
             if (window.EMBEDDED_GAME_DATA) {
                 try {
                     const game = window.EMBEDDED_GAME_DATA;
+                    // Create player instance and make it globally accessible
                     window.player = new GamePlayer();
                     window.player.loadGame(game);
 
                     // Hide the "Load Different Game" button
-                    const style = document.createElement('style');
-                    style.textContent = '.btn:contains("Load Different Game") { display: none !important; }';
-                    document.head.appendChild(style);
-
-                    // More reliable way: hide by button text after page loads
                     setTimeout(function() {
                         const buttons = document.querySelectorAll('.btn');
                         buttons.forEach(function(btn) {
@@ -262,6 +261,7 @@ class GameSerializer {
                     }, 100);
                 } catch (error) {
                     console.error('Failed to load embedded game:', error);
+                    showError('Failed to load the embedded game: ' + error.message);
                 }
             }
         });
