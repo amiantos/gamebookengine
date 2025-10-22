@@ -586,6 +586,7 @@
                 this.currentPage = null;
                 this.attributes = {};
                 this.saveKey = null;
+                this.history = [];
             }
 
             loadGame(gameData) {
@@ -628,7 +629,15 @@
             loadSavedState() {
                 try {
                     const saved = localStorage.getItem(this.saveKey);
-                    return saved ? JSON.parse(saved) : null;
+                    if (saved) {
+                        const state = JSON.parse(saved);
+                        // Restore history if it exists
+                        if (state.history) {
+                            this.history = state.history;
+                        }
+                        return state;
+                    }
+                    return null;
                 } catch (e) {
                     console.error('Error loading saved state:', e);
                     return null;
@@ -639,7 +648,8 @@
                 try {
                     const state = {
                         currentPageUuid: this.currentPage.uuid,
-                        attributes: this.attributes
+                        attributes: this.attributes,
+                        history: this.history
                     };
                     localStorage.setItem(this.saveKey, JSON.stringify(state));
                 } catch (e) {
@@ -651,6 +661,7 @@
                 if (confirm('Are you sure you want to restart the game? All progress will be lost.')) {
                     localStorage.removeItem(this.saveKey);
                     this.attributes = {};
+                    this.history = [];
                     if (this.game.attributes) {
                         this.game.attributes.forEach(attr => {
                             this.attributes[attr.uuid] = 0.0;
@@ -660,6 +671,22 @@
                     this.saveState();
                     this.displayPage();
                 }
+            }
+
+            undo() {
+                if (this.history.length === 0) {
+                    return; // Nothing to undo
+                }
+
+                // Pop the last state from history
+                const previousState = this.history.pop();
+
+                // Restore the previous state
+                this.currentPage = this.findPageByUuid(previousState.pageUuid);
+                this.attributes = { ...previousState.attributes };
+
+                // Display the page without adding to history
+                this.displayPage(false);
             }
 
             displayGameInfo() {
@@ -693,7 +720,7 @@
                 }
             }
 
-            displayPage() {
+            displayPage(addToHistory = true) {
                 // Process consequences
                 this.processConsequences();
 
@@ -734,7 +761,9 @@
                 const controlsEl = document.getElementById('controls');
                 const currentTheme = document.body.classList.contains('dark-mode') ? 'dark-mode' : 'light-mode';
                 const themeIcon = currentTheme === 'dark-mode' ? '☀️' : '🌙';
+                const canUndo = this.history.length > 0;
                 controlsEl.innerHTML = `
+                    <button class="btn btn-secondary" onclick="player.undo()" ${!canUndo ? 'disabled' : ''} style="${!canUndo ? 'opacity: 0.5; cursor: not-allowed;' : ''}">Undo</button>
                     <button class="btn btn-secondary" onclick="player.restart()">Restart Game</button>
                     <button class="btn btn-secondary" onclick="location.reload()">Load Different Game</button>
                     <button class="btn btn-secondary" onclick="toggleTheme()" aria-label="Toggle theme">
@@ -832,6 +861,12 @@
                     showError('Could not find the destination page. The game file may be corrupted.');
                     return;
                 }
+
+                // Save current state to history before navigating
+                this.history.push({
+                    pageUuid: this.currentPage.uuid,
+                    attributes: { ...this.attributes }
+                });
 
                 this.currentPage = nextPage;
                 this.displayPage();
