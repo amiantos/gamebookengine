@@ -246,14 +246,39 @@ extension GameListTableViewController: GameListGameTableViewCellDelegate, UIDocu
     }
 
     func exportGame(_ game: Game) {
-        let gamebookDocument = GamebookProvider(game: game)
         let indexPathForGame = IndexPath(row: games.firstIndex(of: game)!, section: 0)
         guard let cell = tableView.cellForRow(at: indexPathForGame) as? GameListGameTableViewCell else { fatalError() }
 
-        let activityViewController = UIActivityViewController(activityItems: [gamebookDocument], applicationActivities: nil)
-        activityViewController.popoverPresentationController?.sourceView = cell.exportButton
-        activityViewController.popoverPresentationController?.sourceRect = CGRect(x: 15, y: cell.exportButton.frame.height / 2, width: 0, height: 0)
-        present(activityViewController, animated: true, completion: nil)
+        // Show action sheet to choose export format
+        let actionSheet = UIAlertController(title: "Export Format", message: "Choose the format to export this game", preferredStyle: .actionSheet)
+
+        let gbookAction = UIAlertAction(title: "Export as .gbook", style: .default) { _ in
+            let gamebookDocument = GamebookProvider(game: game)
+            let activityViewController = UIActivityViewController(activityItems: [gamebookDocument], applicationActivities: nil)
+            activityViewController.popoverPresentationController?.sourceView = cell.exportButton
+            activityViewController.popoverPresentationController?.sourceRect = CGRect(x: 15, y: cell.exportButton.frame.height / 2, width: 0, height: 0)
+            self.present(activityViewController, animated: true, completion: nil)
+        }
+
+        let htmlAction = UIAlertAction(title: "Export as .html", style: .default) { _ in
+            let htmlDocument = HTMLGamebookProvider(game: game)
+            let activityViewController = UIActivityViewController(activityItems: [htmlDocument], applicationActivities: nil)
+            activityViewController.popoverPresentationController?.sourceView = cell.exportButton
+            activityViewController.popoverPresentationController?.sourceRect = CGRect(x: 15, y: cell.exportButton.frame.height / 2, width: 0, height: 0)
+            self.present(activityViewController, animated: true, completion: nil)
+        }
+
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+
+        actionSheet.addAction(gbookAction)
+        actionSheet.addAction(htmlAction)
+        actionSheet.addAction(cancelAction)
+
+        actionSheet.popoverPresentationController?.sourceView = cell.exportButton
+        actionSheet.popoverPresentationController?.sourceRect = CGRect(x: 15, y: cell.exportButton.frame.height / 2, width: 0, height: 0)
+
+        present(actionSheet, animated: true, completion: nil)
+        actionSheet.view.tintColor = UIColor(named: "text") ?? .darkGray
     }
 }
 
@@ -276,6 +301,32 @@ class GamebookProvider: UIActivityItemProvider {
     init(game: Game) {
         // Creates a URL to show a non-existent gamebook prior to loading the real gamebook
         temporaryURL = NSURL(fileURLWithPath: NSTemporaryDirectory() + "\(game.name).gbook")
+        Log.debug("Create temporary URL for \(game.name)")
+
+        self.game = game
+        super.init(placeholderItem: temporaryURL as Any)
+    }
+}
+
+class HTMLGamebookProvider: UIActivityItemProvider {
+    var temporaryURL: NSURL?
+    var game: Game
+
+    override var item: Any {
+        guard let htmlString = GameSerializer.standard.toHTMLFile(game: game) else {
+            fatalError("Error: Unable to generate HTML file")
+        }
+        let textData = htmlString.data(using: .utf8)
+        guard let textURL = textData?.dataToFile(fileName: "\(game.name).html") else {
+            fatalError("Error: Unable to save the HTML file")
+        }
+        Log.debug("Load \(game.name) at \(textURL)")
+        return textURL
+    }
+
+    init(game: Game) {
+        // Creates a URL to show a non-existent HTML file prior to loading the real file
+        temporaryURL = NSURL(fileURLWithPath: NSTemporaryDirectory() + "\(game.name).html")
         Log.debug("Create temporary URL for \(game.name)")
 
         self.game = game

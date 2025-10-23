@@ -217,4 +217,65 @@ class GameSerializer {
         attributeDictionary["name"] = attribute.name
         return attributeDictionary
     }
+
+    // MARK: - HTML Export
+
+    func toHTMLFile(game: Game) -> String? {
+        // Load the HTML template from the bundle
+        guard let templateURL = Bundle.main.url(forResource: "index", withExtension: "html"),
+              let templateHTML = try? String(contentsOf: templateURL, encoding: .utf8) else {
+            Log.error("Could not load webplayer/index.html template")
+            return nil
+        }
+
+        // Get the game JSON
+        let gameJSON = toJSONString(game: game)
+
+        // Create the injection script that will:
+        // 1. Auto-load the game on page load
+        // 2. Hide the "Load Different Game" button
+        let injectionScript = """
+        <style>
+        /* Hide the Load Different Game button in embedded mode */
+        .embedded-mode .load-different-game-btn {
+            display: none !important;
+        }
+        </style>
+        <script>
+        // Auto-load embedded game
+        window.EMBEDDED_GAME_DATA = \(gameJSON);
+
+        // Initialize player globally before DOMContentLoaded
+        window.player = null;
+
+        document.addEventListener('DOMContentLoaded', function() {
+            if (window.EMBEDDED_GAME_DATA) {
+                try {
+                    // Mark body as embedded mode for CSS targeting
+                    document.body.classList.add('embedded-mode');
+
+                    const game = window.EMBEDDED_GAME_DATA;
+                    // Create player instance and make it globally accessible
+                    window.player = new GamePlayer();
+                    window.player.loadGame(game);
+                } catch (error) {
+                    console.error('Failed to load embedded game:', error);
+                    showError('Failed to load the embedded game: ' + error.message);
+                }
+            }
+        });
+        </script>
+        """
+
+        // Insert the script before the closing </body> tag
+        guard let bodyCloseRange = templateHTML.range(of: "</body>", options: .backwards) else {
+            Log.error("Could not find </body> tag in template")
+            return nil
+        }
+
+        var modifiedHTML = templateHTML
+        modifiedHTML.insert(contentsOf: injectionScript, at: bodyCloseRange.lowerBound)
+
+        return modifiedHTML
+    }
 }

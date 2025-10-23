@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gamebook Engine Web Player</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Light Mode (default) */
+        body.light-mode {
+            color-scheme: light;
+            --bg-primary: #FFFFFF;
+            --bg-secondary: #F0EFF6;
+            --bg-hover: #f9f9f9;
+            --text-primary: #000000;
+            --text-secondary: #666666;
+            --button: #3C3C4399;
+            --button-hover: #1C1C1D;
+            --border: #e5e5ea;
+            --shadow: rgba(0, 0, 0, 0.06);
+            --decision-bg: #f9f9f9;
+            --decision-hover: #ffffff;
+            --decision-border: #e5e5ea;
+        }
+
+        /* Dark Mode */
+        body.dark-mode {
+            color-scheme: dark;
+            --bg-primary: #000000;
+            --bg-secondary: #1C1C1D;
+            --bg-hover: #2c2c2e;
+            --text-primary: #ffffff;
+            --text-secondary: #999999;
+            --button: #EBEBF599;
+            --button-hover: #000000;
+            --border: #2c2c2e;
+            --shadow: rgba(0, 0, 0, 0.06);
+            --decision-bg: #2c2c2e;
+            --decision-hover: #3a3a3c;
+            --decision-border: #3a3a3c;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.5;
+            padding: 0;
+            margin: 0 auto;
+            min-height: 100vh;
+            max-width: 600px;
+        }
+
+        body.font-serif {
+            font-family: 'Georgia', 'Times New Roman', serif;
+        }
+
+        .header {
+            background: var(--bg-secondary);
+            text-align: center;
+            padding: 20px;
+            border-bottom: 1px solid var(--border);
+            position: relative;
+            border-radius: 20px 20px 0px 0px;
+            overflow: hidden;
+            margin-top:20px;
+        }
+
+        .header h1 {
+            font-size: 1.5em;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .header .subtitle {
+            color: var(--text-secondary);
+            font-size: 0.85em;
+        }
+
+        .game-header {
+            background: var(--bg-secondary);
+            text-align: center;
+            padding: 12px 20px;
+            border: 1px solid var(--border);
+            position: relative;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            border-radius: 20px 20px 0px 0px;
+            overflow: hidden;
+            margin-top:20px;
+        }
+
+        .game-header:hover {
+            background: var(--bg-hover);
+        }
+
+        .game-header-title {
+            font-size: 0.95em;
+            font-weight: 500;
+            color: var(--text-primary);
+            margin: 0;
+        }
+
+        .game-header-details {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+
+        .game-header.expanded .game-header-details {
+            max-height: 200px;
+            padding-top: 10px;
+        }
+
+        .game-header-details .meta {
+            color: var(--text-secondary);
+            font-size: 0.85em;
+            margin-bottom: 5px;
+            line-height: 1.4;
+        }
+
+        .game-header-expand-icon {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-secondary);
+            font-size: 0.8em;
+            transition: transform 0.3s ease;
+        }
+
+        .game-header.expanded .game-header-expand-icon {
+            transform: translateY(-50%) rotate(180deg);
+        }
+
+        .import-section {
+            background: var(--bg-secondary);
+            padding: 40px 20px;
+            text-align: center;
+            border-left: 1px solid var(--border);
+            border-right: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            border-radius: 0px 00px 20px 20px;
+            transition: all 0.3s ease;
+        }
+
+        .import-section.drag-over {
+            background: var(--bg-hover);
+        }
+
+        .import-section h2 {
+            margin-bottom: 15px;
+            font-weight: 600;
+            font-size: 1.3em;
+        }
+
+        .import-section p {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            font-size: 0.95em;
+        }
+
+        .file-input-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+
+        .file-input-wrapper input[type="file"] {
+            display: none;
+        }
+
+        .btn {
+            background-color: var(--button);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 500;
+            transition: background-color 0.2s ease;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            background-color: var(--button-hover);
+        }
+
+        .btn:active {
+            opacity: 0.8;
+        }
+
+        .btn-secondary {
+            flex: 1;
+            background-color: transparent;
+            color: var(--button);
+            border: none;
+            border-right: 1px solid var(--border);
+            padding: 16px;
+            font-size: 0.95em;
+            font-weight: 400;
+            border-radius: 0;
+        }
+
+        .btn-secondary:last-child {
+            border-right: none;
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--bg-hover);
+        }
+
+        .btn-secondary:active {
+            opacity: 0.6;
+        }
+
+        .game-info {
+            display: none;
+        }
+
+        .game-content {
+            background: var(--bg-secondary);
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
+            border-left: 1px solid var(--border);
+            border-right: 1px solid var(--border);
+        }
+
+        @keyframes slideOutLeft {
+            from {
+                opacity: 1;
+                transform: translateX(0);
+            }
+            to {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+        }
+
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+            }
+            to {
+                opacity: 0;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .page-content.exit {
+            animation: slideOutLeft 0.3s ease-out forwards;
+        }
+
+        .decisions.exit {
+            animation: fadeOut 0.2s ease-out forwards;
+        }
+
+        .page-content.enter {
+            animation: fadeIn 0.4s ease-out forwards;
+        }
+
+        .decisions.enter {
+            animation: fadeIn 0.3s ease-out 0.2s forwards;
+            opacity: 0;
+        }
+
+        .page-content {
+            margin-bottom: 0;
+            padding: 0;
+        }
+
+        .page-content h1 {
+            font-size: 1.6em;
+            font-weight: 700;
+            margin: 24px 0 16px 0;
+            line-height: 1.3;
+        }
+
+        .page-content h2 {
+            font-size: 1.35em;
+            font-weight: 600;
+            margin: 20px 0 12px 0;
+            line-height: 1.3;
+        }
+
+        .page-content h3 {
+            font-size: 1.15em;
+            font-weight: 600;
+            margin: 16px 0 10px 0;
+            line-height: 1.3;
+        }
+
+        /* Remove top margin from first child to keep consistent padding */
+        .page-content > *:first-child {
+            margin-top: 0;
+        }
+
+        .page-content p {
+            margin-bottom: 16px;
+            line-height: 1.6;
+        }
+
+        .page-content em {
+            font-style: italic;
+        }
+
+        .page-content strong {
+            font-weight: bold;
+        }
+
+        .page-content blockquote {
+            border-left: 4px solid var(--button);
+            padding-left: 20px;
+            margin: 20px 0;
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
+        .page-content ul, .page-content ol {
+            margin-left: 30px;
+            margin-bottom: 15px;
+        }
+
+        .page-content li {
+            margin-bottom: 8px;
+        }
+
+        .page-content code {
+            background: var(--bg-primary);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+
+        .page-content a {
+            color: var(--button);
+            text-decoration: none;
+        }
+
+        .page-content a:hover {
+            text-decoration: underline;
+        }
+
+        .decisions {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            margin-top: 30px;
+            border-top: 1px solid var(--border);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0px 0px 20px var(--shadow);
+        }
+
+        .decision-btn {
+            background: var(--decision-bg);
+            color: var(--text-primary);
+            border: none;
+            border-bottom: 1px solid var(--decision-border);
+            padding: 18px 20px;
+            cursor: pointer;
+            font-size: 0.95em;
+            text-align: left;
+            transition: all 0.2s ease;
+            font-family: inherit;
+            line-height: 1.5;
+            font-weight: 400;
+        }
+
+        .decision-btn:last-child {
+            border-bottom: none;
+        }
+
+        .decision-btn:hover {
+            background: var(--decision-hover);
+        }
+
+        .decision-btn:active {
+            opacity: 0.6;
+        }
+
+        .controls {
+            display: flex;
+            gap: 0;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            padding: 0;
+            border-radius: 0px 0px 20px 20px;
+            overflow: hidden;
+            margin-bottom:20px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .error {
+            background: #ff3b30;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .ending-marker {
+            text-align: center;
+            font-size: 1.8em;
+            margin-top: 30px;
+            margin-bottom: 20px;
+            color: var(--text-secondary);
+            font-weight: 700;
+        }
+
+        @media (max-width: 600px) {
+            .import-section {
+                margin: 15px;
+                padding: 30px 20px;
+            }
+
+            .game-header, .header {
+                margin-top: 0px;
+                border-radius: 0px;
+            }
+
+            .game-content {
+                padding: 20px;
+            }
+
+            .page-content h1 {
+                font-size: 1.4em;
+            }
+
+            .page-content h2 {
+                font-size: 1.25em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="initial-header" class="header">
+        <h1>Gamebook Engine</h1>
+        <p class="subtitle">Web Player</p>
+    </div>
+
+    <div id="game-header" class="game-header hidden" onclick="toggleGameHeader()">
+        <h1 class="game-header-title" id="game-header-title"></h1>
+        <div class="game-header-details" id="game-header-details"></div>
+        <span class="game-header-expand-icon">▼</span>
+    </div>
+
+    <div id="error-container"></div>
+
+    <div id="import-section" class="import-section">
+        <h2>Import a Gamebook</h2>
+        <p>Drag and drop a .gbook file here, or click the button below to select one</p>
+        <div class="file-input-wrapper">
+            <input type="file" id="file-input" accept=".gbook,application/json">
+            <label for="file-input" class="btn">Choose File</label>
+        </div>
+    </div>
+
+    <div id="game-info" class="game-info hidden"></div>
+    <div id="game-content" class="game-content hidden"></div>
+    <div id="controls" class="controls hidden"></div>
+
+    <script>
+        // Theme Management
+        function initTheme() {
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+            if (savedTheme) {
+                document.body.classList.add(savedTheme);
+                updateThemeIcon(savedTheme);
+            } else if (prefersDark) {
+                document.body.classList.add('dark-mode');
+                updateThemeIcon('dark-mode');
+            } else {
+                document.body.classList.add('light-mode');
+                updateThemeIcon('light-mode');
+            }
+        }
+
+        function toggleTheme() {
+            const body = document.body;
+            const isDark = body.classList.contains('dark-mode');
+
+            body.classList.remove('light-mode', 'dark-mode');
+
+            const newTheme = isDark ? 'light-mode' : 'dark-mode';
+            body.classList.add(newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateThemeIcon(newTheme);
+        }
+
+        function updateThemeIcon(theme) {
+            const icon = document.getElementById('theme-icon');
+            const newIcon = theme === 'dark-mode' ? '☀️' : '🌙';
+            if (icon) {
+                icon.textContent = newIcon;
+            }
+        }
+
+        function toggleGameHeader() {
+            const header = document.getElementById('game-header');
+            header.classList.toggle('expanded');
+        }
+
+        // Initialize theme on page load
+        initTheme();
+
+        // Simple Markdown parser
+        function parseMarkdown(text) {
+            let html = text;
+
+            // Store escaped characters temporarily
+            const escapeMap = new Map();
+            let escapeIndex = 0;
+
+            // Replace escaped characters with placeholders
+            html = html.replace(/\\(.)/g, (match, char) => {
+                const placeholder = `\uE000${escapeIndex}\uE000`;
+                escapeMap.set(placeholder, char);
+                escapeIndex++;
+                return placeholder;
+            });
+
+            // Escape HTML to prevent XSS
+            html = html.replace(/&/g, '&amp;')
+                       .replace(/</g, '&lt;')
+                       .replace(/>/g, '&gt;');
+
+            // Headers
+            html = html.replace(/^### (.*?)$/gm, '<h3>$1</h3>');
+            html = html.replace(/^## (.*?)$/gm, '<h2>$1</h2>');
+            html = html.replace(/^# (.*?)$/gm, '<h1>$1</h1>');
+
+            // Bold and Italic
+            html = html.replace(/\*\*\*(.+?)\*\*\*/g, '<strong><em>$1</em></strong>');
+            html = html.replace(/___(.+?)___/g, '<strong><em>$1</em></strong>');
+            html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+            html = html.replace(/__(.+?)__/g, '<strong>$1</strong>');
+            html = html.replace(/\*(.+?)\*/g, '<em>$1</em>');
+            html = html.replace(/_(.+?)_/g, '<em>$1</em>');
+
+            // Code
+            html = html.replace(/`(.+?)`/g, '<code>$1</code>');
+
+            // Links
+            html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank">$1</a>');
+
+            // Blockquotes
+            html = html.replace(/^&gt; (.+)$/gm, '<blockquote>$1</blockquote>');
+
+            // Lists
+            const lines = html.split('\n');
+            let inList = false;
+            let listType = null;
+            const processedLines = [];
+
+            for (let i = 0; i < lines.length; i++) {
+                const line = lines[i];
+                const isUnorderedItem = /^\* (.+)$/.test(line);
+                const isOrderedItem = /^\d+\. (.+)$/.test(line);
+
+                if (isUnorderedItem || isOrderedItem) {
+                    const currentListType = isUnorderedItem ? 'ul' : 'ol';
+                    const itemContent = isUnorderedItem ?
+                        line.replace(/^\* /, '') :
+                        line.replace(/^\d+\. /, '');
+
+                    if (!inList) {
+                        processedLines.push(`<${currentListType}>`);
+                        inList = true;
+                        listType = currentListType;
+                    } else if (listType !== currentListType) {
+                        processedLines.push(`</${listType}>`);
+                        processedLines.push(`<${currentListType}>`);
+                        listType = currentListType;
+                    }
+
+                    processedLines.push(`<li>${itemContent}</li>`);
+                } else {
+                    if (inList) {
+                        processedLines.push(`</${listType}>`);
+                        inList = false;
+                        listType = null;
+                    }
+                    processedLines.push(line);
+                }
+            }
+
+            if (inList) {
+                processedLines.push(`</${listType}>`);
+            }
+
+            html = processedLines.join('\n');
+
+            // Paragraphs
+            html = html.replace(/^(?!<[hbulo]|<\/[uo]l>)(.+)$/gm, '<p>$1</p>');
+            html = html.replace(/<\/blockquote>\n<blockquote>/g, '<br>');
+
+            // Restore escaped characters
+            escapeMap.forEach((char, placeholder) => {
+                html = html.replace(new RegExp(placeholder, 'g'), char);
+            });
+
+            return html;
+        }
+
+        class GamePlayer {
+            constructor() {
+                this.game = null;
+                this.currentPage = null;
+                this.attributes = {};
+                this.saveKey = null;
+                this.history = [];
+            }
+
+            loadGame(gameData) {
+                this.game = gameData;
+                this.saveKey = `gamebook_save_${this.game.uuid}`;
+
+                // Initialize attributes
+                this.attributes = {};
+                if (this.game.attributes) {
+                    this.game.attributes.forEach(attr => {
+                        this.attributes[attr.uuid] = 0.0;
+                    });
+                }
+
+                // Try to load saved progress
+                const savedState = this.loadSavedState();
+                if (savedState) {
+                    this.attributes = savedState.attributes;
+                    this.currentPage = this.findPageByUuid(savedState.currentPageUuid);
+                }
+
+                // If no save or invalid save, start from first page
+                if (!this.currentPage) {
+                    this.currentPage = this.findFirstPage();
+                }
+
+                this.displayGameInfo();
+                // Process consequences for first page if new game, don't process if loading saved game
+                const shouldProcessConsequences = !savedState;
+                if (shouldProcessConsequences) {
+                    this.processConsequences();
+                }
+                // Always display without adding to history on initial load
+                this.displayPageContent();
+            }
+
+            findFirstPage() {
+                return this.game.pages.find(page => page.type === 'first') || this.game.pages[0];
+            }
+
+            findPageByUuid(uuid) {
+                return this.game.pages.find(page => page.uuid === uuid);
+            }
+
+            loadSavedState() {
+                try {
+                    const saved = localStorage.getItem(this.saveKey);
+                    if (saved) {
+                        const state = JSON.parse(saved);
+                        // Restore history if it exists
+                        if (state.history) {
+                            this.history = state.history;
+                        }
+                        return state;
+                    }
+                    return null;
+                } catch (e) {
+                    console.error('Error loading saved state:', e);
+                    return null;
+                }
+            }
+
+            saveState() {
+                try {
+                    const state = {
+                        currentPageUuid: this.currentPage.uuid,
+                        attributes: this.attributes,
+                        history: this.history
+                    };
+                    localStorage.setItem(this.saveKey, JSON.stringify(state));
+                } catch (e) {
+                    console.error('Error saving state:', e);
+                }
+            }
+
+            restart() {
+                if (confirm('Are you sure you want to restart the game? All progress will be lost.')) {
+                    localStorage.removeItem(this.saveKey);
+                    this.attributes = {};
+                    this.history = [];
+                    if (this.game.attributes) {
+                        this.game.attributes.forEach(attr => {
+                            this.attributes[attr.uuid] = 0.0;
+                        });
+                    }
+                    this.currentPage = this.findFirstPage();
+                    this.saveState();
+                    this.displayPage();
+                }
+            }
+
+            undo() {
+                if (this.history.length === 0) {
+                    return; // Nothing to undo
+                }
+
+                // Pop the last state from history
+                const previousState = this.history.pop();
+
+                // Restore the previous state
+                this.currentPage = this.findPageByUuid(previousState.pageUuid);
+                this.attributes = { ...previousState.attributes };
+
+                // Display the page without processing consequences
+                // saveState() will be called by displayPageContent()
+                this.displayPage(false);
+            }
+
+            displayGameInfo() {
+                // Hide initial header and import section
+                document.getElementById('initial-header').classList.add('hidden');
+                document.getElementById('import-section').classList.add('hidden');
+
+                // Show and populate game header
+                const gameHeader = document.getElementById('game-header');
+                const gameHeaderTitle = document.getElementById('game-header-title');
+                const gameHeaderDetails = document.getElementById('game-header-details');
+
+                gameHeaderTitle.textContent = this.game.name;
+
+                let detailsHTML = '';
+                if (this.game.author) {
+                    detailsHTML += `<p class="meta">By ${this.game.author}</p>`;
+                }
+                if (this.game.about) {
+                    detailsHTML += `<p class="meta">${this.game.about}</p>`;
+                }
+                if (this.game.website) {
+                    detailsHTML += `<p class="meta"><a href="${this.game.website}" target="_blank">${this.game.website}</a></p>`;
+                }
+                gameHeaderDetails.innerHTML = detailsHTML;
+
+                gameHeader.classList.remove('hidden');
+
+                // Set font
+                if (this.game.font === 'serif') {
+                    document.body.classList.add('font-serif');
+                } else {
+                    document.body.classList.remove('font-serif');
+                }
+            }
+
+            displayPage(processConsequences = true) {
+                // Process consequences if needed
+                if (processConsequences) {
+                    this.processConsequences();
+                }
+
+                this.displayPageContent();
+            }
+
+            displayPageContent() {
+                // Get available decisions
+                const availableDecisions = this.getAvailableDecisions();
+
+                // Display content
+                const contentEl = document.getElementById('game-content');
+                const parsedContent = parseMarkdown(this.currentPage.content);
+
+                let decisionsHtml = '';
+                if (availableDecisions.length > 0) {
+                    decisionsHtml = '<div class="decisions enter">';
+                    availableDecisions.forEach((decision, index) => {
+                        decisionsHtml += `
+                            <button class="decision-btn" data-decision-index="${index}" onclick="window.player.makeDecision(${index})">
+                                ${decision.content}
+                            </button>
+                        `;
+                    });
+                    decisionsHtml += '</div>';
+                }
+
+                contentEl.innerHTML = `
+                    <div class="page-content enter">${parsedContent}</div>
+                    ${decisionsHtml}
+                `;
+                contentEl.classList.remove('hidden');
+
+                // Store decisions for later reference
+                this.currentDecisions = availableDecisions;
+
+                // Show controls
+                const controlsEl = document.getElementById('controls');
+                const currentTheme = document.body.classList.contains('dark-mode') ? 'dark-mode' : 'light-mode';
+                const themeIcon = currentTheme === 'dark-mode' ? '☀️' : '🌙';
+                const canUndo = this.history.length > 0;
+                controlsEl.innerHTML = `
+                    <button class="btn btn-secondary" onclick="window.player.undo()" ${!canUndo ? 'disabled' : ''} style="${!canUndo ? 'opacity: 0.5; cursor: not-allowed;' : ''}">Undo</button>
+                    <button class="btn btn-secondary" onclick="window.player.restart()">Restart</button>
+                    <button class="btn btn-secondary" onclick="toggleTheme()" aria-label="Toggle theme">
+                        <span id="theme-icon">${themeIcon}</span>
+                    </button>
+                    <button class="btn btn-secondary load-different-game-btn" onclick="location.reload()">Exit</button>
+                `;
+                controlsEl.classList.remove('hidden');
+
+                // Save state
+                this.saveState();
+            }
+
+            processConsequences() {
+                if (!this.currentPage.consequences) return;
+
+                this.currentPage.consequences.forEach(consequence => {
+                    if (!consequence.attribute_uuid) return;
+
+                    const attrUuid = consequence.attribute_uuid;
+                    let currentValue = this.attributes[attrUuid] || 0.0;
+
+                    switch (consequence.type) {
+                        case 'set':
+                            currentValue = consequence.amount;
+                            break;
+                        case 'add':
+                            currentValue += consequence.amount;
+                            break;
+                        case 'subtract':
+                            currentValue -= consequence.amount;
+                            break;
+                        case 'multiply':
+                            currentValue *= consequence.amount;
+                            break;
+                    }
+
+                    this.attributes[attrUuid] = currentValue;
+                });
+            }
+
+            getAvailableDecisions() {
+                if (!this.currentPage.decisions) return [];
+
+                const available = [];
+
+                this.currentPage.decisions.forEach(decision => {
+                    if (this.evaluateDecisionRules(decision)) {
+                        available.push(decision);
+                    }
+                });
+
+                return available;
+            }
+
+            evaluateDecisionRules(decision) {
+                if (!decision.rules || decision.rules.length === 0) {
+                    return true;
+                }
+
+                const results = decision.rules.map(rule => {
+                    const attrValue = this.attributes[rule.attribute_uuid] || 0.0;
+                    const ruleValue = rule.value;
+
+                    switch (rule.type) {
+                        case 'equal':
+                            return attrValue === ruleValue;
+                        case 'not_equal':
+                            return attrValue !== ruleValue;
+                        case 'greater_than':
+                            return attrValue > ruleValue;
+                        case 'less_than':
+                            return attrValue < ruleValue;
+                        default:
+                            return false;
+                    }
+                });
+
+                // Apply match style
+                const matchStyle = decision.match_style || 'match_all';
+                if (matchStyle === 'match_all') {
+                    return results.every(r => r === true);
+                } else if (matchStyle === 'match_any') {
+                    return results.some(r => r === true);
+                }
+
+                return false;
+            }
+
+            makeDecision(index) {
+                const decision = this.currentDecisions[index];
+                if (!decision || !decision.destination_uuid) return;
+
+                const nextPage = this.findPageByUuid(decision.destination_uuid);
+                if (!nextPage) {
+                    showError('Could not find the destination page. The game file may be corrupted.');
+                    return;
+                }
+
+                // Save current state to history BEFORE leaving
+                this.history.push({
+                    pageUuid: this.currentPage.uuid,
+                    attributes: { ...this.attributes }
+                });
+
+                // Disable decision buttons during transition
+                const decisionButtons = document.querySelectorAll('.decision-btn');
+                decisionButtons.forEach(btn => btn.disabled = true);
+
+                // Add exit animations
+                const contentEl = document.getElementById('game-content');
+                const pageContent = contentEl.querySelector('.page-content');
+                const decisions = contentEl.querySelector('.decisions');
+
+                if (pageContent) {
+                    pageContent.classList.remove('enter');
+                    pageContent.classList.add('exit');
+                }
+                if (decisions) {
+                    decisions.classList.remove('enter');
+                    decisions.classList.add('exit');
+                }
+
+                // Wait for exit animation to complete
+                setTimeout(() => {
+                    this.currentPage = nextPage;
+                    this.displayPage();
+
+                    // Scroll to top
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }, 300);
+            }
+        }
+
+        // Global player instance
+        let player = null;
+
+        // File handling
+        const fileInput = document.getElementById('file-input');
+        const importSection = document.getElementById('import-section');
+
+        fileInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) loadGameFile(file);
+        });
+
+        // Drag and drop
+        importSection.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            importSection.classList.add('drag-over');
+        });
+
+        importSection.addEventListener('dragleave', () => {
+            importSection.classList.remove('drag-over');
+        });
+
+        importSection.addEventListener('drop', (e) => {
+            e.preventDefault();
+            importSection.classList.remove('drag-over');
+
+            const file = e.dataTransfer.files[0];
+            if (file) loadGameFile(file);
+        });
+
+        function loadGameFile(file) {
+            if (!file.name.endsWith('.gbook')) {
+                showError('Please select a .gbook file');
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                try {
+                    const gameData = JSON.parse(e.target.result);
+
+                    // Validate game data
+                    if (!gameData.uuid || !gameData.name || !gameData.pages) {
+                        throw new Error('Invalid game file format');
+                    }
+
+                    // Hide import section
+                    importSection.classList.add('hidden');
+
+                    // Start game
+                    window.player = new GamePlayer();
+                    window.player.loadGame(gameData);
+
+                } catch (error) {
+                    showError('Failed to load game file: ' + error.message);
+                }
+            };
+            reader.readAsText(file);
+        }
+
+        function showError(message) {
+            const errorContainer = document.getElementById('error-container');
+            errorContainer.innerHTML = `<div class="error">${message}</div>`;
+            setTimeout(() => {
+                errorContainer.innerHTML = '';
+            }, 5000);
+        }
+    </script>
+</body>
+</html>
