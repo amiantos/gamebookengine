@@ -825,7 +825,7 @@
                 controlsEl.innerHTML = `
                     <button class="btn btn-secondary" onclick="window.player.undo()" ${!canUndo ? 'disabled' : ''} style="${!canUndo ? 'opacity: 0.5; cursor: not-allowed;' : ''}">Undo</button>
                     <button class="btn btn-secondary" onclick="window.player.restart()">Restart Game</button>
-                    <button class="btn btn-secondary" onclick="location.reload()">Load Different Game</button>
+                    <button class="btn btn-secondary load-different-game-btn" onclick="location.reload()">Load Different Game</button>
                     <button class="btn btn-secondary" onclick="toggleTheme()" aria-label="Toggle theme">
                         <span id="theme-icon">${themeIcon}</span>
                     </button>

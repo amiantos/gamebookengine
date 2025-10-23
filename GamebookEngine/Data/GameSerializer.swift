@@ -235,6 +235,12 @@ class GameSerializer {
         // 1. Auto-load the game on page load
         // 2. Hide the "Load Different Game" button
         let injectionScript = """
+        <style>
+        /* Hide the Load Different Game button in embedded mode */
+        .embedded-mode .load-different-game-btn {
+            display: none !important;
+        }
+        </style>
         <script>
         // Auto-load embedded game
         window.EMBEDDED_GAME_DATA = \(gameJSON);
@@ -245,20 +251,13 @@ class GameSerializer {
         document.addEventListener('DOMContentLoaded', function() {
             if (window.EMBEDDED_GAME_DATA) {
                 try {
+                    // Mark body as embedded mode for CSS targeting
+                    document.body.classList.add('embedded-mode');
+
                     const game = window.EMBEDDED_GAME_DATA;
                     // Create player instance and make it globally accessible
                     window.player = new GamePlayer();
                     window.player.loadGame(game);
-
-                    // Hide the "Load Different Game" button
-                    setTimeout(function() {
-                        const buttons = document.querySelectorAll('.btn');
-                        buttons.forEach(function(btn) {
-                            if (btn.textContent.includes('Load Different Game')) {
-                                btn.style.display = 'none';
-                            }
-                        });
-                    }, 100);
                 } catch (error) {
                     console.error('Failed to load embedded game:', error);
                     showError('Failed to load the embedded game: ' + error.message);
