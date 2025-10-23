@@ -11,32 +11,38 @@
             box-sizing: border-box;
         }
 
-        :root {
-            --bg-primary: #efeff4;
-            --bg-secondary: #ffffff;
+        /* Light Mode (default) */
+        body.light-mode {
+            color-scheme: light;
+            --bg-primary: #FFFFFF;
+            --bg-secondary: #F0EFF6;
+            --bg-hover: #f9f9f9;
             --text-primary: #000000;
             --text-secondary: #666666;
-            --accent: #007AFF;
-            --accent-hover: #0056b3;
+            --button: #3C3C4399;
+            --button-hover: #1C1C1D;
             --border: #e5e5ea;
-            --shadow: rgba(0, 0, 0, 0.05);
+            --shadow: rgba(0, 0, 0, 0.06);
             --decision-bg: #f9f9f9;
+            --decision-hover: #ffffff;
             --decision-border: #e5e5ea;
         }
 
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --bg-primary: #000000;
-                --bg-secondary: #1c1c1e;
-                --text-primary: #ffffff;
-                --text-secondary: #999999;
-                --accent: #0A84FF;
-                --accent-hover: #409CFF;
-                --border: #2c2c2e;
-                --shadow: rgba(0, 0, 0, 0.3);
-                --decision-bg: #2c2c2e;
-                --decision-border: #3a3a3c;
-            }
+        /* Dark Mode */
+        body.dark-mode {
+            color-scheme: dark;
+            --bg-primary: #000000;
+            --bg-secondary: #1C1C1D;
+            --bg-hover: #2c2c2e;
+            --text-primary: #ffffff;
+            --text-secondary: #999999;
+            --button: #EBEBF599;
+            --button-hover: #000000;
+            --border: #2c2c2e;
+            --shadow: rgba(0, 0, 0, 0.06);
+            --decision-bg: #2c2c2e;
+            --decision-hover: #3a3a3c;
+            --decision-border: #3a3a3c;
         }
 
         body {
@@ -47,7 +53,7 @@
             padding: 0;
             margin: 0 auto;
             min-height: 100vh;
-            max-width: 800px;
+            max-width: 600px;
         }
 
         body.font-serif {
@@ -60,6 +66,9 @@
             padding: 20px;
             border-bottom: 1px solid var(--border);
             position: relative;
+            border-radius: 20px 20px 0px 0px;
+            overflow: hidden;
+            margin-top:20px;
         }
 
         .header h1 {
@@ -77,14 +86,17 @@
             background: var(--bg-secondary);
             text-align: center;
             padding: 12px 20px;
-            border-bottom: 1px solid var(--border);
+            border: 1px solid var(--border);
             position: relative;
             cursor: pointer;
             transition: background-color 0.2s ease;
+            border-radius: 20px 20px 0px 0px;
+            overflow: hidden;
+            margin-top:20px;
         }
 
         .game-header:hover {
-            background: var(--bg-primary);
+            background: var(--bg-hover);
         }
 
         .game-header-title {
@@ -126,52 +138,19 @@
             transform: translateY(-50%) rotate(180deg);
         }
 
-        body.light-mode {
-            color-scheme: light;
-        }
-
-        body.dark-mode {
-            color-scheme: dark;
-        }
-
-        body.dark-mode {
-            --bg-primary: #000000;
-            --bg-secondary: #1c1c1e;
-            --text-primary: #ffffff;
-            --text-secondary: #999999;
-            --accent: #0A84FF;
-            --accent-hover: #409CFF;
-            --border: #2c2c2e;
-            --shadow: rgba(0, 0, 0, 0.3);
-            --decision-bg: #2c2c2e;
-            --decision-border: #3a3a3c;
-        }
-
-        body.light-mode {
-            --bg-primary: #efeff4;
-            --bg-secondary: #ffffff;
-            --text-primary: #000000;
-            --text-secondary: #666666;
-            --accent: #007AFF;
-            --accent-hover: #0056b3;
-            --border: #e5e5ea;
-            --shadow: rgba(0, 0, 0, 0.05);
-            --decision-bg: #f9f9f9;
-            --decision-border: #e5e5ea;
-        }
-
         .import-section {
             background: var(--bg-secondary);
             padding: 40px 20px;
-            margin: 20px;
             text-align: center;
-            border: 2px dashed var(--border);
-            border-radius: 10px;
+            border-left: 1px solid var(--border);
+            border-right: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            border-radius: 0px 00px 20px 20px;
             transition: all 0.3s ease;
         }
 
         .import-section.drag-over {
-            border-color: var(--accent);
+            border-color: var(--button);
             background: var(--bg-primary);
         }
 
@@ -197,7 +176,7 @@
         }
 
         .btn {
-            background-color: var(--accent);
+            background-color: var(--button);
             color: white;
             border: none;
             padding: 12px 24px;
@@ -210,7 +189,7 @@
         }
 
         .btn:hover {
-            background-color: var(--accent-hover);
+            background-color: var(--button-hover);
         }
 
         .btn:active {
@@ -220,7 +199,7 @@
         .btn-secondary {
             flex: 1;
             background-color: transparent;
-            color: var(--accent);
+            color: var(--button);
             border: none;
             border-right: 1px solid var(--border);
             padding: 16px;
@@ -234,7 +213,7 @@
         }
 
         .btn-secondary:hover {
-            background-color: var(--bg-primary);
+            background-color: var(--bg-hover);
         }
 
         .btn-secondary:active {
@@ -247,9 +226,11 @@
 
         .game-content {
             background: var(--bg-secondary);
-            padding: 20px;
+            padding: 40px;
             position: relative;
             overflow: hidden;
+            border-left: 1px solid var(--border);
+            border-right: 1px solid var(--border);
         }
 
         @keyframes slideOutLeft {
@@ -338,7 +319,7 @@
         }
 
         .page-content blockquote {
-            border-left: 4px solid var(--accent);
+            border-left: 4px solid var(--button);
             padding-left: 20px;
             margin: 20px 0;
             color: var(--text-secondary);
@@ -363,7 +344,7 @@
         }
 
         .page-content a {
-            color: var(--accent);
+            color: var(--button);
             text-decoration: none;
         }
 
@@ -377,6 +358,9 @@
             gap: 0;
             margin-top: 30px;
             border-top: 1px solid var(--border);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0px 0px 20px var(--shadow);
         }
 
         .decision-btn {
@@ -399,7 +383,7 @@
         }
 
         .decision-btn:hover {
-            background: var(--bg-secondary);
+            background: var(--decision-hover);
         }
 
         .decision-btn:active {
@@ -410,9 +394,11 @@
             display: flex;
             gap: 0;
             background: var(--bg-secondary);
-            border-top: 1px solid var(--border);
+            border: 1px solid var(--border);
             padding: 0;
-            margin-top: 20px;
+            border-radius: 0px 0px 20px 20px;
+            overflow: hidden;
+            margin-bottom:20px;
         }
 
         .hidden {
@@ -442,8 +428,13 @@
                 padding: 30px 20px;
             }
 
+            .game-header, .header {
+                margin-top: 0px;
+                border-radius: 0px;
+            }
+
             .game-content {
-                padding: 15px;
+                padding: 20px;
             }
 
             .page-content h1 {
@@ -762,6 +753,9 @@
                 if (this.game.about) {
                     detailsHTML += `<p class="meta">${this.game.about}</p>`;
                 }
+                if (this.game.website) {
+                    detailsHTML += `<p class="meta"><a href="${this.game.website}" target="_blank">${this.game.website}</a></p>`;
+                }
                 gameHeaderDetails.innerHTML = detailsHTML;
 
                 gameHeader.classList.remove('hidden');
@@ -804,13 +798,9 @@
                     decisionsHtml += '</div>';
                 }
 
-                const isEnding = this.currentPage.type === 'ending';
-                const endingMarker = isEnding ? '<div class="ending-marker">THE END</div>' : '';
-
                 contentEl.innerHTML = `
                     <div class="page-content enter">${parsedContent}</div>
                     ${decisionsHtml}
-                    ${endingMarker}
                 `;
                 contentEl.classList.remove('hidden');
 
@@ -824,11 +814,11 @@
                 const canUndo = this.history.length > 0;
                 controlsEl.innerHTML = `
                     <button class="btn btn-secondary" onclick="window.player.undo()" ${!canUndo ? 'disabled' : ''} style="${!canUndo ? 'opacity: 0.5; cursor: not-allowed;' : ''}">Undo</button>
-                    <button class="btn btn-secondary" onclick="window.player.restart()">Restart Game</button>
-                    <button class="btn btn-secondary load-different-game-btn" onclick="location.reload()">Load Different Game</button>
+                    <button class="btn btn-secondary" onclick="window.player.restart()">Restart</button>
                     <button class="btn btn-secondary" onclick="toggleTheme()" aria-label="Toggle theme">
                         <span id="theme-icon">${themeIcon}</span>
                     </button>
+                    <button class="btn btn-secondary load-different-game-btn" onclick="location.reload()">Exit</button>
                 `;
                 controlsEl.classList.remove('hidden');
 
