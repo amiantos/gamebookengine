@@ -17,6 +17,10 @@ Gamebook Engine is an iOS app for creating and playing gamebooks, a type of inte
 
 - [Download Gamebook Engine for iOS 15.6 and later on the App Store](https://apps.apple.com/us/app/gamebook-engine/id1478537871)
 
+## Web Player
+
+- [Use this web player to open shared .gbook files in any web browser](https://amiantos.github.io/gamebookengine/).
+
 ## Beta Test
 
 - [Sign up for the beta on TestFlight](https://testflight.apple.com/join/FjHHmoVy)
