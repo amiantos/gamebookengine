@@ -126,9 +126,10 @@ extension GameListTableViewController: GameListGameTableViewCellDelegate, UIDocu
             textField.autocapitalizationType = .words
             textField.placeholder = "A Magnificent Voyage"
         }
+        guard let textField = actionSheet.textFields?.first else { return }
 
         let okButton = UIAlertAction(title: "OK", style: .default) { _ in
-            guard let text = actionSheet.textFields?.first?.text, !text.isEmpty else { return }
+            guard let text = textField.text, !text.isEmpty else { return }
             GameDatabase.standard.createGame(name: text, completion: { game in
                 guard let game = game else { return }
                 DispatchQueue.main.async {
@@ -137,7 +138,13 @@ extension GameListTableViewController: GameListGameTableViewCellDelegate, UIDocu
                 }
             })
         }
+        okButton.isEnabled = false
         actionSheet.addAction(okButton)
+
+        NotificationCenter.default.addObserver(forName: UITextField.textDidChangeNotification, object: textField, queue: .main) { _ in
+            guard let text = textField.text else { return }
+            okButton.isEnabled = !text.isEmpty
+        }
 
         let cancelButton = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         actionSheet.addAction(cancelButton)
