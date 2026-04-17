@@ -25,6 +25,13 @@ class MarkdownEditorViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
+    override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
+        if action == #selector(insertBold) || action == #selector(insertItalic) {
+            return true
+        }
+        return super.canPerformAction(action, withSender: sender)
+    }
+
     // MARK: View Setup
 
     override func viewDidLoad() {
@@ -66,14 +73,19 @@ extension MarkdownEditorViewController: UITextViewDelegate {
         let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
         toolbar.sizeToFit()
         toolbar.barStyle = .default
-        toolbar.tintColor = UIColor(named: "text") ?? .darkText
         toolbar.items = [
-            UIBarButtonItem(title: "Bold", style: .plain, target: self, action: #selector(insertBold)),
-            UIBarButtonItem(title: "Italic", style: .plain, target: self, action: #selector(insertItalic)),
             UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
-            UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(doneAction)),
+            UIBarButtonItem(image: .init(systemName: "checkmark"), style: .done, target: self, action: #selector(doneAction)),
         ]
         textView.inputAccessoryView = toolbar
+        textView.delegate = self
+
+        if #unavailable(iOS 16) {
+            UIMenuController.shared.menuItems = [
+                UIMenuItem(title: "Bold", action: #selector(insertBold)),
+                UIMenuItem(title: "Italic", action: #selector(insertItalic)),
+            ]
+        }
 
         textView.contentInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
 
@@ -120,6 +132,13 @@ extension MarkdownEditorViewController: UITextViewDelegate {
 
     func textViewDidEndEditing(_: UITextView) {
         saveContent()
+    }
+
+    @available(iOS 16, *)
+    func textView(_ textView: UITextView, editMenuForTextIn range: NSRange, suggestedActions: [UIMenuElement]) -> UIMenu? {
+        let bold = UIAction(title: "Bold", image: UIImage(systemName: "bold")) { [weak self] _ in self?.insertBold() }
+        let italic = UIAction(title: "Italic", image: UIImage(systemName: "italic")) { [weak self] _ in self?.insertItalic() }
+        return UIMenu(children: [bold, italic] + suggestedActions)
     }
 
     @objc func doneAction() {
