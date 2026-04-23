@@ -50,7 +50,7 @@ class RuleEditorViewController: UIViewController, AttributesTableViewDelegate {
         toolbar.barStyle = .default
         toolbar.items = [
             UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
-            UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(doneAction)),
+            UIBarButtonItem(image: .init(systemName: "checkmark"), style: .done, target: self, action: #selector(doneAction)),
         ]
         textField.inputAccessoryView = toolbar
     }
