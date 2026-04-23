@@ -299,7 +299,7 @@ extension GameListTableViewController: GameListGameTableViewCellDelegate, UIDocu
 
 // MARK: - Item Provider
 
-class GamebookProvider: UIActivityItemProvider {
+class GamebookProvider: UIActivityItemProvider, @unchecked Sendable {
     var temporaryURL: NSURL?
     var game: Game
 
@@ -323,7 +323,7 @@ class GamebookProvider: UIActivityItemProvider {
     }
 }
 
-class HTMLGamebookProvider: UIActivityItemProvider {
+class HTMLGamebookProvider: UIActivityItemProvider, @unchecked Sendable {
     var temporaryURL: NSURL?
     var game: Game
 
