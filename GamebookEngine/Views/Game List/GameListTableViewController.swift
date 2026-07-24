@@ -101,8 +101,16 @@ extension GameListTableViewController: GameListGameTableViewCellDelegate, UIDocu
     func documentPicker(_: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
         for url in urls {
             Log.info("Open URL: \(url)")
-            guard let jsonData = try? Data(contentsOf: url) else { continue }
-            GameSerializer.standard.gameFromJSONData(jsonData)
+            let didStartAccess = url.startAccessingSecurityScopedResource()
+            defer {
+                if didStartAccess { url.stopAccessingSecurityScopedResource() }
+            }
+            do {
+                let jsonData = try Data(contentsOf: url)
+                GameSerializer.standard.gameFromJSONData(jsonData)
+            } catch {
+                Log.error("Failed to read picked file at \(url): \(error)")
+            }
         }
     }
 
@@ -291,7 +299,7 @@ extension GameListTableViewController: GameListGameTableViewCellDelegate, UIDocu
 
 // MARK: - Item Provider
 
-class GamebookProvider: UIActivityItemProvider {
+class GamebookProvider: UIActivityItemProvider, @unchecked Sendable {
     var temporaryURL: NSURL?
     var game: Game
 
@@ -315,7 +323,7 @@ class GamebookProvider: UIActivityItemProvider {
     }
 }
 
-class HTMLGamebookProvider: UIActivityItemProvider {
+class HTMLGamebookProvider: UIActivityItemProvider, @unchecked Sendable {
     var temporaryURL: NSURL?
     var game: Game
 
