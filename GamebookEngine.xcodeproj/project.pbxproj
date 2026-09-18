@@ -54,6 +54,7 @@
 		B43EE2F0231F3FF7005D563D /* GameOverviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B43EE2EF231F3FF7005D563D /* GameOverviewViewController.swift */; };
 		B43EE2F2231F407F005D563D /* PagesScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = B43EE2F1231F407F005D563D /* PagesScene.swift */; };
 		B448874F23063A0D000E2FDD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B448874E23063A0D000E2FDD /* AppDelegate.swift */; };
+		8F25E5F077D296A987009994 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BE5783532219433DA8AE38 /* SceneDelegate.swift */; };
 		B448875623063A0E000E2FDD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B448875523063A0E000E2FDD /* Assets.xcassets */; };
 		B448875923063A0E000E2FDD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B448875723063A0E000E2FDD /* LaunchScreen.storyboard */; };
 		B452531D2314C186002F628C /* UserDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B452531C2314C186002F628C /* UserDatabase.swift */; };
@@ -162,6 +163,7 @@
 		B43EE2F1231F407F005D563D /* PagesScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PagesScene.swift; sourceTree = "<group>"; };
 		B448874B23063A0D000E2FDD /* GamebookEngine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GamebookEngine.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B448874E23063A0D000E2FDD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		41BE5783532219433DA8AE38 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		B448875523063A0E000E2FDD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B448875823063A0E000E2FDD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B448875A23063A0E000E2FDD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -372,6 +374,7 @@
 			children = (
 				B4B6B3B623173C0400E72320 /* GamebookEngine.entitlements */,
 				B448874E23063A0D000E2FDD /* AppDelegate.swift */,
+				41BE5783532219433DA8AE38 /* SceneDelegate.swift */,
 				B4E9EFBA230A41AD00C9CA76 /* Views */,
 				B4B6B3B32316F82200E72320 /* Data */,
 				B402FFF3231613E300900020 /* Utilities */,
@@ -682,6 +685,7 @@
 				44764DB829E1535C00CD95DD /* HelpView.swift in Sources */,
 				B48C4B8323332297008C77ED /* ContainerView.swift in Sources */,
 				B448874F23063A0D000E2FDD /* AppDelegate.swift in Sources */,
+				8F25E5F077D296A987009994 /* SceneDelegate.swift in Sources */,
 				B4B6B3B523170B9F00E72320 /* CodableModels.swift in Sources */,
 				4417DC292314867C00A6F96B /* RuleEditorViewController.swift in Sources */,
 				B4789FE9231887E3008DBE9F /* GameListTableViewController.swift in Sources */,
@@ -743,7 +747,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 15;
 				INFOPLIST_FILE = GamebookPreviewExtension/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -763,7 +767,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 15;
 				INFOPLIST_FILE = GamebookPreviewExtension/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -831,7 +835,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -890,7 +894,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -909,7 +913,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 15;
 				INFOPLIST_FILE = GamebookEngine/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -932,7 +936,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 15;
 				INFOPLIST_FILE = GamebookEngine/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

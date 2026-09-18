@@ -12,7 +12,6 @@ import UIKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var temp: Int?
-    var window: UIWindow?
     let navigationController = UINavigationController(rootViewController: GameListTableViewController())
 
     func application(
@@ -25,20 +24,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Log.logLevel = .debug
         Log.useEmoji = true
 
-        window = UIWindow(frame: UIScreen.main.bounds)
-        guard let window = window else { return false }
-        window.rootViewController = GameListTableViewController()
-        window.makeKeyAndVisible()
         return true
     }
 
-    func application(_: UIApplication, open url: URL, options _: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
-        Log.info("Open URL: \(url)")
-        _ = url.startAccessingSecurityScopedResource()
-        guard let jsonData = try? Data(contentsOf: url) else { return false }
-        url.stopAccessingSecurityScopedResource()
-        GameSerializer.standard.gameFromJSONData(jsonData)
-        return true
+    func application(
+        _: UIApplication,
+        configurationForConnecting connectingSceneSession: UISceneSession,
+        options _: UIScene.ConnectionOptions
+    ) -> UISceneConfiguration {
+        UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
     }
 
     func applicationWillResignActive(_: UIApplication) {}
