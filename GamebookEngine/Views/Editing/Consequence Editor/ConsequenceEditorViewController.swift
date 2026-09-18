@@ -46,14 +46,16 @@ class ConsequenceEditorViewController: UIViewController, AttributesTableViewDele
 
         changeAttributeButton.layer.cornerRadius = 5
 
-        let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-        toolbar.sizeToFit()
-        toolbar.barStyle = .default
-        toolbar.items = [
-            UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
-            UIBarButtonItem(image: .init(systemName: "checkmark"), style: .done, target: self, action: #selector(doneAction)),
-        ]
-        currentAmountTextField.inputAccessoryView = toolbar
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+
+    @objc fileprivate func keyboardWillShow(_: Notification) {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "checkmark"), style: .done, target: self, action: #selector(doneAction))
+    }
+
+    @objc fileprivate func keyboardWillHide(_: Notification) {
+        navigationItem.rightBarButtonItem = nil
     }
 
     override func viewWillAppear(_ animated: Bool) {

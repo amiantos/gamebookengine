@@ -70,14 +70,6 @@ class MarkdownEditorViewController: UIViewController {
 
 extension MarkdownEditorViewController: UITextViewDelegate {
     fileprivate func setupKeyboard() {
-        let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-        toolbar.sizeToFit()
-        toolbar.barStyle = .default
-        toolbar.items = [
-            UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
-            UIBarButtonItem(image: .init(systemName: "checkmark"), style: .done, target: self, action: #selector(doneAction)),
-        ]
-        textView.inputAccessoryView = toolbar
         textView.delegate = self
 
         if #unavailable(iOS 16) {
@@ -153,9 +145,12 @@ extension MarkdownEditorViewController: UITextViewDelegate {
 
             textAreaBottomConstraint.constant = keyboardHeight
         }
+
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "checkmark"), style: .done, target: self, action: #selector(doneAction))
     }
 
     @objc func keyboardWillHide(_: Notification) {
         textAreaBottomConstraint.constant = 0
+        navigationItem.rightBarButtonItem = nil
     }
 }

@@ -41,14 +41,8 @@ class DecisionEditorViewController: UIViewController {
         super.viewDidLoad()
         title = "Decision Editor"
 
-        let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: 0, height: 0))
-        toolbar.sizeToFit()
-        toolbar.barStyle = .default
-        toolbar.items = [
-            UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil),
-            UIBarButtonItem(image: .init(systemName: "checkmark"), style: .done, target: self, action: #selector(doneAction)),
-        ]
-        textView.inputAccessoryView = toolbar
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
 
         textView.allowsEditingTextAttributes = true
 
@@ -81,6 +75,14 @@ class DecisionEditorViewController: UIViewController {
     @objc func doneAction() {
         textView.resignFirstResponder()
         saveContent()
+    }
+
+    @objc func keyboardWillShow(_: Notification) {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "checkmark"), style: .done, target: self, action: #selector(doneAction))
+    }
+
+    @objc func keyboardWillHide(_: Notification) {
+        navigationItem.rightBarButtonItem = nil
     }
 
     fileprivate func addRule() {
