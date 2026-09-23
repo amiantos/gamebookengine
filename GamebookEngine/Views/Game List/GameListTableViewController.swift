@@ -38,7 +38,6 @@ class GameListTableViewController: UITableViewController {
     }
 
     private func configureNavigationBar() {
-        navigationController?.navigationBar.tintColor = UIColor(named: "button")
         navigationController?.navigationBar.prefersLargeTitles = true
 
         let addItem = UIBarButtonItem(
