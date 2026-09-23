@@ -13,7 +13,6 @@ import UniformTypeIdentifiers
 class GameListTableViewController: UITableViewController {
     var games: [Game] = []
 
-    @IBOutlet var topBarView: UIView!
     @IBOutlet var bottomBarView: UIView!
 
     @IBOutlet var patronButton: UIButton!
@@ -23,7 +22,7 @@ class GameListTableViewController: UITableViewController {
         present(swiftUIViewController, animated: true, completion: nil)
     }
 
-    @IBAction func topBarAddAction(_ sender: UIButton) {
+    @objc private func addGameAction(_ sender: UIBarButtonItem) {
         showFilePicker(sender)
     }
 
@@ -32,10 +31,23 @@ class GameListTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        title = "Your Gamebooks"
+        title = "Gamebooks"
+        configureNavigationBar()
         tableView.register(UINib(nibName: "GameListGameTableViewCell", bundle: nil), forCellReuseIdentifier: "gameCell")
         NotificationCenter.default.addObserver(self, selector: #selector(fetchGames), name: .didAddNewBook, object: nil)
-        tableView.tableHeaderView = topBarView
+    }
+
+    private func configureNavigationBar() {
+        navigationController?.navigationBar.tintColor = UIColor(named: "button")
+        navigationController?.navigationBar.prefersLargeTitles = true
+
+        let addItem = UIBarButtonItem(
+            barButtonSystemItem: .add,
+            target: self,
+            action: #selector(addGameAction(_:))
+        )
+        addItem.accessibilityLabel = "Add Gamebook"
+        navigationItem.rightBarButtonItem = addItem
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -195,7 +207,7 @@ extension GameListTableViewController: GameListGameTableViewCellDelegate, UIDocu
         }
     }
 
-    fileprivate func showFilePicker(_ sender: UIButton) {
+    fileprivate func showFilePicker(_ sender: UIBarButtonItem) {
         let actionSheet = UIAlertController(title: "Add game", message: nil, preferredStyle: .actionSheet)
         let importAction = UIAlertAction(title: "Import game from file", style: .default) { _ in
             self.importGame()
@@ -211,8 +223,7 @@ extension GameListTableViewController: GameListGameTableViewCellDelegate, UIDocu
         actionSheet.addAction(importAction)
         actionSheet.addAction(createDefaultGamesAction)
         actionSheet.addAction(cancelAction)
-        actionSheet.popoverPresentationController?.sourceView = sender
-        actionSheet.popoverPresentationController?.sourceRect = CGRect(x: sender.frame.width / 2 - 3, y: sender.frame.height, width: 0, height: 0)
+        actionSheet.popoverPresentationController?.barButtonItem = sender
         present(actionSheet, animated: true, completion: nil)
         actionSheet.view.tintColor = UIColor(named: "text") ?? .darkGray
     }
