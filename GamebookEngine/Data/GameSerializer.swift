@@ -37,10 +37,7 @@ class GameSerializer {
                             let alertButton = UIAlertAction(title: "Groovy", style: .default, handler: nil)
                             alert.addAction(alertButton)
                             DispatchQueue.main.async {
-                                if let appDelegate = UIApplication.shared.delegate,
-                                   let appWindow = appDelegate.window!,
-                                   let rootViewController = appWindow.rootViewController
-                                {
+                                if let rootViewController = UIApplication.shared.activeRootViewController {
                                     rootViewController.present(alert, animated: true, completion: nil)
                                 }
                             }
@@ -48,10 +45,7 @@ class GameSerializer {
                     }
                 }
                 DispatchQueue.main.async {
-                    if let appDelegate = UIApplication.shared.delegate,
-                       let appWindow = appDelegate.window!,
-                       let rootViewController = appWindow.rootViewController
-                    {
+                    if let rootViewController = UIApplication.shared.activeRootViewController {
                         rootViewController.present(alert, animated: true, completion: nil)
                         alert.view.tintColor = UIColor(named: "text") ?? .darkGray
                     }
@@ -70,10 +64,7 @@ class GameSerializer {
             let alertButton = UIAlertAction(title: "Oh, okay", style: .default, handler: nil)
             alert.addAction(alertButton)
             DispatchQueue.main.async {
-                if let appDelegate = UIApplication.shared.delegate,
-                   let appWindow = appDelegate.window!,
-                   let rootViewController = appWindow.rootViewController
-                {
+                if let rootViewController = UIApplication.shared.activeRootViewController {
                     rootViewController.present(alert, animated: true, completion: nil)
                 }
             }

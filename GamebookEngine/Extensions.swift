@@ -51,3 +51,12 @@ extension Data {
         return nil
     }
 }
+
+extension UIApplication {
+    /// The root view controller of the app's active window scene, for presenting from outside of the view hierarchy.
+    var activeRootViewController: UIViewController? {
+        let windowScenes = connectedScenes.compactMap { $0 as? UIWindowScene }
+        let scene = windowScenes.first { $0.activationState == .foregroundActive } ?? windowScenes.first
+        return scene?.keyWindow?.rootViewController
+    }
+}
