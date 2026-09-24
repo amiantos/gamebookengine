@@ -44,6 +44,7 @@ class PagesScene: SKScene, PageEditorDelegate {
                 GameDatabase.standard.fetchFirstPage(for: game) { page in
                     guard let page = page else { return }
                     self.firstPage = page
+                    self.moveCameraToFirstPage()
                 }
             }
         }
@@ -338,13 +339,18 @@ class PagesScene: SKScene, PageEditorDelegate {
     }
 
     func moveCameraToSelectedPage() {
-        guard let page = lastSelectedPage, let node = nodes[page] else { return }
-        let currentNodePositionInScene = convert(node.position, from: node.parent!)
-        let translatedNodePosition = CGPoint(
-            x: currentNodePositionInScene.x + (size.width / 2),
-            y: currentNodePositionInScene.y - (size.height - nodeSize / 2)
-        )
-        camera?.position = translatedNodePosition
+        guard let page = lastSelectedPage else { return }
+        centerCamera(on: page)
+    }
+
+    func moveCameraToFirstPage() {
+        guard let page = firstPage else { return }
+        centerCamera(on: page)
+    }
+
+    private func centerCamera(on page: Page) {
+        guard let node = nodes[page] else { return }
+        camera?.position = convert(CGPoint(x: node.size.width / 2, y: node.size.height / 2), from: node)
     }
 
     func deletedPage(_: Page) {}

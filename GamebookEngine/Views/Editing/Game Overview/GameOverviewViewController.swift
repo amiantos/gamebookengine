@@ -15,6 +15,8 @@ class GameOverviewViewController: UIViewController, PagesTableViewDelegate {
     var skView: SKView?
     var searchButton: UIButton!
     weak var delegate: PagesTableViewDelegate?
+    /// Lets a SwiftUI presenter dismiss through its own state, so the presentation stays in sync.
+    var onExit: (() -> Void)?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -90,7 +92,11 @@ class GameOverviewViewController: UIViewController, PagesTableViewDelegate {
     }
 
     @objc func exitGame() {
-        dismiss(animated: true, completion: nil)
+        if let onExit {
+            onExit()
+        } else {
+            dismiss(animated: true, completion: nil)
+        }
     }
 
     @objc fileprivate func metaAction() {
