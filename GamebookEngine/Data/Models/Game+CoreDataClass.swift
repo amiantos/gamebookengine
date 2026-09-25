@@ -11,4 +11,4 @@ import CoreData
 import Foundation
 
 @objc(Game)
-public class Game: NSManagedObject {}
+public class Game: NSManagedObject, Identifiable {}

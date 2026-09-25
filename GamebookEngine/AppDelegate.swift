@@ -12,7 +12,6 @@ import UIKit
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var temp: Int?
-    let navigationController = UINavigationController(rootViewController: GameListTableViewController())
 
     func application(
         _: UIApplication,
