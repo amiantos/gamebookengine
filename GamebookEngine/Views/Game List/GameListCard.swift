@@ -37,7 +37,6 @@ struct GameListCard: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
         .gameListCardBackground()
         .contentShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
-        .onTapGesture { onAction(.play(game)) }
         .contextMenu {
             Button("Play", systemImage: "play") { onAction(.play(game)) }
             Button("Edit", systemImage: "pencil") { onAction(.edit(game)) }

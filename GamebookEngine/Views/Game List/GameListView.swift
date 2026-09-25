@@ -23,9 +23,12 @@ struct GameListView: View {
                 grid
             }
         }
-        .background(Color("background").ignoresSafeArea())
+        .background(
+            Color("background")
+                .ignoresSafeArea()
+        )
         .fullScreenCover(item: $model.editingGame, onDismiss: { model.fetchGames() }) { game in
-            GameEditorView(game: game) { model.editingGame = nil }
+            GameEditorView(game: game)
                 .ignoresSafeArea()
                 .interactiveDismissDisabled()
                 .gameEditorZoomTransition(sourceID: game.objectID, in: editorZoom)

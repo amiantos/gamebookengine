@@ -8,12 +8,12 @@ import UIKit
 
 struct GameEditorView: UIViewControllerRepresentable {
     let game: Game
-    var onExit: () -> Void
+    @Environment(\.dismiss) private var dismiss
 
     func makeUIViewController(context _: Context) -> UINavigationController {
         let gameOverview = GameOverviewViewController()
         gameOverview.game = game
-        gameOverview.onExit = onExit
+        gameOverview.onExit = { dismiss() }
         let navController = UINavigationController(rootViewController: gameOverview)
         navController.navigationBar.tintColor = .secondaryLabel
         return navController
