@@ -15,6 +15,7 @@ class GameOverviewViewController: UIViewController, PagesTableViewDelegate {
     var skView: SKView?
     var searchButton: UIButton!
     weak var delegate: PagesTableViewDelegate?
+    var onExit: (() -> Void)?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -90,7 +91,11 @@ class GameOverviewViewController: UIViewController, PagesTableViewDelegate {
     }
 
     @objc func exitGame() {
-        dismiss(animated: true, completion: nil)
+        if let onExit {
+            onExit()
+        } else {
+            dismiss(animated: true, completion: nil)
+        }
     }
 
     @objc fileprivate func metaAction() {

@@ -1,5 +1,5 @@
 //
-//  GameListTableViewController.swift
+//  GameListViewController.swift
 //  BRGamebookEngine
 //
 //  Created by Bradley Root on 8/29/19.
@@ -10,16 +10,21 @@ import SwiftUI
 import UIKit
 import UniformTypeIdentifiers
 
-class GameListTableViewController: UITableViewController {
-    var games: [Game] = []
+final class GameListViewController: UIHostingController<GameListView> {
+    private let model: GameListModel
 
-    @IBOutlet var bottomBarView: UIView!
+    init() {
+        let model = GameListModel()
+        self.model = model
+        super.init(rootView: GameListView(model: model, onAction: { _ in }))
+        rootView = GameListView(model: model) { [weak self] action in
+            self?.handle(action)
+        }
+    }
 
-    @IBOutlet var patronButton: UIButton!
-    @IBAction func patronButtonAction(_: UIButton) {
-        let swiftUIViewController = UIHostingController(rootView: HelpView())
-        swiftUIViewController.modalPresentationStyle = .pageSheet
-        present(swiftUIViewController, animated: true, completion: nil)
+    @available(*, unavailable)
+    @MainActor required dynamic init?(coder _: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 
     @objc private func addGameAction(_ sender: UIBarButtonItem) {
@@ -33,7 +38,6 @@ class GameListTableViewController: UITableViewController {
 
         title = "Gamebooks"
         configureNavigationBar()
-        tableView.register(UINib(nibName: "GameListGameTableViewCell", bundle: nil), forCellReuseIdentifier: "gameCell")
         NotificationCenter.default.addObserver(self, selector: #selector(fetchGames), name: .didAddNewBook, object: nil)
     }
 
@@ -47,12 +51,20 @@ class GameListTableViewController: UITableViewController {
         )
         addItem.accessibilityLabel = "Add Gamebook"
         navigationItem.rightBarButtonItem = addItem
+
+        let helpItem = UIBarButtonItem(
+            image: UIImage(systemName: "questionmark"),
+            style: .plain,
+            target: self,
+            action: #selector(showHelp)
+        )
+        helpItem.accessibilityLabel = "Help"
+        navigationItem.leftBarButtonItem = helpItem
     }
 
     override func viewWillAppear(_ animated: Bool) {
         fetchGames()
         super.viewWillAppear(animated)
-        patronButton.layer.cornerRadius = 10
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -62,53 +74,28 @@ class GameListTableViewController: UITableViewController {
         showIntroductionScreen()
     }
 
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        if tableView.tableFooterView == nil {
-            tableView.tableFooterView = bottomBarView
+    private func handle(_ action: GameListAction) {
+        switch action {
+        case let .play(game):
+            loadGame(game)
+        case let .edit(game):
+            editGame(game)
+        case let .export(game, format, sourceRect):
+            exportGame(game, as: format, from: sourceRect)
+        case let .delete(game):
+            deleteGame(game)
+        case .addGame:
+            guard let addItem = navigationItem.rightBarButtonItem else { return }
+            showFilePicker(addItem)
+        case .help:
+            showHelp()
         }
-    }
-
-    // MARK: - Table View
-
-    override func numberOfSections(in _: UITableView) -> Int {
-        return 1
-    }
-
-    override func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
-        return games.count
-    }
-
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: "gameCell",
-            for: indexPath
-        ) as? GameListGameTableViewCell,
-            let game = games.item(at: indexPath.row) else { fatalError() }
-        cell.game = game
-        cell.delegate = self
-
-        cell.separatorView.isHidden = false
-        if indexPath.row == games.count - 1 {
-            cell.separatorView.isHidden = true
-        }
-
-        return cell
-    }
-
-    override func tableView(_: UITableView, viewForFooterInSection _: Int) -> UIView? {
-        return UIView()
-    }
-
-    override func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let game = games.item(at: indexPath.row) else { return }
-        loadGame(game)
     }
 }
 
 // MARK: - Activities
 
-extension GameListTableViewController: GameListGameTableViewCellDelegate, UIDocumentPickerDelegate {
+extension GameListViewController: UIDocumentPickerDelegate {
     func documentPicker(_: UIDocumentPickerViewController, didPickDocumentsAt urls: [URL]) {
         for url in urls {
             Log.info("Open URL: \(url)")
@@ -187,14 +174,13 @@ extension GameListTableViewController: GameListGameTableViewCellDelegate, UIDocu
     }
 
     @objc fileprivate func fetchGames() {
-        GameDatabase.standard.fetchGames { games in
-            if let games = games {
-                DispatchQueue.main.async {
-                    self.games = games
-                    self.tableView.reloadData()
-                }
-            }
-        }
+        model.fetchGames()
+    }
+
+    @objc fileprivate func showHelp() {
+        let swiftUIViewController = UIHostingController(rootView: HelpView())
+        swiftUIViewController.modalPresentationStyle = .pageSheet
+        present(swiftUIViewController, animated: true, completion: nil)
     }
 
     @objc fileprivate func showIntroductionScreen() {
@@ -234,20 +220,7 @@ extension GameListTableViewController: GameListGameTableViewCellDelegate, UIDocu
     }
 
     func editGame(_ game: Game) {
-        var textColor: UIColor = .black
-        if #available(iOS 13.0, *) {
-            textColor = .secondaryLabel
-        }
-
-        let gameOverview = GameOverviewViewController()
-        gameOverview.game = game
-        let navController = UINavigationController(rootViewController: gameOverview)
-        navController.navigationBar.tintColor = textColor
-        navController.modalPresentationStyle = .pageSheet
-        if #available(iOS 13.0, *) {
-            navController.isModalInPresentation = true
-        }
-        present(navController, animated: true, completion: nil)
+        model.editingGame = game
     }
 
     func deleteGame(_ game: Game) {
@@ -256,54 +229,25 @@ extension GameListTableViewController: GameListGameTableViewCellDelegate, UIDocu
             message: "Are you sure you want to delete this game?",
             primaryActionTitle: "Delete"
         ) { _ in
-            let indexPath = IndexPath(row: self.games.firstIndex(of: game)!, section: 0)
-            GameDatabase.standard.deleteGame(game, completion: { game in
-                if game == nil {
-                    self.games.remove(at: indexPath.row)
-                    DispatchQueue.main.async {
-                        self.tableView.deleteRows(at: [indexPath], with: .automatic)
-                    }
-                }
-            })
+            self.model.deleteGame(game)
         }
         present(alert, animated: true, completion: nil)
         alert.view.tintColor = UIColor(named: "text") ?? .darkGray
     }
 
-    func exportGame(_ game: Game) {
-        let indexPathForGame = IndexPath(row: games.firstIndex(of: game)!, section: 0)
-        guard let cell = tableView.cellForRow(at: indexPathForGame) as? GameListGameTableViewCell else { fatalError() }
-
-        // Show action sheet to choose export format
-        let actionSheet = UIAlertController(title: "Export Format", message: "Choose the format to export this game", preferredStyle: .actionSheet)
-
-        let gbookAction = UIAlertAction(title: "Export as .gbook", style: .default) { _ in
-            let gamebookDocument = GamebookProvider(game: game)
-            let activityViewController = UIActivityViewController(activityItems: [gamebookDocument], applicationActivities: nil)
-            activityViewController.popoverPresentationController?.sourceView = cell.exportButton
-            activityViewController.popoverPresentationController?.sourceRect = CGRect(x: 15, y: cell.exportButton.frame.height / 2, width: 0, height: 0)
-            self.present(activityViewController, animated: true, completion: nil)
+    func exportGame(_ game: Game, as format: GameExportFormat, from sourceRect: CGRect) {
+        let itemProvider: UIActivityItemProvider
+        switch format {
+        case .gbook:
+            itemProvider = GamebookProvider(game: game)
+        case .html:
+            itemProvider = HTMLGamebookProvider(game: game)
         }
 
-        let htmlAction = UIAlertAction(title: "Export as .html", style: .default) { _ in
-            let htmlDocument = HTMLGamebookProvider(game: game)
-            let activityViewController = UIActivityViewController(activityItems: [htmlDocument], applicationActivities: nil)
-            activityViewController.popoverPresentationController?.sourceView = cell.exportButton
-            activityViewController.popoverPresentationController?.sourceRect = CGRect(x: 15, y: cell.exportButton.frame.height / 2, width: 0, height: 0)
-            self.present(activityViewController, animated: true, completion: nil)
-        }
-
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-
-        actionSheet.addAction(gbookAction)
-        actionSheet.addAction(htmlAction)
-        actionSheet.addAction(cancelAction)
-
-        actionSheet.popoverPresentationController?.sourceView = cell.exportButton
-        actionSheet.popoverPresentationController?.sourceRect = CGRect(x: 15, y: cell.exportButton.frame.height / 2, width: 0, height: 0)
-
-        present(actionSheet, animated: true, completion: nil)
-        actionSheet.view.tintColor = UIColor(named: "text") ?? .darkGray
+        let activityViewController = UIActivityViewController(activityItems: [itemProvider], applicationActivities: nil)
+        activityViewController.popoverPresentationController?.sourceView = view
+        activityViewController.popoverPresentationController?.sourceRect = view.convert(sourceRect, from: nil)
+        present(activityViewController, animated: true, completion: nil)
     }
 }
 
