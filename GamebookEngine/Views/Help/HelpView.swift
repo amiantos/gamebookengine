@@ -51,6 +51,8 @@ struct HelpContainer: View {
 }
 
 struct HelpView: View {
+    @Environment(\.dismiss) private var dismiss
+
     var body: some View {
         NavigationView {
             ScrollView {
@@ -64,8 +66,24 @@ struct HelpView: View {
                 }
             }
             .navigationBarTitle("Get Help", displayMode: .inline)
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    closeButton
+                }
+            }
         }
         .navigationViewStyle(.stack)
+    }
+
+    @ViewBuilder
+    private var closeButton: some View {
+        if #available(iOS 26.0, *) {
+            Button(role: .close) { dismiss() }
+        } else {
+            Button { dismiss() } label: {
+                Label("Close", systemImage: "xmark")
+            }
+        }
     }
 }
 
