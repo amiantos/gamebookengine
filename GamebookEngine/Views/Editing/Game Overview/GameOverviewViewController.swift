@@ -36,14 +36,11 @@ class GameOverviewViewController: UIViewController, PagesTableViewDelegate {
         configureBarItems()
     }
 
-    /// Uses standard bar items, each with a title and symbol, so iPhone Duo can hoist them into its vertical side bar.
-    /// Exit and Edit Metadata sit at the top of the side bar, and Search in the bottom toolbar sits toward its bottom.
     private func configureBarItems() {
         navigationItem.leftBarButtonItem = UIBarButtonItem(
             title: "Exit Editor", image: UIImage(systemName: "xmark"),
             primaryAction: UIAction { [weak self] _ in self?.exitGame() }
         )
-        // TODO: Switch to "book.and.wrench", which reads better as "edit this book's details", if the deployment target moves to iOS 17.
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             title: "Edit Metadata", image: UIImage(systemName: "info"),
             primaryAction: UIAction { [weak self] _ in self?.metaAction() }
@@ -103,14 +100,12 @@ class GameOverviewViewController: UIViewController, PagesTableViewDelegate {
             primaryAction: UIAction { [weak pagesView] _ in pagesView?.dismiss(animated: true) }
         )
 
-        // Searching switches context rather than going deeper, so present it as a sheet instead of pushing it.
         let searchNavController = UINavigationController(rootViewController: pagesView)
         searchNavController.navigationBar.tintColor = navigationController?.navigationBar.tintColor
         navigationController?.present(searchNavController, animated: true)
     }
 
     func selectedPage(_ page: Page) {
-        // A page picked from the search sheet opens from the overview, so Back returns to the map.
         if let searchSheet = navigationController?.presentedViewController {
             searchSheet.dismiss(animated: true) { [weak self] in
                 self?.showPageEditor(for: page)
