@@ -13,7 +13,6 @@ class GameOverviewViewController: UIViewController, PagesTableViewDelegate {
     var game: Game?
     var scene: PagesScene?
     var skView: SKView?
-    var searchButton: UIButton!
     weak var delegate: PagesTableViewDelegate?
 
     override func viewDidLoad() {
@@ -34,37 +33,31 @@ class GameOverviewViewController: UIViewController, PagesTableViewDelegate {
         skView?.showsFPS = false
         skView!.presentScene(scene)
 
-        let exitButton = UIBarButtonItem(title: "Exit", style: .plain, target: self, action: #selector(exitGame))
-        let metaButton = UIBarButtonItem(title: "Edit Metadata", style: .plain, target: self, action: #selector(metaAction))
-        navigationItem.leftBarButtonItem = exitButton
-        navigationItem.rightBarButtonItem = metaButton
+        configureBarItems()
+    }
+
+    /// Uses standard bar items, each with a title and symbol, so iPhone Duo can hoist them into its vertical side bar.
+    /// Exit and Edit Metadata sit at the top of the side bar, and Search in the bottom toolbar sits toward its bottom.
+    private func configureBarItems() {
+        navigationItem.leftBarButtonItem = UIBarButtonItem(
+            title: "Exit Editor", image: UIImage(systemName: "xmark"),
+            primaryAction: UIAction { [weak self] _ in self?.exitGame() }
+        )
+        // TODO: Switch to "book.and.wrench", which reads better as "edit this book's details", if the deployment target moves to iOS 17.
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            title: "Edit Metadata", image: UIImage(systemName: "info"),
+            primaryAction: UIAction { [weak self] _ in self?.metaAction() }
+        )
 
         navigationItem.backBarButtonItem = UIBarButtonItem(
             title: "Overview", style: .plain, target: nil, action: nil
         )
 
-        searchButton = UIButton()
-        searchButton.translatesAutoresizingMaskIntoConstraints = false
-        searchButton.addTarget(self, action: #selector(searchButtonTapped), for: .touchUpInside)
-        searchButton.setImage(UIImage(named: "search"), for: .normal)
-        searchButton.imageView?.tintColor = UIColor(named: "button")
-        searchButton.backgroundColor = UIColor(named: "containerBackground")
-
-        searchButton.layer.cornerRadius = 5
-        searchButton.layer.masksToBounds = false
-        searchButton.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1).cgColor
-        searchButton.layer.shadowOpacity = 0.3
-        searchButton.layer.shadowRadius = 4
-        searchButton.layer.shadowOffset = CGSize(width: 0, height: 2)
-
-        view.addSubview(searchButton)
-
-        NSLayoutConstraint.activate([
-            searchButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
-            searchButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            searchButton.heightAnchor.constraint(equalToConstant: 40),
-            searchButton.widthAnchor.constraint(equalToConstant: 40),
-        ])
+        let searchButton = UIBarButtonItem(
+            title: "Search Pages", image: UIImage(systemName: "magnifyingglass"),
+            primaryAction: UIAction { [weak self] _ in self?.searchButtonTapped() }
+        )
+        toolbarItems = [.flexibleSpace(), searchButton]
     }
 
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -83,10 +76,12 @@ class GameOverviewViewController: UIViewController, PagesTableViewDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         scene?.redrawPages()
+        navigationController?.setToolbarHidden(false, animated: animated)
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setToolbarHidden(true, animated: animated)
     }
 
     @objc func exitGame() {
@@ -103,10 +98,29 @@ class GameOverviewViewController: UIViewController, PagesTableViewDelegate {
         guard let game = game else { return }
         let pagesView = PagesTableViewController(for: game)
         pagesView.delegate = self
-        navigationController?.pushViewController(pagesView, animated: true)
+        pagesView.navigationItem.leftBarButtonItem = UIBarButtonItem(
+            systemItem: .close,
+            primaryAction: UIAction { [weak pagesView] _ in pagesView?.dismiss(animated: true) }
+        )
+
+        // Searching switches context rather than going deeper, so present it as a sheet instead of pushing it.
+        let searchNavController = UINavigationController(rootViewController: pagesView)
+        searchNavController.navigationBar.tintColor = navigationController?.navigationBar.tintColor
+        navigationController?.present(searchNavController, animated: true)
     }
 
     func selectedPage(_ page: Page) {
+        // A page picked from the search sheet opens from the overview, so Back returns to the map.
+        if let searchSheet = navigationController?.presentedViewController {
+            searchSheet.dismiss(animated: true) { [weak self] in
+                self?.showPageEditor(for: page)
+            }
+        } else {
+            showPageEditor(for: page)
+        }
+    }
+
+    private func showPageEditor(for page: Page) {
         let pageEditor = PageEditorViewController()
         pageEditor.currentGame = game
         navigationController?.pushViewController(pageEditor, animated: true)

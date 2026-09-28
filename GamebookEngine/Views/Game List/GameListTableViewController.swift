@@ -243,6 +243,7 @@ extension GameListTableViewController: GameListGameTableViewCellDelegate, UIDocu
         gameOverview.game = game
         let navController = UINavigationController(rootViewController: gameOverview)
         navController.navigationBar.tintColor = textColor
+        navController.toolbar.tintColor = textColor
         navController.modalPresentationStyle = .pageSheet
         if #available(iOS 13.0, *) {
             navController.isModalInPresentation = true
