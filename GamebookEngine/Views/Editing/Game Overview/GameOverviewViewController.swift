@@ -95,27 +95,10 @@ class GameOverviewViewController: UIViewController, PagesTableViewDelegate {
         guard let game = game else { return }
         let pagesView = PagesTableViewController(for: game)
         pagesView.delegate = self
-        pagesView.navigationItem.leftBarButtonItem = UIBarButtonItem(
-            systemItem: .close,
-            primaryAction: UIAction { [weak pagesView] _ in pagesView?.dismiss(animated: true) }
-        )
-
-        let searchNavController = UINavigationController(rootViewController: pagesView)
-        searchNavController.navigationBar.tintColor = navigationController?.navigationBar.tintColor
-        navigationController?.present(searchNavController, animated: true)
+        navigationController?.pushViewController(pagesView, animated: true)
     }
 
     func selectedPage(_ page: Page) {
-        if let searchSheet = navigationController?.presentedViewController {
-            searchSheet.dismiss(animated: true) { [weak self] in
-                self?.showPageEditor(for: page)
-            }
-        } else {
-            showPageEditor(for: page)
-        }
-    }
-
-    private func showPageEditor(for page: Page) {
         let pageEditor = PageEditorViewController()
         pageEditor.currentGame = game
         navigationController?.pushViewController(pageEditor, animated: true)
