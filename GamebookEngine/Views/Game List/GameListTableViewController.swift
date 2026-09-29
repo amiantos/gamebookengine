@@ -229,8 +229,10 @@ extension GameListTableViewController: GameListGameTableViewCellDelegate, UIDocu
 
     func loadGame(_ game: Game) {
         let playPageView = PlayViewController(for: game)
-        playPageView.modalPresentationStyle = .fullScreen
-        present(playPageView, animated: true, completion: nil)
+        let navController = UINavigationController(rootViewController: playPageView)
+        navController.navigationBar.tintColor = .secondaryLabel
+        navController.modalPresentationStyle = .fullScreen
+        present(navController, animated: true, completion: nil)
     }
 
     func editGame(_ game: Game) {
