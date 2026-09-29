@@ -12,11 +12,16 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PlayViewController" customModule="BRGamebookEngine" customModuleProvider="target">
             <connections>
                 <outlet property="decisionsContainerView" destination="Udl-2Q-LrP" id="fMU-oF-nmP"/>
+                <outlet property="decisionsContainerLeadingConstraint" destination="ge3-Fb-jQI" id="Duo-Tr-005"/>
+                <outlet property="decisionsContainerTrailingConstraint" destination="ahz-NK-A4g" id="Duo-Tr-006"/>
                 <outlet property="decisionsLabel" destination="MCc-qH-nGc" id="hAZ-o7-cHN"/>
                 <outlet property="decisionsTableView" destination="c4j-2H-sRc" id="i00-Pw-Pmm"/>
                 <outlet property="mainScrollView" destination="K0V-gG-uKB" id="Hzn-pC-dfw"/>
-                <outlet property="optionsContainerView" destination="nhb-lX-DU9" id="d4C-Oi-uuw"/>
+                <outlet property="mainScrollViewTrailingConstraint" destination="MGi-KG-Ajk" id="Duo-Tr-001"/>
                 <outlet property="textView" destination="jEN-eq-1DG" id="158-16-nbI"/>
+                <outlet property="textViewLeadingConstraint" destination="siB-P7-6QU" id="Duo-Tr-002"/>
+                <outlet property="textViewTopConstraint" destination="Hze-hJ-qN2" id="Duo-Tr-004"/>
+                <outlet property="textViewTrailingConstraint" destination="mNX-jx-dWl" id="Duo-Tr-003"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -25,7 +30,7 @@
             <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <scrollView verifyAmbiguity="off" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" showsHorizontalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" translatesAutoresizingMaskIntoConstraints="NO" id="K0V-gG-uKB">
+                <scrollView verifyAmbiguity="off" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K0V-gG-uKB">
                     <rect key="frame" x="0.0" y="0.0" width="1024" height="1366"/>
                     <subviews>
                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jEN-eq-1DG">
@@ -70,92 +75,30 @@
                                 <constraint firstAttribute="width" relation="lessThanOrEqual" constant="600" id="qgr-Vn-Dzp"/>
                             </constraints>
                         </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nhb-lX-DU9">
-                            <rect key="frame" x="224.5" y="394" width="575" height="55"/>
-                            <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IXO-wu-wet">
-                                    <rect key="frame" x="0.0" y="22" width="78" height="33"/>
-                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                    <state key="normal" title="Exit Game">
-                                        <color key="titleColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </state>
-                                    <connections>
-                                        <action selector="exitButtonAction:" destination="-1" eventType="touchUpInside" id="XHK-o0-6AW"/>
-                                    </connections>
-                                </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0CD-Oz-en9">
-                                    <rect key="frame" x="470" y="22" width="105" height="33"/>
-                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                    <state key="normal" title="Restart Game">
-                                        <color key="titleColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </state>
-                                    <connections>
-                                        <action selector="restartButtonAction:" destination="-1" eventType="touchUpInside" id="KiX-Ql-Sy3"/>
-                                    </connections>
-                                </button>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uaA-t4-bgE">
-                                    <rect key="frame" x="40" y="0.0" width="495" height="0.5"/>
-                                    <color key="backgroundColor" systemColor="separatorColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.28999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="0.5" id="0VS-94-6N4"/>
-                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="0.5" id="M13-dD-ip2"/>
-                                    </constraints>
-                                </view>
-                            </subviews>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <constraints>
-                                <constraint firstAttribute="bottom" secondItem="0CD-Oz-en9" secondAttribute="bottom" id="6aI-Ot-N5v"/>
-                                <constraint firstItem="uaA-t4-bgE" firstAttribute="leading" secondItem="nhb-lX-DU9" secondAttribute="leading" constant="40" id="GL1-oF-9Nh"/>
-                                <constraint firstAttribute="width" relation="lessThanOrEqual" constant="575" id="IX7-Ot-BL7"/>
-                                <constraint firstItem="0CD-Oz-en9" firstAttribute="top" secondItem="nhb-lX-DU9" secondAttribute="top" constant="22" id="NxH-sS-MLF"/>
-                                <constraint firstItem="uaA-t4-bgE" firstAttribute="top" secondItem="nhb-lX-DU9" secondAttribute="top" id="Oa6-T0-BpF"/>
-                                <constraint firstAttribute="trailing" secondItem="0CD-Oz-en9" secondAttribute="trailing" id="Rm9-qk-Ifj"/>
-                                <constraint firstAttribute="bottom" secondItem="IXO-wu-wet" secondAttribute="bottom" id="fRa-xO-nRD"/>
-                                <constraint firstItem="IXO-wu-wet" firstAttribute="top" secondItem="nhb-lX-DU9" secondAttribute="top" constant="22" id="fwt-Pc-dLj"/>
-                                <constraint firstAttribute="trailing" secondItem="uaA-t4-bgE" secondAttribute="trailing" constant="40" id="goi-Os-alj"/>
-                                <constraint firstItem="IXO-wu-wet" firstAttribute="leading" secondItem="nhb-lX-DU9" secondAttribute="leading" id="qoB-RL-Pif"/>
-                            </constraints>
-                        </view>
                     </subviews>
                     <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
                     <constraints>
                         <constraint firstItem="Udl-2Q-LrP" firstAttribute="width" relation="greaterThanOrEqual" secondItem="K0V-gG-uKB" secondAttribute="width" priority="750" id="8Hj-bk-SSE"/>
-                        <constraint firstItem="nhb-lX-DU9" firstAttribute="centerX" secondItem="K0V-gG-uKB" secondAttribute="centerX" id="8OF-V0-BLr"/>
                         <constraint firstItem="MCc-qH-nGc" firstAttribute="trailing" secondItem="Udl-2Q-LrP" secondAttribute="trailing" id="8qU-NL-bvz"/>
-                        <constraint firstItem="nhb-lX-DU9" firstAttribute="width" relation="greaterThanOrEqual" secondItem="K0V-gG-uKB" secondAttribute="width" priority="750" id="EWn-kx-Ytl"/>
-                        <constraint firstItem="nhb-lX-DU9" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="K0V-gG-uKB" secondAttribute="leading" constant="32" id="Glz-Bc-1jD"/>
                         <constraint firstItem="jEN-eq-1DG" firstAttribute="top" secondItem="K0V-gG-uKB" secondAttribute="top" constant="80" id="Hze-hJ-qN2"/>
                         <constraint firstItem="Udl-2Q-LrP" firstAttribute="top" secondItem="MCc-qH-nGc" secondAttribute="bottom" constant="13" id="Oia-eu-S2R"/>
                         <constraint firstItem="MCc-qH-nGc" firstAttribute="leading" secondItem="Udl-2Q-LrP" secondAttribute="leading" id="Peb-X5-VdK"/>
                         <constraint firstItem="jEN-eq-1DG" firstAttribute="centerX" secondItem="K0V-gG-uKB" secondAttribute="centerX" id="VIv-rC-RlZ"/>
-                        <constraint firstAttribute="bottom" secondItem="nhb-lX-DU9" secondAttribute="bottom" constant="40" id="YCe-bh-Fb6"/>
-                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Udl-2Q-LrP" secondAttribute="trailing" constant="20" id="ahz-NK-A4g">
-                            <variation key="heightClass=regular-widthClass=regular" constant="110"/>
-                        </constraint>
+                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Udl-2Q-LrP" secondAttribute="trailing" constant="20" id="ahz-NK-A4g"/>
                         <constraint firstItem="jEN-eq-1DG" firstAttribute="width" relation="greaterThanOrEqual" secondItem="K0V-gG-uKB" secondAttribute="width" priority="750" id="cdX-vu-uIx"/>
-                        <constraint firstItem="nhb-lX-DU9" firstAttribute="top" secondItem="Udl-2Q-LrP" secondAttribute="bottom" constant="10" placeholder="YES" id="e4w-bI-r80"/>
                         <constraint firstItem="Udl-2Q-LrP" firstAttribute="centerX" secondItem="K0V-gG-uKB" secondAttribute="centerX" id="fp7-oP-gUO"/>
-                        <constraint firstItem="Udl-2Q-LrP" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="K0V-gG-uKB" secondAttribute="leading" constant="20" id="ge3-Fb-jQI">
-                            <variation key="heightClass=regular-widthClass=regular" constant="110"/>
-                        </constraint>
+                        <constraint firstItem="Udl-2Q-LrP" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="K0V-gG-uKB" secondAttribute="leading" constant="20" id="ge3-Fb-jQI"/>
                         <constraint firstItem="MCc-qH-nGc" firstAttribute="top" secondItem="jEN-eq-1DG" secondAttribute="bottom" constant="40" id="hPD-6C-o1s"/>
-                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="nhb-lX-DU9" secondAttribute="trailing" constant="32" id="lx0-gl-MpA"/>
-                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="jEN-eq-1DG" secondAttribute="trailing" constant="40" id="mNX-jx-dWl">
-                            <variation key="heightClass=regular-widthClass=regular" constant="110"/>
-                        </constraint>
-                        <constraint firstItem="jEN-eq-1DG" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="K0V-gG-uKB" secondAttribute="leading" constant="40" id="siB-P7-6QU">
-                            <variation key="heightClass=regular-widthClass=regular" constant="110"/>
-                        </constraint>
+                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="jEN-eq-1DG" secondAttribute="trailing" constant="40" id="mNX-jx-dWl"/>
+                        <constraint firstItem="jEN-eq-1DG" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="K0V-gG-uKB" secondAttribute="leading" constant="40" id="siB-P7-6QU"/>
                     </constraints>
                 </scrollView>
             </subviews>
             <color key="backgroundColor" name="background"/>
             <constraints>
                 <constraint firstItem="K0V-gG-uKB" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="2pM-S8-ncv"/>
-                <constraint firstItem="K0V-gG-uKB" firstAttribute="width" secondItem="fnl-2z-Ty3" secondAttribute="width" id="GD9-f3-yzR"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="K0V-gG-uKB" secondAttribute="trailing" id="MGi-KG-Ajk"/>
                 <constraint firstAttribute="bottom" secondItem="K0V-gG-uKB" secondAttribute="bottom" id="fEw-5M-wSB"/>
-                <constraint firstItem="K0V-gG-uKB" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" id="ilx-db-XOn"/>
                 <constraint firstItem="K0V-gG-uKB" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="lxM-qW-RVq"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
